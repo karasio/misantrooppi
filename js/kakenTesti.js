@@ -9,6 +9,10 @@ tällä esmes löytyy asioita:
 http://api.digitransit.fi/routing/v1/routers/hsl/plan?
 TÄMÄ MUUTTUVANA PALASENA:
 fromPlace=60.17036, 24.93768&toPlace=60.191058, 24.914124&time=1:02pm&date=05-01-2019&mode=TRANSIT,WALK&maxWalkDistance=500&arriveBy=false
+
+Reititys JSONissa json.plan.itineraries.legs[].from.stopCode vastaa ehkä
+ nousijämäärän Lyhyt_tunn!!
+
  */
 
 button.addEventListener('click', search)
@@ -38,8 +42,10 @@ function search(evt) {
 }
 
 function sortByPeople(json) {
+
+
   /*
-    let stopName = json.plan.itineraries.legs.to.name;
+    let stopNames = json.plan.itineraries.legs[].from.stopCode;
    */
 }
 
