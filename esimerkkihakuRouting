@@ -1,0 +1,1349 @@
+{
+  "requestParameters": {
+    "mode": "TRANSIT,WALK",
+    "fromPlace": "60.17036, 24.93768",
+    "toPlace": "60.191058, 24.914124",
+    "maxWalkDistance": "500"
+  },
+  "plan": {
+    "date": 1556118193000,
+    "from": {
+      "name": "Origin",
+      "lon": 24.93768,
+      "lat": 60.17036,
+      "orig": "",
+      "vertexType": "NORMAL"
+    },
+    "to": {
+      "name": "Destination",
+      "lon": 24.914124,
+      "lat": 60.191058,
+      "orig": "",
+      "vertexType": "NORMAL"
+    },
+    "itineraries": [
+      {
+        "duration": 896,
+        "startTime": 1556118210000,
+        "endTime": 1556119106000,
+        "walkTime": 243,
+        "transitTime": 653,
+        "waitingTime": 0,
+        "walkDistance": 280.4476153915704,
+        "walkLimitExceeded": false,
+        "elevationLost": 2.730000000000002,
+        "elevationGained": 0.23000000000000043,
+        "transfers": 0,
+        "fare": {
+          "fare": {
+            "regular": {
+              "currency": {
+                "symbol": "EUR",
+                "currency": "EUR",
+                "defaultFractionDigits": 2,
+                "currencyCode": "EUR"
+              },
+              "cents": 320
+            }
+          },
+          "details": {
+            "regular": [
+              {
+                "fareId": "HSL:hki",
+                "price": {
+                  "currency": {
+                    "symbol": "EUR",
+                    "currency": "EUR",
+                    "defaultFractionDigits": 2,
+                    "currencyCode": "EUR"
+                  },
+                  "cents": 320
+                },
+                "routes": [
+                  "HSL:1004"
+                ]
+              }
+            ]
+          }
+        },
+        "legs": [
+          {
+            "startTime": 1556118210000,
+            "endTime": 1556118291000,
+            "departureDelay": 0,
+            "arrivalDelay": 0,
+            "realTime": false,
+            "distance": 95.816,
+            "pathway": false,
+            "mode": "WALK",
+            "route": "",
+            "agencyTimeZoneOffset": 10800000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "name": "Origin",
+              "lon": 24.93768,
+              "lat": 60.17036,
+              "departure": 1556118210000,
+              "orig": "",
+              "vertexType": "NORMAL"
+            },
+            "to": {
+              "name": "Lasipalatsi",
+              "stopId": "HSL:1020444",
+              "stopCode": "0101",
+              "platformCode": "51",
+              "lon": 24.9377,
+              "lat": 60.17045,
+              "arrival": 1556118291000,
+              "departure": 1556118291000,
+              "zoneId": "01",
+              "stopIndex": 9,
+              "stopSequence": 10,
+              "vertexType": "TRANSIT"
+            },
+            "legGeometry": {
+              "points": "u_gnJisewCcA`B?EACAIAC?Cv@yA",
+              "length": 8
+            },
+            "rentedBike": false,
+            "intermediatePlace": false,
+            "realTimeState": "SCHEDULED",
+            "duration": 81,
+            "transitLeg": false,
+            "steps": [
+              {
+                "distance": 46.759,
+                "relativeDirection": "DEPART",
+                "streetName": "platform",
+                "absoluteDirection": "NORTHWEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": 24.93765881678665,
+                "lat": 60.17035232300965,
+                "elevation": []
+              },
+              {
+                "distance": 49.057,
+                "relativeDirection": "UTURN_RIGHT",
+                "streetName": "platform",
+                "absoluteDirection": "SOUTHEAST",
+                "stayOn": true,
+                "area": false,
+                "bogusName": true,
+                "lon": 24.9373092,
+                "lat": 60.1707265,
+                "elevation": [
+                  {
+                    "first": 0,
+                    "second": 7.21
+                  },
+                  {
+                    "first": 10,
+                    "second": 7.19
+                  },
+                  {
+                    "first": 20,
+                    "second": 7.2
+                  },
+                  {
+                    "first": 30,
+                    "second": 7.15
+                  },
+                  {
+                    "first": 40.02,
+                    "second": 7.1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "startTime": 1556118291000,
+            "endTime": 1556118944000,
+            "departureDelay": 51,
+            "arrivalDelay": 44,
+            "realTime": true,
+            "distance": 2777.3305466902893,
+            "pathway": false,
+            "mode": "TRAM",
+            "route": "4",
+            "agencyName": "Helsingin seudun liikenne",
+            "agencyUrl": "http://www.hsl.fi/",
+            "agencyTimeZoneOffset": 10800000,
+            "routeType": 0,
+            "routeId": "HSL:1004",
+            "interlineWithPreviousLeg": false,
+            "headsign": "Munkkiniemi via Meilahti",
+            "agencyId": "HSL",
+            "tripId": "HSL:1004_20190423_Ke_1_1753",
+            "serviceDate": "20190424",
+            "from": {
+              "name": "Lasipalatsi",
+              "stopId": "HSL:1020444",
+              "stopCode": "0101",
+              "platformCode": "51",
+              "lon": 24.9377,
+              "lat": 60.17045,
+              "arrival": 1556118291000,
+              "departure": 1556118291000,
+              "zoneId": "01",
+              "stopIndex": 9,
+              "stopSequence": 10,
+              "vertexType": "TRANSIT"
+            },
+            "to": {
+              "name": "Töölön tulli",
+              "stopId": "HSL:1150431",
+              "stopCode": "0113",
+              "lon": 24.91126,
+              "lat": 60.19117,
+              "arrival": 1556118944000,
+              "departure": 1556118944000,
+              "zoneId": "01",
+              "stopIndex": 15,
+              "stopSequence": 16,
+              "vertexType": "TRANSIT"
+            },
+            "legGeometry": {
+              "points": "c`gnJksewCkAlBw@lBK~@y@dAUZuDrDqOrNqD~DuFfH{@p@qAj@iAr@uKfE{GhDa@`@gApBiDrG}CrFoGdL{AzB{FtIuBvByAtAgCrCk@l@e@p@qBjDkAfDqE`NC~J",
+              "length": 31
+            },
+            "routeShortName": "4",
+            "routeLongName": "Katajanokka - Lasipalatsi - Meilahti - Munkkiniemi",
+            "rentedBike": false,
+            "intermediatePlace": false,
+            "realTimeState": "UPDATED",
+            "duration": 653,
+            "transitLeg": true,
+            "steps": []
+          },
+          {
+            "startTime": 1556118944000,
+            "endTime": 1556119106000,
+            "departureDelay": 0,
+            "arrivalDelay": 0,
+            "realTime": false,
+            "distance": 184.442,
+            "pathway": false,
+            "mode": "WALK",
+            "route": "",
+            "agencyTimeZoneOffset": 10800000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "name": "Töölön tulli",
+              "stopId": "HSL:1150431",
+              "stopCode": "0113",
+              "lon": 24.91126,
+              "lat": 60.19117,
+              "arrival": 1556118944000,
+              "departure": 1556118944000,
+              "zoneId": "01",
+              "stopIndex": 15,
+              "stopSequence": 16,
+              "vertexType": "TRANSIT"
+            },
+            "to": {
+              "name": "Destination",
+              "lon": 24.914124,
+              "lat": 60.191058,
+              "arrival": 1556119106000,
+              "orig": "",
+              "vertexType": "NORMAL"
+            },
+            "legGeometry": {
+              "points": "}aknJwm`wC@qB??E?E?A?A_@?W?ODqACYCM?AACAEAI?ACIAICMCQBGFSFKz@gC",
+              "length": 25
+            },
+            "rentedBike": false,
+            "intermediatePlace": false,
+            "realTimeState": "SCHEDULED",
+            "duration": 162,
+            "transitLeg": false,
+            "steps": [
+              {
+                "distance": 31.603,
+                "relativeDirection": "DEPART",
+                "streetName": "platform",
+                "absoluteDirection": "EAST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": true,
+                "lon": 24.9111614,
+                "lat": 60.191191700000005,
+                "elevation": [
+                  {
+                    "first": 0,
+                    "second": 17.62
+                  },
+                  {
+                    "first": 10,
+                    "second": 17.17
+                  },
+                  {
+                    "first": 20,
+                    "second": 16.73
+                  },
+                  {
+                    "first": 31.6,
+                    "second": 16.25
+                  }
+                ]
+              },
+              {
+                "distance": 7.92,
+                "relativeDirection": "LEFT",
+                "streetName": "path",
+                "absoluteDirection": "NORTH",
+                "stayOn": true,
+                "area": false,
+                "bogusName": true,
+                "lon": 24.911732800000003,
+                "lat": 60.191182000000005,
+                "elevation": [
+                  {
+                    "first": 0,
+                    "second": 16.25
+                  },
+                  {
+                    "first": 4.16,
+                    "second": 16.22
+                  },
+                  {
+                    "first": 4.16,
+                    "second": 16.22
+                  },
+                  {
+                    "first": 7.92,
+                    "second": 16.2
+                  }
+                ]
+              },
+              {
+                "distance": 144.919,
+                "relativeDirection": "RIGHT",
+                "streetName": "bike path",
+                "absoluteDirection": "EAST",
+                "stayOn": true,
+                "area": false,
+                "bogusName": true,
+                "lon": 24.911737600000002,
+                "lat": 60.191253200000006,
+                "elevation": [
+                  {
+                    "first": 0,
+                    "second": 16.2
+                  },
+                  {
+                    "first": 10,
+                    "second": 15.88
+                  },
+                  {
+                    "first": 15.64,
+                    "second": 15.82
+                  },
+                  {
+                    "first": 15.641,
+                    "second": 15.82
+                  },
+                  {
+                    "first": 25.641,
+                    "second": 15.71
+                  },
+                  {
+                    "first": 35.641,
+                    "second": 15.6
+                  },
+                  {
+                    "first": 42.451,
+                    "second": 15.59
+                  },
+                  {
+                    "first": 42.45,
+                    "second": 15.59
+                  },
+                  {
+                    "first": 50.17,
+                    "second": 15.61
+                  },
+                  {
+                    "first": 50.169000000000004,
+                    "second": 15.61
+                  },
+                  {
+                    "first": 55.319,
+                    "second": 15.62
+                  },
+                  {
+                    "first": 55.31400000000001,
+                    "second": 15.62
+                  },
+                  {
+                    "first": 68.424,
+                    "second": 15.69
+                  },
+                  {
+                    "first": 68.427,
+                    "second": 15.69
+                  },
+                  {
+                    "first": 78.54700000000001,
+                    "second": 15.81
+                  },
+                  {
+                    "first": 78.549,
+                    "second": 15.81
+                  },
+                  {
+                    "first": 81.63900000000001,
+                    "second": 15.79
+                  },
+                  {
+                    "first": 81.63600000000001,
+                    "second": 15.79
+                  },
+                  {
+                    "first": 88.44600000000001,
+                    "second": 15.68
+                  },
+                  {
+                    "first": 88.45000000000002,
+                    "second": 15.68
+                  },
+                  {
+                    "first": 94.16000000000001,
+                    "second": 15.53
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "tooSloped": false
+      },
+      {
+        "duration": 849,
+        "startTime": 1556118376000,
+        "endTime": 1556119225000,
+        "walkTime": 309,
+        "transitTime": 540,
+        "waitingTime": 0,
+        "walkDistance": 360.13438462181773,
+        "walkLimitExceeded": false,
+        "elevationLost": 4.3199999999999985,
+        "elevationGained": 0.489999999999998,
+        "transfers": 0,
+        "fare": {
+          "fare": {
+            "regular": {
+              "currency": {
+                "symbol": "EUR",
+                "currency": "EUR",
+                "defaultFractionDigits": 2,
+                "currencyCode": "EUR"
+              },
+              "cents": 320
+            }
+          },
+          "details": {
+            "regular": [
+              {
+                "fareId": "HSL:hki",
+                "price": {
+                  "currency": {
+                    "symbol": "EUR",
+                    "currency": "EUR",
+                    "defaultFractionDigits": 2,
+                    "currencyCode": "EUR"
+                  },
+                  "cents": 320
+                },
+                "routes": [
+                  "HSL:2038"
+                ]
+              }
+            ]
+          }
+        },
+        "legs": [
+          {
+            "startTime": 1556118376000,
+            "endTime": 1556118600000,
+            "departureDelay": 0,
+            "arrivalDelay": 0,
+            "realTime": false,
+            "distance": 256.479,
+            "pathway": false,
+            "mode": "WALK",
+            "route": "",
+            "agencyTimeZoneOffset": 10800000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "name": "Origin",
+              "lon": 24.93768,
+              "lat": 60.17036,
+              "departure": 1556118376000,
+              "orig": "",
+              "vertexType": "NORMAL"
+            },
+            "to": {
+              "name": "Elielinaukio",
+              "stopId": "HSL:1020129",
+              "stopCode": "2021",
+              "platformCode": "21",
+              "lon": 24.939739,
+              "lat": 60.171681,
+              "arrival": 1556118600000,
+              "departure": 1556118600000,
+              "zoneId": "01",
+              "stopIndex": 0,
+              "stopSequence": 1,
+              "vertexType": "TRANSIT"
+            },
+            "legGeometry": {
+              "points": "u_gnJisewCcA`B?EACAIAC?CAIAQ?MAQGGC?G@IBK@IaBAUIwCa@q@EIGK_@?i@qA",
+              "length": 24
+            },
+            "rentedBike": false,
+            "intermediatePlace": false,
+            "realTimeState": "SCHEDULED",
+            "duration": 224,
+            "transitLeg": false,
+            "steps": [
+              {
+                "distance": 46.759,
+                "relativeDirection": "DEPART",
+                "streetName": "platform",
+                "absoluteDirection": "NORTHWEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": 24.93765881678665,
+                "lat": 60.17035232300965,
+                "elevation": []
+              },
+              {
+                "distance": 26.055,
+                "relativeDirection": "RIGHT",
+                "streetName": "bike path",
+                "absoluteDirection": "NORTHEAST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": true,
+                "lon": 24.937161000000003,
+                "lat": 60.170692200000005,
+                "elevation": [
+                  {
+                    "first": 0,
+                    "second": 7.51
+                  },
+                  {
+                    "first": 1.94,
+                    "second": 7.44
+                  },
+                  {
+                    "first": 1.936,
+                    "second": 7.44
+                  },
+                  {
+                    "first": 7.656,
+                    "second": 7.25
+                  },
+                  {
+                    "first": 7.657,
+                    "second": 7.25
+                  },
+                  {
+                    "first": 9.036999999999999,
+                    "second": 7.21
+                  },
+                  {
+                    "first": 9.039,
+                    "second": 7.21
+                  },
+                  {
+                    "first": 11.369,
+                    "second": 7.16
+                  },
+                  {
+                    "first": 11.372,
+                    "second": 7.16
+                  },
+                  {
+                    "first": 16.622,
+                    "second": 7.06
+                  },
+                  {
+                    "first": 16.619,
+                    "second": 7.06
+                  },
+                  {
+                    "first": 20.519,
+                    "second": 7.01
+                  },
+                  {
+                    "first": 20.517,
+                    "second": 7.01
+                  },
+                  {
+                    "first": 26.057,
+                    "second": 6.94
+                  }
+                ]
+              },
+              {
+                "distance": 99.417,
+                "relativeDirection": "LEFT",
+                "streetName": "bike path",
+                "absoluteDirection": "NORTHEAST",
+                "stayOn": true,
+                "area": false,
+                "bogusName": true,
+                "lon": 24.937609600000002,
+                "lat": 60.1707595,
+                "elevation": [
+                  {
+                    "first": 0,
+                    "second": 6.94
+                  },
+                  {
+                    "first": 4.38,
+                    "second": 6.89
+                  },
+                  {
+                    "first": 4.38,
+                    "second": 6.89
+                  },
+                  {
+                    "first": 6.88,
+                    "second": 6.88
+                  },
+                  {
+                    "first": 6.883,
+                    "second": 6.88
+                  },
+                  {
+                    "first": 10.753,
+                    "second": 6.87
+                  },
+                  {
+                    "first": 10.756,
+                    "second": 6.87
+                  },
+                  {
+                    "first": 17.396,
+                    "second": 6.86
+                  },
+                  {
+                    "first": 17.392,
+                    "second": 6.86
+                  },
+                  {
+                    "first": 23.172,
+                    "second": 6.87
+                  },
+                  {
+                    "first": 23.173,
+                    "second": 6.87
+                  },
+                  {
+                    "first": 33.173,
+                    "second": 6.63
+                  },
+                  {
+                    "first": 43.173,
+                    "second": 6.28
+                  },
+                  {
+                    "first": 57.352999999999994,
+                    "second": 5.67
+                  },
+                  {
+                    "first": 57.354,
+                    "second": 5.67
+                  },
+                  {
+                    "first": 67.354,
+                    "second": 5.21
+                  },
+                  {
+                    "first": 77.354,
+                    "second": 4.75
+                  },
+                  {
+                    "first": 87.354,
+                    "second": 4.38
+                  },
+                  {
+                    "first": 99.414,
+                    "second": 4.08
+                  }
+                ]
+              },
+              {
+                "distance": 51.744,
+                "relativeDirection": "LEFT",
+                "streetName": "open area",
+                "absoluteDirection": "NORTHEAST",
+                "stayOn": true,
+                "area": true,
+                "bogusName": true,
+                "lon": 24.9389606,
+                "lat": 60.171071000000005,
+                "elevation": [
+                  {
+                    "first": 0,
+                    "second": 4.08
+                  },
+                  {
+                    "first": 10,
+                    "second": 3.96
+                  },
+                  {
+                    "first": 23.67,
+                    "second": 3.85
+                  },
+                  {
+                    "first": 23.674,
+                    "second": 3.85
+                  },
+                  {
+                    "first": 28.174,
+                    "second": 3.83
+                  },
+                  {
+                    "first": 28.173,
+                    "second": 3.83
+                  },
+                  {
+                    "first": 33.543,
+                    "second": 3.81
+                  },
+                  {
+                    "first": 33.542,
+                    "second": 3.81
+                  },
+                  {
+                    "first": 43.542,
+                    "second": 3.9
+                  },
+                  {
+                    "first": 51.742000000000004,
+                    "second": 3.99
+                  }
+                ]
+              },
+              {
+                "distance": 32.504,
+                "relativeDirection": "RIGHT",
+                "streetName": "platform",
+                "absoluteDirection": "NORTHEAST",
+                "stayOn": true,
+                "area": true,
+                "bogusName": true,
+                "lon": 24.9393269,
+                "lat": 60.1714751,
+                "elevation": [
+                  {
+                    "first": 0,
+                    "second": 3.99
+                  },
+                  {
+                    "first": 10,
+                    "second": 4.03
+                  },
+                  {
+                    "first": 20,
+                    "second": 4.01
+                  },
+                  {
+                    "first": 32.5,
+                    "second": 3.97
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "startTime": 1556118600000,
+            "endTime": 1556119140000,
+            "departureDelay": 0,
+            "arrivalDelay": 0,
+            "realTime": false,
+            "distance": 2695.6729680641292,
+            "pathway": false,
+            "mode": "BUS",
+            "route": "38",
+            "agencyName": "Helsingin seudun liikenne",
+            "agencyUrl": "http://www.hsl.fi/",
+            "agencyTimeZoneOffset": 10800000,
+            "routeType": 701,
+            "routeId": "HSL:2038",
+            "interlineWithPreviousLeg": false,
+            "headsign": "Uusmäki via Pitäjänmäki as.",
+            "agencyId": "HSL",
+            "tripId": "HSL:2038_20190423_Ke_1_1810",
+            "serviceDate": "20190424",
+            "from": {
+              "name": "Elielinaukio",
+              "stopId": "HSL:1020129",
+              "stopCode": "2021",
+              "platformCode": "21",
+              "lon": 24.939739,
+              "lat": 60.171681,
+              "arrival": 1556118600000,
+              "departure": 1556118600000,
+              "zoneId": "01",
+              "stopIndex": 0,
+              "stopSequence": 1,
+              "vertexType": "TRANSIT"
+            },
+            "to": {
+              "name": "Töölön tulli",
+              "stopId": "HSL:1180113",
+              "stopCode": "1919",
+              "lon": 24.91246,
+              "lat": 60.19157,
+              "arrival": 1556119140000,
+              "departure": 1556119140000,
+              "zoneId": "01",
+              "stopIndex": 4,
+              "stopSequence": 5,
+              "vertexType": "TRANSIT"
+            },
+            "legGeometry": {
+              "points": "sggnJwafwC{Bz@?nCiBX[PeDRaBJSDYb@Ih@E`A@nCHlHNdApBdGNt@kAhAqEbEgAlAm@r@m@r@}@lA_BzBq@z@}AnAkAf@cB|@qAl@_@Nq@Zy@\\q@Vq@Zq@Vo@\\}@^{@`@aCjAMLKNU^_@t@Yb@eAnBmC~EKP{@~Ai@`Ac@t@e@z@}@~AiCnE]h@a@l@k@v@i@x@i@v@W^aCdDQVcChCw@x@c@b@mCxCSXkAjBy@zAkAbDwD`LYbAM^m@rBGX",
+              "length": 73
+            },
+            "routeShortName": "38",
+            "routeLongName": "Elielinaukio-Pitäjänmäki-Uusmäki",
+            "rentedBike": false,
+            "intermediatePlace": false,
+            "realTimeState": "SCHEDULED",
+            "duration": 540,
+            "transitLeg": true,
+            "steps": []
+          },
+          {
+            "startTime": 1556119140000,
+            "endTime": 1556119225000,
+            "departureDelay": 0,
+            "arrivalDelay": 0,
+            "realTime": false,
+            "distance": 103.48,
+            "pathway": false,
+            "mode": "WALK",
+            "route": "",
+            "agencyTimeZoneOffset": 10800000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "name": "Töölön tulli",
+              "stopId": "HSL:1180113",
+              "stopCode": "1919",
+              "lon": 24.91246,
+              "lat": 60.19157,
+              "arrival": 1556119140000,
+              "departure": 1556119140000,
+              "zoneId": "01",
+              "stopIndex": 4,
+              "stopSequence": 5,
+              "vertexType": "TRANSIT"
+            },
+            "to": {
+              "name": "Destination",
+              "lon": 24.914124,
+              "lat": 60.191058,
+              "arrival": 1556119225000,
+              "orig": "",
+              "vertexType": "NORMAL"
+            },
+            "legGeometry": {
+              "points": "edknJgv`wCNs@R{@BGFSFKz@gC",
+              "length": 7
+            },
+            "rentedBike": false,
+            "intermediatePlace": false,
+            "realTimeState": "SCHEDULED",
+            "duration": 85,
+            "transitLeg": false,
+            "steps": [
+              {
+                "distance": 103.48,
+                "relativeDirection": "DEPART",
+                "streetName": "bike path",
+                "absoluteDirection": "SOUTHEAST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": true,
+                "lon": 24.9125248,
+                "lat": 60.1915599,
+                "elevation": [
+                  {
+                    "first": 0,
+                    "second": 15.82
+                  },
+                  {
+                    "first": 10,
+                    "second": 15.92
+                  },
+                  {
+                    "first": 20,
+                    "second": 16.08
+                  },
+                  {
+                    "first": 30,
+                    "second": 15.89
+                  },
+                  {
+                    "first": 37.11,
+                    "second": 15.81
+                  },
+                  {
+                    "first": 74.22,
+                    "second": 15.81
+                  },
+                  {
+                    "first": 77.31,
+                    "second": 15.79
+                  },
+                  {
+                    "first": 77.307,
+                    "second": 15.79
+                  },
+                  {
+                    "first": 84.117,
+                    "second": 15.68
+                  },
+                  {
+                    "first": 84.12100000000001,
+                    "second": 15.68
+                  },
+                  {
+                    "first": 89.831,
+                    "second": 15.53
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "tooSloped": false
+      },
+      {
+        "duration": 888,
+        "startTime": 1556118502000,
+        "endTime": 1556119390000,
+        "walkTime": 253,
+        "transitTime": 635,
+        "waitingTime": 0,
+        "walkDistance": 299.43669231310963,
+        "walkLimitExceeded": false,
+        "elevationLost": 1.7199999999999989,
+        "elevationGained": 0.3899999999999988,
+        "transfers": 0,
+        "fare": {
+          "fare": {
+            "regular": {
+              "currency": {
+                "symbol": "EUR",
+                "currency": "EUR",
+                "defaultFractionDigits": 2,
+                "currencyCode": "EUR"
+              },
+              "cents": 320
+            }
+          },
+          "details": {
+            "regular": [
+              {
+                "fareId": "HSL:hki",
+                "price": {
+                  "currency": {
+                    "symbol": "EUR",
+                    "currency": "EUR",
+                    "defaultFractionDigits": 2,
+                    "currencyCode": "EUR"
+                  },
+                  "cents": 320
+                },
+                "routes": [
+                  "HSL:1010"
+                ]
+              }
+            ]
+          }
+        },
+        "legs": [
+          {
+            "startTime": 1556118502000,
+            "endTime": 1556118583000,
+            "departureDelay": 0,
+            "arrivalDelay": 0,
+            "realTime": false,
+            "distance": 95.816,
+            "pathway": false,
+            "mode": "WALK",
+            "route": "",
+            "agencyTimeZoneOffset": 10800000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "name": "Origin",
+              "lon": 24.93768,
+              "lat": 60.17036,
+              "departure": 1556118502000,
+              "orig": "",
+              "vertexType": "NORMAL"
+            },
+            "to": {
+              "name": "Lasipalatsi",
+              "stopId": "HSL:1020444",
+              "stopCode": "0101",
+              "platformCode": "51",
+              "lon": 24.9377,
+              "lat": 60.17045,
+              "arrival": 1556118583000,
+              "departure": 1556118583000,
+              "zoneId": "01",
+              "stopIndex": 5,
+              "stopSequence": 6,
+              "vertexType": "TRANSIT"
+            },
+            "legGeometry": {
+              "points": "u_gnJisewCcA`B?EACAIAC?Cv@yA",
+              "length": 8
+            },
+            "rentedBike": false,
+            "intermediatePlace": false,
+            "realTimeState": "SCHEDULED",
+            "duration": 81,
+            "transitLeg": false,
+            "steps": [
+              {
+                "distance": 46.759,
+                "relativeDirection": "DEPART",
+                "streetName": "platform",
+                "absoluteDirection": "NORTHWEST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": false,
+                "lon": 24.93765881678665,
+                "lat": 60.17035232300965,
+                "elevation": []
+              },
+              {
+                "distance": 49.057,
+                "relativeDirection": "UTURN_RIGHT",
+                "streetName": "platform",
+                "absoluteDirection": "SOUTHEAST",
+                "stayOn": true,
+                "area": false,
+                "bogusName": true,
+                "lon": 24.9373092,
+                "lat": 60.1707265,
+                "elevation": [
+                  {
+                    "first": 0,
+                    "second": 7.21
+                  },
+                  {
+                    "first": 10,
+                    "second": 7.19
+                  },
+                  {
+                    "first": 20,
+                    "second": 7.2
+                  },
+                  {
+                    "first": 30,
+                    "second": 7.15
+                  },
+                  {
+                    "first": 40.02,
+                    "second": 7.1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "startTime": 1556118583000,
+            "endTime": 1556119218000,
+            "departureDelay": 103,
+            "arrivalDelay": 78,
+            "realTime": true,
+            "distance": 2833.098663699811,
+            "pathway": false,
+            "mode": "TRAM",
+            "route": "10",
+            "agencyName": "Helsingin seudun liikenne",
+            "agencyUrl": "http://www.hsl.fi/",
+            "agencyTimeZoneOffset": 10800000,
+            "routeType": 0,
+            "routeId": "HSL:1010",
+            "interlineWithPreviousLeg": false,
+            "headsign": "Pikku Huopalahti via Ruskeasuo",
+            "agencyId": "HSL",
+            "tripId": "HSL:1010_20190423_Ke_1_1802",
+            "serviceDate": "20190424",
+            "from": {
+              "name": "Lasipalatsi",
+              "stopId": "HSL:1020444",
+              "stopCode": "0101",
+              "platformCode": "51",
+              "lon": 24.9377,
+              "lat": 60.17045,
+              "arrival": 1556118583000,
+              "departure": 1556118583000,
+              "zoneId": "01",
+              "stopIndex": 5,
+              "stopSequence": 6,
+              "vertexType": "TRANSIT"
+            },
+            "to": {
+              "name": "Töölön tulli",
+              "stopId": "HSL:1180437",
+              "stopCode": "0133",
+              "lon": 24.91111,
+              "lat": 60.19186,
+              "arrival": 1556119218000,
+              "departure": 1556119218000,
+              "zoneId": "01",
+              "stopIndex": 11,
+              "stopSequence": 12,
+              "vertexType": "TRANSIT"
+            },
+            "legGeometry": {
+              "points": "c`gnJksewCkAlBw@lBK~@y@dAUZuDrDqOrNqD~DuFfH{@p@qAj@iAr@uKfE{GhDa@`@gApBiDrG}CrFoGdL{AzB{FtIuBvByAtAgCrCk@l@e@p@qBjDkAfDqE`NuCxK",
+              "length": 31
+            },
+            "routeShortName": "10",
+            "routeLongName": "Kirurgi - Lasipalatsi - Ruskeasuo - Pikku Huopalahti",
+            "rentedBike": false,
+            "intermediatePlace": false,
+            "realTimeState": "UPDATED",
+            "duration": 635,
+            "transitLeg": true,
+            "steps": []
+          },
+          {
+            "startTime": 1556119218000,
+            "endTime": 1556119390000,
+            "departureDelay": 0,
+            "arrivalDelay": 0,
+            "realTime": false,
+            "distance": 203.473,
+            "pathway": false,
+            "mode": "WALK",
+            "route": "",
+            "agencyTimeZoneOffset": 10800000,
+            "interlineWithPreviousLeg": false,
+            "from": {
+              "name": "Töölön tulli",
+              "stopId": "HSL:1180437",
+              "stopCode": "0133",
+              "lon": 24.91111,
+              "lat": 60.19186,
+              "arrival": 1556119218000,
+              "departure": 1556119218000,
+              "zoneId": "01",
+              "stopIndex": 11,
+              "stopSequence": 12,
+              "vertexType": "TRANSIT"
+            },
+            "to": {
+              "name": "Destination",
+              "lon": 24.914124,
+              "lat": 60.191058,
+              "arrival": 1556119390000,
+              "orig": "",
+              "vertexType": "NORMAL"
+            },
+            "legGeometry": {
+              "points": "sfknJem`wC^}A??EGEIAAZqANo@Lg@@ENs@R{@BGFSFKz@gC",
+              "length": 16
+            },
+            "rentedBike": false,
+            "intermediatePlace": false,
+            "realTimeState": "SCHEDULED",
+            "duration": 172,
+            "transitLeg": false,
+            "steps": [
+              {
+                "distance": 31.63,
+                "relativeDirection": "DEPART",
+                "streetName": "platform",
+                "absoluteDirection": "SOUTHEAST",
+                "stayOn": false,
+                "area": false,
+                "bogusName": true,
+                "lon": 24.911073400000003,
+                "lat": 60.1919437,
+                "elevation": [
+                  {
+                    "first": 0,
+                    "second": 16.45
+                  },
+                  {
+                    "first": 10,
+                    "second": 16.36
+                  },
+                  {
+                    "first": 20,
+                    "second": 16.29
+                  },
+                  {
+                    "first": 31.63,
+                    "second": 16.24
+                  }
+                ]
+              },
+              {
+                "distance": 9.92,
+                "relativeDirection": "LEFT",
+                "streetName": "path",
+                "absoluteDirection": "NORTHEAST",
+                "stayOn": true,
+                "area": false,
+                "bogusName": true,
+                "lon": 24.911542100000002,
+                "lat": 60.19178050000001,
+                "elevation": [
+                  {
+                    "first": 0,
+                    "second": 16.24
+                  },
+                  {
+                    "first": 4.33,
+                    "second": 16.26
+                  },
+                  {
+                    "first": 4.33,
+                    "second": 16.26
+                  },
+                  {
+                    "first": 9.92,
+                    "second": 16.28
+                  }
+                ]
+              },
+              {
+                "distance": 161.923,
+                "relativeDirection": "RIGHT",
+                "streetName": "bike path",
+                "absoluteDirection": "SOUTHEAST",
+                "stayOn": true,
+                "area": false,
+                "bogusName": true,
+                "lon": 24.911647000000002,
+                "lat": 60.1918529,
+                "elevation": [
+                  {
+                    "first": 0,
+                    "second": 16.28
+                  },
+                  {
+                    "first": 10,
+                    "second": 16.24
+                  },
+                  {
+                    "first": 20,
+                    "second": 16.18
+                  },
+                  {
+                    "first": 27.4,
+                    "second": 16.03
+                  },
+                  {
+                    "first": 27.403,
+                    "second": 16.03
+                  },
+                  {
+                    "first": 37.403,
+                    "second": 16.11
+                  },
+                  {
+                    "first": 43.113,
+                    "second": 16.08
+                  },
+                  {
+                    "first": 43.111999999999995,
+                    "second": 16.08
+                  },
+                  {
+                    "first": 53.111999999999995,
+                    "second": 15.94
+                  },
+                  {
+                    "first": 58.44199999999999,
+                    "second": 15.82
+                  },
+                  {
+                    "first": 58.443,
+                    "second": 15.82
+                  },
+                  {
+                    "first": 68.443,
+                    "second": 15.92
+                  },
+                  {
+                    "first": 78.443,
+                    "second": 16.08
+                  },
+                  {
+                    "first": 88.443,
+                    "second": 15.89
+                  },
+                  {
+                    "first": 95.553,
+                    "second": 15.81
+                  },
+                  {
+                    "first": 95.553,
+                    "second": 15.81
+                  },
+                  {
+                    "first": 98.643,
+                    "second": 15.79
+                  },
+                  {
+                    "first": 98.64,
+                    "second": 15.79
+                  },
+                  {
+                    "first": 105.45,
+                    "second": 15.68
+                  },
+                  {
+                    "first": 105.45400000000001,
+                    "second": 15.68
+                  },
+                  {
+                    "first": 111.164,
+                    "second": 15.53
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "tooSloped": false
+      }
+    ]
+  },
+  "debugOutput": {
+    "precalculationTime": 254,
+    "pathCalculationTime": 228,
+    "pathTimes": [
+      81,
+      91,
+      55
+    ],
+    "renderingTime": 1,
+    "totalTime": 483,
+    "timedOut": false
+  },
+  "elevationMetadata": {
+    "ellipsoidToGeoidDifference": 18.971388914713888,
+    "geoidElevation": false
+  }
+}

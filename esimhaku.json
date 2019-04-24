@@ -1,0 +1,1565 @@
+{
+    "requestParameters": {
+        "date": "05-01-2019",
+        "mode": "TRANSIT,WALK",
+        "arriveBy": "false",
+        "fromPlace": "60.17036, 24.93768",
+        "toPlace": "60.191058, 24.914124",
+        "time": "1:02pm",
+        "maxWalkDistance": "500"
+    },
+    "plan": {
+        "date": 1556704920000,
+        "from": {
+            "name": "Origin",
+            "lon": 24.93768,
+            "lat": 60.17036,
+            "orig": "",
+            "vertexType": "NORMAL"
+        },
+        "to": {
+            "name": "Destination",
+            "lon": 24.914124,
+            "lat": 60.191058,
+            "orig": "",
+            "vertexType": "NORMAL"
+        },
+        "itineraries": [
+            {
+                "duration": 850,
+                "startTime": 1556705140000,
+                "endTime": 1556705990000,
+                "walkTime": 370,
+                "transitTime": 480,
+                "waitingTime": 0,
+                "walkDistance": 432.16730769899476,
+                "walkLimitExceeded": false,
+                "elevationLost": 4.689999999999998,
+                "elevationGained": 0.6199999999999961,
+                "transfers": 0,
+                "fare": {
+                    "fare": {
+                        "regular": {
+                            "currency": {
+                                "currency": "EUR",
+                                "defaultFractionDigits": 2,
+                                "currencyCode": "EUR",
+                                "symbol": "EUR"
+                            },
+                            "cents": 320
+                        }
+                    },
+                    "details": {
+                        "regular": [
+                            {
+                                "fareId": "HSL:hki",
+                                "price": {
+                                    "currency": {
+                                        "currency": "EUR",
+                                        "defaultFractionDigits": 2,
+                                        "currencyCode": "EUR",
+                                        "symbol": "EUR"
+                                    },
+                                    "cents": 320
+                                },
+                                "routes": [
+                                    "HSL:1043"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "legs": [
+                    {
+                        "startTime": 1556705140000,
+                        "endTime": 1556705400000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 297.465,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 10800000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "Origin",
+                            "lon": 24.93768,
+                            "lat": 60.17036,
+                            "departure": 1556705140000,
+                            "orig": "",
+                            "vertexType": "NORMAL"
+                        },
+                        "to": {
+                            "name": "Elielinaukio",
+                            "stopId": "HSL:1020243",
+                            "stopCode": "2028",
+                            "platformCode": "28",
+                            "lon": 24.939698,
+                            "lat": 60.172101,
+                            "arrival": 1556705400000,
+                            "departure": 1556705400000,
+                            "zoneId": "01",
+                            "stopIndex": 0,
+                            "stopSequence": 1,
+                            "vertexType": "TRANSIT"
+                        },
+                        "legGeometry": {
+                            "points": "u_gnJisewCcA`B?EACAIAC?CAIAQ?MAQGGC?G@IBK@IaBAUIwCa@q@EIGK_@?YW_Bi@CG",
+                            "length": 26
+                        },
+                        "rentedBike": false,
+                        "intermediatePlace": false,
+                        "realTimeState": "SCHEDULED",
+                        "duration": 260,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 46.759,
+                                "relativeDirection": "DEPART",
+                                "streetName": "platform",
+                                "absoluteDirection": "NORTHWEST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 24.93765881678665,
+                                "lat": 60.17035232300965,
+                                "elevation": []
+                            },
+                            {
+                                "distance": 26.055,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "bike path",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 24.937161000000003,
+                                "lat": 60.170692200000005,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 7.51
+                                    },
+                                    {
+                                        "first": 1.94,
+                                        "second": 7.44
+                                    },
+                                    {
+                                        "first": 1.936,
+                                        "second": 7.44
+                                    },
+                                    {
+                                        "first": 7.656,
+                                        "second": 7.25
+                                    },
+                                    {
+                                        "first": 7.657,
+                                        "second": 7.25
+                                    },
+                                    {
+                                        "first": 9.036999999999999,
+                                        "second": 7.21
+                                    },
+                                    {
+                                        "first": 9.039,
+                                        "second": 7.21
+                                    },
+                                    {
+                                        "first": 11.369,
+                                        "second": 7.16
+                                    },
+                                    {
+                                        "first": 11.372,
+                                        "second": 7.16
+                                    },
+                                    {
+                                        "first": 16.622,
+                                        "second": 7.06
+                                    },
+                                    {
+                                        "first": 16.619,
+                                        "second": 7.06
+                                    },
+                                    {
+                                        "first": 20.519,
+                                        "second": 7.01
+                                    },
+                                    {
+                                        "first": 20.517,
+                                        "second": 7.01
+                                    },
+                                    {
+                                        "first": 26.057,
+                                        "second": 6.94
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 99.417,
+                                "relativeDirection": "LEFT",
+                                "streetName": "bike path",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 24.937609600000002,
+                                "lat": 60.1707595,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 6.94
+                                    },
+                                    {
+                                        "first": 4.38,
+                                        "second": 6.89
+                                    },
+                                    {
+                                        "first": 4.38,
+                                        "second": 6.89
+                                    },
+                                    {
+                                        "first": 6.88,
+                                        "second": 6.88
+                                    },
+                                    {
+                                        "first": 6.883,
+                                        "second": 6.88
+                                    },
+                                    {
+                                        "first": 10.753,
+                                        "second": 6.87
+                                    },
+                                    {
+                                        "first": 10.756,
+                                        "second": 6.87
+                                    },
+                                    {
+                                        "first": 17.396,
+                                        "second": 6.86
+                                    },
+                                    {
+                                        "first": 17.392,
+                                        "second": 6.86
+                                    },
+                                    {
+                                        "first": 23.172,
+                                        "second": 6.87
+                                    },
+                                    {
+                                        "first": 23.173,
+                                        "second": 6.87
+                                    },
+                                    {
+                                        "first": 33.173,
+                                        "second": 6.63
+                                    },
+                                    {
+                                        "first": 43.173,
+                                        "second": 6.28
+                                    },
+                                    {
+                                        "first": 57.352999999999994,
+                                        "second": 5.67
+                                    },
+                                    {
+                                        "first": 57.354,
+                                        "second": 5.67
+                                    },
+                                    {
+                                        "first": 67.354,
+                                        "second": 5.21
+                                    },
+                                    {
+                                        "first": 77.354,
+                                        "second": 4.75
+                                    },
+                                    {
+                                        "first": 87.354,
+                                        "second": 4.38
+                                    },
+                                    {
+                                        "first": 99.414,
+                                        "second": 4.08
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 122.179,
+                                "relativeDirection": "LEFT",
+                                "streetName": "open area",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": true,
+                                "area": true,
+                                "bogusName": true,
+                                "lon": 24.9389606,
+                                "lat": 60.171071000000005,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 4.08
+                                    },
+                                    {
+                                        "first": 10,
+                                        "second": 3.96
+                                    },
+                                    {
+                                        "first": 23.67,
+                                        "second": 3.85
+                                    },
+                                    {
+                                        "first": 23.674,
+                                        "second": 3.85
+                                    },
+                                    {
+                                        "first": 28.174,
+                                        "second": 3.83
+                                    },
+                                    {
+                                        "first": 28.173,
+                                        "second": 3.83
+                                    },
+                                    {
+                                        "first": 33.543,
+                                        "second": 3.81
+                                    },
+                                    {
+                                        "first": 33.542,
+                                        "second": 3.81
+                                    },
+                                    {
+                                        "first": 43.542,
+                                        "second": 3.9
+                                    },
+                                    {
+                                        "first": 51.742000000000004,
+                                        "second": 3.99
+                                    },
+                                    {
+                                        "first": 51.744,
+                                        "second": 3.99
+                                    },
+                                    {
+                                        "first": 61.744,
+                                        "second": 4.05
+                                    },
+                                    {
+                                        "first": 67.124,
+                                        "second": 4.08
+                                    },
+                                    {
+                                        "first": 67.124,
+                                        "second": 4.08
+                                    },
+                                    {
+                                        "first": 77.124,
+                                        "second": 4.07
+                                    },
+                                    {
+                                        "first": 87.124,
+                                        "second": 4.05
+                                    },
+                                    {
+                                        "first": 97.124,
+                                        "second": 4.02
+                                    },
+                                    {
+                                        "first": 107.124,
+                                        "second": 4
+                                    },
+                                    {
+                                        "first": 117.124,
+                                        "second": 3.96
+                                    },
+                                    {
+                                        "first": 122.184,
+                                        "second": 3.96
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 3.055,
+                                "relativeDirection": "SLIGHTLY_RIGHT",
+                                "streetName": "Elielinaukio",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 24.939657800000003,
+                                "lat": 60.1720842,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 3.96
+                                    },
+                                    {
+                                        "first": 3.06,
+                                        "second": 3.94
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "startTime": 1556705400000,
+                        "endTime": 1556705880000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 2715.856204733374,
+                        "pathway": false,
+                        "mode": "BUS",
+                        "route": "43",
+                        "agencyName": "Helsingin seudun liikenne",
+                        "agencyUrl": "http://www.hsl.fi/",
+                        "agencyTimeZoneOffset": 10800000,
+                        "routeType": 701,
+                        "routeId": "HSL:1043",
+                        "interlineWithPreviousLeg": false,
+                        "headsign": "Kuninkaantammi via Kannelmäki as.",
+                        "agencyId": "HSL",
+                        "tripId": "HSL:1043_20190423_Su_1_1310",
+                        "serviceDate": "20190501",
+                        "from": {
+                            "name": "Elielinaukio",
+                            "stopId": "HSL:1020243",
+                            "stopCode": "2028",
+                            "platformCode": "28",
+                            "lon": 24.939698,
+                            "lat": 60.172101,
+                            "arrival": 1556705400000,
+                            "departure": 1556705400000,
+                            "zoneId": "01",
+                            "stopIndex": 0,
+                            "stopSequence": 1,
+                            "vertexType": "TRANSIT"
+                        },
+                        "to": {
+                            "name": "Töölön tulli",
+                            "stopId": "HSL:1180214",
+                            "stopCode": "1921",
+                            "lon": 24.91203,
+                            "lat": 60.19169,
+                            "arrival": 1556705880000,
+                            "departure": 1556705880000,
+                            "zoneId": "01",
+                            "stopIndex": 5,
+                            "stopSequence": 6,
+                            "vertexType": "TRANSIT"
+                        },
+                        "legGeometry": {
+                            "points": "kjgnJ{afwCc@~@?nCiBX[PeDRaBJSDYb@Ih@E`A@nCHlHNdApBdGNt@kAhAqEbEgAlAm@r@m@r@}@lA_BzBq@z@}AnAkAf@cB|@qAl@_@Nq@Zy@\\q@Vq@Zq@Vo@\\}@^{@`@aCjAMLKNU^_@t@Yb@eAnBmC~EKP{@~Ai@`Ac@t@e@z@}@~AiCnE]h@a@l@k@v@i@x@i@v@W^aCdDQVcChCw@x@c@b@mCxCSXkAjBy@zAkAbDwD`LYbAM^m@rBGX[pA",
+                            "length": 74
+                        },
+                        "routeShortName": "43",
+                        "routeLongName": "Elielinaukio-Kannelmäki-Kuninkaantammi",
+                        "rentedBike": false,
+                        "intermediatePlace": false,
+                        "realTimeState": "SCHEDULED",
+                        "duration": 480,
+                        "transitLeg": true,
+                        "steps": []
+                    },
+                    {
+                        "startTime": 1556705880000,
+                        "endTime": 1556705990000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 134.52,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 10800000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "Töölön tulli",
+                            "stopId": "HSL:1180214",
+                            "stopCode": "1921",
+                            "lon": 24.91203,
+                            "lat": 60.19169,
+                            "arrival": 1556705880000,
+                            "departure": 1556705880000,
+                            "zoneId": "01",
+                            "stopIndex": 5,
+                            "stopSequence": 6,
+                            "vertexType": "TRANSIT"
+                        },
+                        "to": {
+                            "name": "Destination",
+                            "lon": 24.914124,
+                            "lat": 60.191058,
+                            "arrival": 1556705990000,
+                            "orig": "",
+                            "vertexType": "NORMAL"
+                        },
+                        "legGeometry": {
+                            "points": "eeknJis`wCNo@Lg@@ENs@R{@BGFSFKz@gC",
+                            "length": 10
+                        },
+                        "rentedBike": false,
+                        "intermediatePlace": false,
+                        "realTimeState": "SCHEDULED",
+                        "duration": 110,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 134.52,
+                                "relativeDirection": "DEPART",
+                                "streetName": "bike path",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 24.912059900000003,
+                                "lat": 60.191716500000005,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 16.03
+                                    },
+                                    {
+                                        "first": 10,
+                                        "second": 16.11
+                                    },
+                                    {
+                                        "first": 15.71,
+                                        "second": 16.08
+                                    },
+                                    {
+                                        "first": 31.418,
+                                        "second": 16.08
+                                    },
+                                    {
+                                        "first": 41.418,
+                                        "second": 15.94
+                                    },
+                                    {
+                                        "first": 46.748,
+                                        "second": 15.82
+                                    },
+                                    {
+                                        "first": 46.748999999999995,
+                                        "second": 15.82
+                                    },
+                                    {
+                                        "first": 56.748999999999995,
+                                        "second": 15.92
+                                    },
+                                    {
+                                        "first": 66.749,
+                                        "second": 16.08
+                                    },
+                                    {
+                                        "first": 76.749,
+                                        "second": 15.89
+                                    },
+                                    {
+                                        "first": 83.859,
+                                        "second": 15.81
+                                    },
+                                    {
+                                        "first": 83.859,
+                                        "second": 15.81
+                                    },
+                                    {
+                                        "first": 86.949,
+                                        "second": 15.79
+                                    },
+                                    {
+                                        "first": 86.946,
+                                        "second": 15.79
+                                    },
+                                    {
+                                        "first": 93.756,
+                                        "second": 15.68
+                                    },
+                                    {
+                                        "first": 93.75999999999999,
+                                        "second": 15.68
+                                    },
+                                    {
+                                        "first": 99.46999999999998,
+                                        "second": 15.53
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "tooSloped": false
+            },
+            {
+                "duration": 853,
+                "startTime": 1556705199000,
+                "endTime": 1556706052000,
+                "walkTime": 253,
+                "transitTime": 600,
+                "waitingTime": 0,
+                "walkDistance": 299.43669231310963,
+                "walkLimitExceeded": false,
+                "elevationLost": 1.7199999999999989,
+                "elevationGained": 0.3899999999999988,
+                "transfers": 0,
+                "fare": {
+                    "fare": {
+                        "regular": {
+                            "currency": {
+                                "currency": "EUR",
+                                "defaultFractionDigits": 2,
+                                "currencyCode": "EUR",
+                                "symbol": "EUR"
+                            },
+                            "cents": 320
+                        }
+                    },
+                    "details": {
+                        "regular": [
+                            {
+                                "fareId": "HSL:hki",
+                                "price": {
+                                    "currency": {
+                                        "currency": "EUR",
+                                        "defaultFractionDigits": 2,
+                                        "currencyCode": "EUR",
+                                        "symbol": "EUR"
+                                    },
+                                    "cents": 320
+                                },
+                                "routes": [
+                                    "HSL:1010"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "legs": [
+                    {
+                        "startTime": 1556705199000,
+                        "endTime": 1556705280000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 95.816,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 10800000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "Origin",
+                            "lon": 24.93768,
+                            "lat": 60.17036,
+                            "departure": 1556705199000,
+                            "orig": "",
+                            "vertexType": "NORMAL"
+                        },
+                        "to": {
+                            "name": "Lasipalatsi",
+                            "stopId": "HSL:1020444",
+                            "stopCode": "0101",
+                            "platformCode": "51",
+                            "lon": 24.9377,
+                            "lat": 60.17045,
+                            "arrival": 1556705280000,
+                            "departure": 1556705280000,
+                            "zoneId": "01",
+                            "stopIndex": 5,
+                            "stopSequence": 6,
+                            "vertexType": "TRANSIT"
+                        },
+                        "legGeometry": {
+                            "points": "u_gnJisewCcA`B?EACAIAC?Cv@yA",
+                            "length": 8
+                        },
+                        "rentedBike": false,
+                        "intermediatePlace": false,
+                        "realTimeState": "SCHEDULED",
+                        "duration": 81,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 46.759,
+                                "relativeDirection": "DEPART",
+                                "streetName": "platform",
+                                "absoluteDirection": "NORTHWEST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 24.93765881678665,
+                                "lat": 60.17035232300965,
+                                "elevation": []
+                            },
+                            {
+                                "distance": 49.057,
+                                "relativeDirection": "UTURN_RIGHT",
+                                "streetName": "platform",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 24.9373092,
+                                "lat": 60.1707265,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 7.21
+                                    },
+                                    {
+                                        "first": 10,
+                                        "second": 7.19
+                                    },
+                                    {
+                                        "first": 20,
+                                        "second": 7.2
+                                    },
+                                    {
+                                        "first": 30,
+                                        "second": 7.15
+                                    },
+                                    {
+                                        "first": 40.02,
+                                        "second": 7.1
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "startTime": 1556705280000,
+                        "endTime": 1556705880000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 2833.098663699811,
+                        "pathway": false,
+                        "mode": "TRAM",
+                        "route": "10",
+                        "agencyName": "Helsingin seudun liikenne",
+                        "agencyUrl": "http://www.hsl.fi/",
+                        "agencyTimeZoneOffset": 10800000,
+                        "routeType": 0,
+                        "routeId": "HSL:1010",
+                        "interlineWithPreviousLeg": false,
+                        "headsign": "Pikku Huopalahti via Ruskeasuo",
+                        "agencyId": "HSL",
+                        "tripId": "HSL:1010_20190423_VP_1_1300",
+                        "serviceDate": "20190501",
+                        "from": {
+                            "name": "Lasipalatsi",
+                            "stopId": "HSL:1020444",
+                            "stopCode": "0101",
+                            "platformCode": "51",
+                            "lon": 24.9377,
+                            "lat": 60.17045,
+                            "arrival": 1556705280000,
+                            "departure": 1556705280000,
+                            "zoneId": "01",
+                            "stopIndex": 5,
+                            "stopSequence": 6,
+                            "vertexType": "TRANSIT"
+                        },
+                        "to": {
+                            "name": "Töölön tulli",
+                            "stopId": "HSL:1180437",
+                            "stopCode": "0133",
+                            "lon": 24.91111,
+                            "lat": 60.19186,
+                            "arrival": 1556705880000,
+                            "departure": 1556705880000,
+                            "zoneId": "01",
+                            "stopIndex": 11,
+                            "stopSequence": 12,
+                            "vertexType": "TRANSIT"
+                        },
+                        "legGeometry": {
+                            "points": "c`gnJksewCkAlBw@lBK~@y@dAUZuDrDqOrNqD~DuFfH{@p@qAj@iAr@uKfE{GhDa@`@gApBiDrG}CrFoGdL{AzB{FtIuBvByAtAgCrCk@l@e@p@qBjDkAfDqE`NuCxK",
+                            "length": 31
+                        },
+                        "routeShortName": "10",
+                        "routeLongName": "Kirurgi - Lasipalatsi - Ruskeasuo - Pikku Huopalahti",
+                        "rentedBike": false,
+                        "intermediatePlace": false,
+                        "realTimeState": "SCHEDULED",
+                        "duration": 600,
+                        "transitLeg": true,
+                        "steps": []
+                    },
+                    {
+                        "startTime": 1556705880000,
+                        "endTime": 1556706052000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 203.473,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 10800000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "Töölön tulli",
+                            "stopId": "HSL:1180437",
+                            "stopCode": "0133",
+                            "lon": 24.91111,
+                            "lat": 60.19186,
+                            "arrival": 1556705880000,
+                            "departure": 1556705880000,
+                            "zoneId": "01",
+                            "stopIndex": 11,
+                            "stopSequence": 12,
+                            "vertexType": "TRANSIT"
+                        },
+                        "to": {
+                            "name": "Destination",
+                            "lon": 24.914124,
+                            "lat": 60.191058,
+                            "arrival": 1556706052000,
+                            "orig": "",
+                            "vertexType": "NORMAL"
+                        },
+                        "legGeometry": {
+                            "points": "sfknJem`wC^}A??EGEIAAZqANo@Lg@@ENs@R{@BGFSFKz@gC",
+                            "length": 16
+                        },
+                        "rentedBike": false,
+                        "intermediatePlace": false,
+                        "realTimeState": "SCHEDULED",
+                        "duration": 172,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 31.63,
+                                "relativeDirection": "DEPART",
+                                "streetName": "platform",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 24.911073400000003,
+                                "lat": 60.1919437,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 16.45
+                                    },
+                                    {
+                                        "first": 10,
+                                        "second": 16.36
+                                    },
+                                    {
+                                        "first": 20,
+                                        "second": 16.29
+                                    },
+                                    {
+                                        "first": 31.63,
+                                        "second": 16.24
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 9.92,
+                                "relativeDirection": "LEFT",
+                                "streetName": "path",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 24.911542100000002,
+                                "lat": 60.19178050000001,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 16.24
+                                    },
+                                    {
+                                        "first": 4.33,
+                                        "second": 16.26
+                                    },
+                                    {
+                                        "first": 4.33,
+                                        "second": 16.26
+                                    },
+                                    {
+                                        "first": 9.92,
+                                        "second": 16.28
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 161.923,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "bike path",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 24.911647000000002,
+                                "lat": 60.1918529,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 16.28
+                                    },
+                                    {
+                                        "first": 10,
+                                        "second": 16.24
+                                    },
+                                    {
+                                        "first": 20,
+                                        "second": 16.18
+                                    },
+                                    {
+                                        "first": 27.4,
+                                        "second": 16.03
+                                    },
+                                    {
+                                        "first": 27.403,
+                                        "second": 16.03
+                                    },
+                                    {
+                                        "first": 37.403,
+                                        "second": 16.11
+                                    },
+                                    {
+                                        "first": 43.113,
+                                        "second": 16.08
+                                    },
+                                    {
+                                        "first": 43.111999999999995,
+                                        "second": 16.08
+                                    },
+                                    {
+                                        "first": 53.111999999999995,
+                                        "second": 15.94
+                                    },
+                                    {
+                                        "first": 58.44199999999999,
+                                        "second": 15.82
+                                    },
+                                    {
+                                        "first": 58.443,
+                                        "second": 15.82
+                                    },
+                                    {
+                                        "first": 68.443,
+                                        "second": 15.92
+                                    },
+                                    {
+                                        "first": 78.443,
+                                        "second": 16.08
+                                    },
+                                    {
+                                        "first": 88.443,
+                                        "second": 15.89
+                                    },
+                                    {
+                                        "first": 95.553,
+                                        "second": 15.81
+                                    },
+                                    {
+                                        "first": 95.553,
+                                        "second": 15.81
+                                    },
+                                    {
+                                        "first": 98.643,
+                                        "second": 15.79
+                                    },
+                                    {
+                                        "first": 98.64,
+                                        "second": 15.79
+                                    },
+                                    {
+                                        "first": 105.45,
+                                        "second": 15.68
+                                    },
+                                    {
+                                        "first": 105.45400000000001,
+                                        "second": 15.68
+                                    },
+                                    {
+                                        "first": 111.164,
+                                        "second": 15.53
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "tooSloped": false
+            },
+            {
+                "duration": 774,
+                "startTime": 1556705336000,
+                "endTime": 1556706110000,
+                "walkTime": 354,
+                "transitTime": 420,
+                "waitingTime": 0,
+                "walkDistance": 413.08030769881134,
+                "walkLimitExceeded": false,
+                "elevationLost": 4.769999999999998,
+                "elevationGained": 0.6199999999999961,
+                "transfers": 0,
+                "fare": {
+                    "fare": {
+                        "regular": {
+                            "currency": {
+                                "currency": "EUR",
+                                "defaultFractionDigits": 2,
+                                "currencyCode": "EUR",
+                                "symbol": "EUR"
+                            },
+                            "cents": 320
+                        }
+                    },
+                    "details": {
+                        "regular": [
+                            {
+                                "fareId": "HSL:hki",
+                                "price": {
+                                    "currency": {
+                                        "currency": "EUR",
+                                        "defaultFractionDigits": 2,
+                                        "currencyCode": "EUR",
+                                        "symbol": "EUR"
+                                    },
+                                    "cents": 320
+                                },
+                                "routes": [
+                                    "HSL:4421"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "legs": [
+                    {
+                        "startTime": 1556705336000,
+                        "endTime": 1556705580000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 278.383,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 10800000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "Origin",
+                            "lon": 24.93768,
+                            "lat": 60.17036,
+                            "departure": 1556705336000,
+                            "orig": "",
+                            "vertexType": "NORMAL"
+                        },
+                        "to": {
+                            "name": "Elielinaukio",
+                            "stopId": "HSL:1020132",
+                            "stopCode": "2025",
+                            "platformCode": "25",
+                            "lon": 24.939716,
+                            "lat": 60.171921,
+                            "arrival": 1556705580000,
+                            "departure": 1556705580000,
+                            "zoneId": "01",
+                            "stopIndex": 0,
+                            "stopSequence": 1,
+                            "vertexType": "TRANSIT"
+                        },
+                        "legGeometry": {
+                            "points": "u_gnJisewCcA`B?EACAIAC?CAIAQ?MAQGGC?G@IBK@IaBAUIwCa@q@EIGK_@?YW{@m@CG",
+                            "length": 26
+                        },
+                        "rentedBike": false,
+                        "intermediatePlace": false,
+                        "realTimeState": "SCHEDULED",
+                        "duration": 244,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 46.759,
+                                "relativeDirection": "DEPART",
+                                "streetName": "platform",
+                                "absoluteDirection": "NORTHWEST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 24.93765881678665,
+                                "lat": 60.17035232300965,
+                                "elevation": []
+                            },
+                            {
+                                "distance": 26.055,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "bike path",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 24.937161000000003,
+                                "lat": 60.170692200000005,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 7.51
+                                    },
+                                    {
+                                        "first": 1.94,
+                                        "second": 7.44
+                                    },
+                                    {
+                                        "first": 1.936,
+                                        "second": 7.44
+                                    },
+                                    {
+                                        "first": 7.656,
+                                        "second": 7.25
+                                    },
+                                    {
+                                        "first": 7.657,
+                                        "second": 7.25
+                                    },
+                                    {
+                                        "first": 9.036999999999999,
+                                        "second": 7.21
+                                    },
+                                    {
+                                        "first": 9.039,
+                                        "second": 7.21
+                                    },
+                                    {
+                                        "first": 11.369,
+                                        "second": 7.16
+                                    },
+                                    {
+                                        "first": 11.372,
+                                        "second": 7.16
+                                    },
+                                    {
+                                        "first": 16.622,
+                                        "second": 7.06
+                                    },
+                                    {
+                                        "first": 16.619,
+                                        "second": 7.06
+                                    },
+                                    {
+                                        "first": 20.519,
+                                        "second": 7.01
+                                    },
+                                    {
+                                        "first": 20.517,
+                                        "second": 7.01
+                                    },
+                                    {
+                                        "first": 26.057,
+                                        "second": 6.94
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 99.417,
+                                "relativeDirection": "LEFT",
+                                "streetName": "bike path",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 24.937609600000002,
+                                "lat": 60.1707595,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 6.94
+                                    },
+                                    {
+                                        "first": 4.38,
+                                        "second": 6.89
+                                    },
+                                    {
+                                        "first": 4.38,
+                                        "second": 6.89
+                                    },
+                                    {
+                                        "first": 6.88,
+                                        "second": 6.88
+                                    },
+                                    {
+                                        "first": 6.883,
+                                        "second": 6.88
+                                    },
+                                    {
+                                        "first": 10.753,
+                                        "second": 6.87
+                                    },
+                                    {
+                                        "first": 10.756,
+                                        "second": 6.87
+                                    },
+                                    {
+                                        "first": 17.396,
+                                        "second": 6.86
+                                    },
+                                    {
+                                        "first": 17.392,
+                                        "second": 6.86
+                                    },
+                                    {
+                                        "first": 23.172,
+                                        "second": 6.87
+                                    },
+                                    {
+                                        "first": 23.173,
+                                        "second": 6.87
+                                    },
+                                    {
+                                        "first": 33.173,
+                                        "second": 6.63
+                                    },
+                                    {
+                                        "first": 43.173,
+                                        "second": 6.28
+                                    },
+                                    {
+                                        "first": 57.352999999999994,
+                                        "second": 5.67
+                                    },
+                                    {
+                                        "first": 57.354,
+                                        "second": 5.67
+                                    },
+                                    {
+                                        "first": 67.354,
+                                        "second": 5.21
+                                    },
+                                    {
+                                        "first": 77.354,
+                                        "second": 4.75
+                                    },
+                                    {
+                                        "first": 87.354,
+                                        "second": 4.38
+                                    },
+                                    {
+                                        "first": 99.414,
+                                        "second": 4.08
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 103.216,
+                                "relativeDirection": "LEFT",
+                                "streetName": "open area",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": true,
+                                "area": true,
+                                "bogusName": true,
+                                "lon": 24.9389606,
+                                "lat": 60.171071000000005,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 4.08
+                                    },
+                                    {
+                                        "first": 10,
+                                        "second": 3.96
+                                    },
+                                    {
+                                        "first": 23.67,
+                                        "second": 3.85
+                                    },
+                                    {
+                                        "first": 23.674,
+                                        "second": 3.85
+                                    },
+                                    {
+                                        "first": 28.174,
+                                        "second": 3.83
+                                    },
+                                    {
+                                        "first": 28.173,
+                                        "second": 3.83
+                                    },
+                                    {
+                                        "first": 33.543,
+                                        "second": 3.81
+                                    },
+                                    {
+                                        "first": 33.542,
+                                        "second": 3.81
+                                    },
+                                    {
+                                        "first": 43.542,
+                                        "second": 3.9
+                                    },
+                                    {
+                                        "first": 51.742000000000004,
+                                        "second": 3.99
+                                    },
+                                    {
+                                        "first": 51.744,
+                                        "second": 3.99
+                                    },
+                                    {
+                                        "first": 61.744,
+                                        "second": 4.05
+                                    },
+                                    {
+                                        "first": 67.124,
+                                        "second": 4.08
+                                    },
+                                    {
+                                        "first": 67.124,
+                                        "second": 4.08
+                                    },
+                                    {
+                                        "first": 77.124,
+                                        "second": 4.06
+                                    },
+                                    {
+                                        "first": 87.124,
+                                        "second": 4.01
+                                    },
+                                    {
+                                        "first": 97.124,
+                                        "second": 3.96
+                                    },
+                                    {
+                                        "first": 103.214,
+                                        "second": 3.91
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 2.936,
+                                "relativeDirection": "SLIGHTLY_RIGHT",
+                                "streetName": "Elielinaukio",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 24.939676900000002,
+                                "lat": 60.1719038,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 3.91
+                                    },
+                                    {
+                                        "first": 2.94,
+                                        "second": 3.86
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "startTime": 1556705580000,
+                        "endTime": 1556706000000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 2697.1725349023636,
+                        "pathway": false,
+                        "mode": "BUS",
+                        "route": "421",
+                        "agencyName": "Helsingin seudun liikenne",
+                        "agencyUrl": "http://www.hsl.fi/",
+                        "agencyTimeZoneOffset": 10800000,
+                        "routeType": 701,
+                        "routeId": "HSL:4421",
+                        "interlineWithPreviousLeg": false,
+                        "headsign": "Martinlaakso",
+                        "agencyId": "HSL",
+                        "tripId": "HSL:4421_20190423_Su_1_1313",
+                        "serviceDate": "20190501",
+                        "from": {
+                            "name": "Elielinaukio",
+                            "stopId": "HSL:1020132",
+                            "stopCode": "2025",
+                            "platformCode": "25",
+                            "lon": 24.939716,
+                            "lat": 60.171921,
+                            "arrival": 1556705580000,
+                            "departure": 1556705580000,
+                            "zoneId": "01",
+                            "stopIndex": 0,
+                            "stopSequence": 1,
+                            "vertexType": "TRANSIT"
+                        },
+                        "to": {
+                            "name": "Töölön tulli",
+                            "stopId": "HSL:1180214",
+                            "stopCode": "1921",
+                            "lon": 24.91203,
+                            "lat": 60.19169,
+                            "arrival": 1556706000000,
+                            "departure": 1556706000000,
+                            "zoneId": "01",
+                            "stopIndex": 4,
+                            "stopSequence": 5,
+                            "vertexType": "TRANSIT"
+                        },
+                        "legGeometry": {
+                            "points": "eignJyafwCiA|@?nCiBX[PeDRaBJSDYb@Ih@E`A@nCHlHNdApBdGNt@kAhAqEbEgAlAm@r@m@r@}@lA_BzBq@z@}AnAkAf@cB|@qAl@_@Nq@Zy@\\q@Vq@Zq@Vo@\\}@^{@`@aCjAMLKNU^_@t@Yb@eAnBmC~EKP{@~Ai@`Ac@t@e@z@}@~AiCnE]h@a@l@k@v@i@x@i@v@W^aCdDQVcChCw@x@c@b@mCxCSXkAjBy@zAkAbDwD`LYbAM^m@rBGX[pA",
+                            "length": 74
+                        },
+                        "routeShortName": "421",
+                        "routeLongName": "Elielinaukio-Martinlaakso",
+                        "rentedBike": false,
+                        "intermediatePlace": false,
+                        "realTimeState": "SCHEDULED",
+                        "duration": 420,
+                        "transitLeg": true,
+                        "steps": []
+                    },
+                    {
+                        "startTime": 1556706000000,
+                        "endTime": 1556706110000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 134.52,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 10800000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "Töölön tulli",
+                            "stopId": "HSL:1180214",
+                            "stopCode": "1921",
+                            "lon": 24.91203,
+                            "lat": 60.19169,
+                            "arrival": 1556706000000,
+                            "departure": 1556706000000,
+                            "zoneId": "01",
+                            "stopIndex": 4,
+                            "stopSequence": 5,
+                            "vertexType": "TRANSIT"
+                        },
+                        "to": {
+                            "name": "Destination",
+                            "lon": 24.914124,
+                            "lat": 60.191058,
+                            "arrival": 1556706110000,
+                            "orig": "",
+                            "vertexType": "NORMAL"
+                        },
+                        "legGeometry": {
+                            "points": "eeknJis`wCNo@Lg@@ENs@R{@BGFSFKz@gC",
+                            "length": 10
+                        },
+                        "rentedBike": false,
+                        "intermediatePlace": false,
+                        "realTimeState": "SCHEDULED",
+                        "duration": 110,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 134.52,
+                                "relativeDirection": "DEPART",
+                                "streetName": "bike path",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 24.912059900000003,
+                                "lat": 60.191716500000005,
+                                "elevation": [
+                                    {
+                                        "first": 0,
+                                        "second": 16.03
+                                    },
+                                    {
+                                        "first": 10,
+                                        "second": 16.11
+                                    },
+                                    {
+                                        "first": 15.71,
+                                        "second": 16.08
+                                    },
+                                    {
+                                        "first": 31.418,
+                                        "second": 16.08
+                                    },
+                                    {
+                                        "first": 41.418,
+                                        "second": 15.94
+                                    },
+                                    {
+                                        "first": 46.748,
+                                        "second": 15.82
+                                    },
+                                    {
+                                        "first": 46.748999999999995,
+                                        "second": 15.82
+                                    },
+                                    {
+                                        "first": 56.748999999999995,
+                                        "second": 15.92
+                                    },
+                                    {
+                                        "first": 66.749,
+                                        "second": 16.08
+                                    },
+                                    {
+                                        "first": 76.749,
+                                        "second": 15.89
+                                    },
+                                    {
+                                        "first": 83.859,
+                                        "second": 15.81
+                                    },
+                                    {
+                                        "first": 83.859,
+                                        "second": 15.81
+                                    },
+                                    {
+                                        "first": 86.949,
+                                        "second": 15.79
+                                    },
+                                    {
+                                        "first": 86.946,
+                                        "second": 15.79
+                                    },
+                                    {
+                                        "first": 93.756,
+                                        "second": 15.68
+                                    },
+                                    {
+                                        "first": 93.75999999999999,
+                                        "second": 15.68
+                                    },
+                                    {
+                                        "first": 99.46999999999998,
+                                        "second": 15.53
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "tooSloped": false
+            }
+        ]
+    },
+    "debugOutput": {
+        "precalculationTime": 153,
+        "pathCalculationTime": 126,
+        "pathTimes": [
+            45,
+            47,
+            34
+        ],
+        "renderingTime": 1,
+        "totalTime": 280,
+        "timedOut": false
+    },
+    "elevationMetadata": {
+        "ellipsoidToGeoidDifference": 18.971388914713888,
+        "geoidElevation": false
+    }
+}
