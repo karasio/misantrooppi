@@ -53,7 +53,7 @@
     alert("You clicked the map at " + e.latlng);
   }
 
-  map.on('click', onMapClick);  
+  map.on('click', onMapClick);
 
   const options = {
     enableHighAccuracy: true,
@@ -83,7 +83,6 @@
 
   // Käynnistetään paikkatietojen haku
   navigator.geolocation.getCurrentPosition(success, error, options);
-</script>
 </script>
 </body>
 </html>
