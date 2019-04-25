@@ -12,7 +12,15 @@
             crossorigin=""></script>
 </head>
 <body>
-<div id="map" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"/>
+
+<main style="position: fixed; z-index: 1";>
+    <h1>Misantrooppi reittihaku</h1>
+    <input type=text value="Mistä" id="fromInput">
+    <input type=text value="Mihin" id="whereInput">
+    <button type="button" id="searchButton">Hae!</button>
+</main>
+
+<div id="map" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"/>
 
 <script>
   var map = L.map('map').setView([60.192059,24.945831], 13);
@@ -24,30 +32,6 @@
     tileSize: 512,
     zoomOffset: -1,
     id: 'hsl-map'}).addTo(map);
-
-  var swedish = L.tileLayer('https://cdn.digitransit.fi/map/v1/{id}/{z}/{x}/{y}@2x.png', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-    maxZoom: 19,
-    tileSize: 512,
-    zoomOffset: -1,
-    id: 'hsl-map-sv'});
-
-  var hdTiles = L.tileLayer('https://cdn.digitransit.fi/map/v1/{id}/{z}/{x}/{y}@2x.png', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-    maxZoom: 19,
-    tileSize: 512,
-    zoomOffset: -1,
-    id: 'hsl-map'});
-
-  L.control.layers({
-    "Normal": normalTiles,
-    "Swedish": swedish,
-    "High-density": hdTiles
-  }, null, {
-    collapsed: false
-  }).addTo(map);
 
   function onMapClick(e) {
     alert("You clicked the map at " + e.latlng);
