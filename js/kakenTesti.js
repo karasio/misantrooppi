@@ -29,9 +29,11 @@ let boardings;
 
 fetch('nousijamaara.geojson')
   .then(function(response) {
-    boardings = response.json();
+    return response.json();
+}).
+  then(function(json) {
+    boardings = json;
 });
-
 
 function getCoordinates() {
   let inputFrom = document.getElementById('fromInput').value;
@@ -90,24 +92,29 @@ function search() {
 function sortByPeople(json) {
   console.log('sortByPeoplessa!');
   console.log(json);
+  console.log(boardings);
   const itineraries = json.plan.itineraries;
   const boardingFeatures = boardings.features;
   let boarderCount;
 
-/*  for(let i = 0; i < itineraries.length; i++) {
+  for(let i = 0; i < itineraries.length; i++) {
     let itinerary = itineraries[i];
     for (let j = 0; j < itinerary.legs.length; j++) {
       let leg = itinerary.legs[j];
       for (let k = 0; k < boardingFeatures.length; k++) {
         let boardingFeature = boardingFeatures[k];
-        if (boardingFeature.properties.Lyhyt_tunn === leg.from.stopCode || TAI KOORDINAATIT TÄSMÄÄ) {
-
+        if (boardingFeature.properties.Lyhyt_tunn === leg.from.stopCode ||
+            (boardingFeature.geometry.coordinates[0]).toFixed(4) ===
+            leg.from.lon.toFixed(4) &&
+            boardingFeature.geometry.coordinates[1].toFixed(4) ===
+            leg.from.lat.toFixed(4)) {
+          //jos täsmää, halutaan nousijamäärä
+          boarderCount = boardingFeature.properties.Lyhyt_tunn;
+          console.log(boarderCount + ' määrä: ' + boardingFeature.properties.Nousijamaa);
         }
       }
     }
-  }*/
-
-
+  }
   //let boardingByStop;
 
   /*
