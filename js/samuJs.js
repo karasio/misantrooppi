@@ -20,6 +20,6 @@ function haeTiedot() {
 
 function tulosta(json) {
   console.log(json);
-  console.log(json[0].boundingbox[0]);
+  console.log('lat:' + json[0].lat + ', lon:' + json[0].lon);
 
 }

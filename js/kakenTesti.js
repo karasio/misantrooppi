@@ -27,13 +27,12 @@ haku.addEventListener('click', getCoordinates);
 let coordinates = {};
 let boardings;
 
-fetch('nousijamaara.geojson')
-  .then(function(response) {
-    return response.json();
+fetch('nousijamaara.geojson').then(function(response) {
+  return response.json();
 }).
-  then(function(json) {
-    boardings = json;
-});
+    then(function(json) {
+      boardings = json;
+    });
 
 function getCoordinates() {
   let inputFrom = document.getElementById('fromInput').value;
@@ -48,7 +47,8 @@ function getCoordinates() {
 }
 
 function fetchCoordinates(input, inputType) {
-  fetch(' https://nominatim.openstreetmap.org/search/' + input + '?format=json&addressdetails=1&limit=1&polygon_svg=1').
+  fetch(' https://nominatim.openstreetmap.org/search/' + input +
+      '?format=json&addressdetails=1&limit=1&polygon_svg=1').
       then(function(response) {
         return response.json();
       }).
@@ -63,7 +63,8 @@ function fetchCoordinates(input, inputType) {
 function tulosta(inputType, json) {
   console.log(json);
 
-  coordinates[inputType]=json[0].boundingbox[0] + ',' + json[0].boundingbox[2];
+  coordinates[inputType] = json[0].boundingbox[0] + ',' +
+      json[0].boundingbox[2];
   if (coordinates.from && coordinates.to) {
     console.log('toimii');
     console.log(coordinates);
@@ -75,16 +76,17 @@ function tulosta(inputType, json) {
 function search() {
   let time = getTime();
   let searchAdd = 'http://api.digitransit.fi/routing/v1/routers/hsl/plan?fromPlace=' +
-  coordinates.from + '&toPlace=' + coordinates.to + '&time=' + time.time + '&date=' +
-      time.date + '&mode=TRANSIT,WALK&maxWalkDistance=500&arriveBy=false&showIntermediateStops=false';
+      coordinates.from + '&toPlace=' + coordinates.to + '&time=' + time.time +
+      '&date=' +
+      time.date +
+      '&mode=TRANSIT,WALK&maxWalkDistance=500&arriveBy=false&showIntermediateStops=true';
   console.log(searchAdd);
 
-  fetch(searchAdd)
-      .then(function(response){
-        return response.json();
-      }).then(function(json){
+  fetch(searchAdd).then(function(response) {
+    return response.json();
+  }).then(function(json) {
     sortByPeople(json);
-  }).catch(function(error){
+  }).catch(function(error) {
     console.log(error);
   });
 }
@@ -96,30 +98,39 @@ function sortByPeople(json) {
   const itineraries = json.plan.itineraries;
   const boardingFeatures = boardings.features;
   let boarderCount;
+  let stopsOnOneRoute = [];
+  let arrayOfStops = [];
+  let leg;
 
-  for(let i = 0; i < itineraries.length; i++) {
+  for (let i = 0; i < itineraries.length; i++) {
     let itinerary = itineraries[i];
     for (let j = 0; j < itinerary.legs.length; j++) {
-      let leg = itinerary.legs[j];
-      for (let k = 0; k < boardingFeatures.length; k++) {
-        let boardingFeature = boardingFeatures[k];
-        if (boardingFeature.properties.Lyhyt_tunn === leg.from.stopCode ||
-            (boardingFeature.geometry.coordinates[0]).toFixed(4) ===
-            leg.from.lon.toFixed(4) &&
-            boardingFeature.geometry.coordinates[1].toFixed(4) ===
-            leg.from.lat.toFixed(4)) {
-          //jos täsmää, halutaan nousijamäärä
-          boarderCount = boardingFeature.properties.Lyhyt_tunn;
-          console.log(boarderCount + ' määrä: ' + boardingFeature.properties.Nousijamaa);
-        }
+      let legTry = itinerary.legs[j];
+      if (legTry.mode != 'WALK') {
+        leg = legTry;
+        break;
       }
     }
-  }
-  //let boardingByStop;
+    for (let l = 0; l < leg.intermediateStops.length; l++) {
+      stopsOnOneRoute[l] = leg.intermediateStops[l].lat + ',' +
+          leg.intermediateStops[l].lon;
+    }
+    for (let k = 0; k < boardingFeatures.length; k++) {
+      let boardingFeature = boardingFeatures[k];
+      if (boardingFeature.properties.Lyhyt_tunn === leg.from.stopCode ||
+          (boardingFeature.geometry.coordinates[0]).toFixed(4) ===
+          leg.from.lon.toFixed(4) &&
+          boardingFeature.geometry.coordinates[1].toFixed(4) ===
+          leg.from.lat.toFixed(4)) {
+        //jos täsmää, halutaan nousijamäärä
+        boarderCount = boardingFeature.properties.Lyhyt_tunn;
+        console.log(
+            boarderCount + ' määrä: ' + boardingFeature.properties.Nousijamaa);
+      }
+    }
 
-  /*
-    let stopNames = json.plan.itineraries.legs[].from.stopCode;
-   */
+  }
+  console.log(arrayOfStops);
 }
 
 function getTime() {
@@ -147,7 +158,7 @@ function getTime() {
   let dateAsString = month + '-' + day + '-' + year;
 
   return {
-    time:  timeAsString,
+    time: timeAsString,
     date: dateAsString,
   };
 }
