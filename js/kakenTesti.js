@@ -3,26 +3,13 @@
 /*
 POHDINTAOSIO
 http://api.digitransit.fi/routing/v1/routers/hsl/
-
-
-http://api.digitransit.fi/routing/v1/routers/hsl/plan?
-tällä esmes löytyy asioita:
-http://api.digitransit.fi/routing/v1/routers/hsl/plan?
-TÄMÄ MUUTTUVANA PALASENA:
-fromPlace=60.17036, 24.93768&toPlace=60.191058, 24.914124&time=1:02pm&date=05-01-2019&mode=TRANSIT,WALK&maxWalkDistance=500&arriveBy=false
-
-Reititys JSONissa json.plan.itineraries.legs[].from.stopCode vastaa ehkä
- nousijämäärän Lyhyt_tunn!!
-
-1. vertaile lyhyt_tunn & stopCode
-2. vertaile koordinaatit 4 numeron tarkkuudella
-else : sori ei löydy.
-
-
  */
 
 // getting coordinates according to address
 let haku = document.getElementById('searchButton');
+let inputFrom = document.getElementById('fromInput');
+let inputTo = document.getElementById('whereInput')
+
 haku.addEventListener('click', getCoordinates);
 let coordinates = {};
 let boardings;
@@ -35,14 +22,14 @@ fetch('nousijamaara.geojson').then(function(response) {
     });
 
 function getCoordinates() {
-  let inputFrom = document.getElementById('fromInput').value;
-  let inputTo = document.getElementById('whereInput').value;
+  let inputFromValue = inputFrom.value;
+  let inputToValue = inputTo.value;
 
-  console.log('From ' + inputFrom);
-  console.log('To ' + inputTo);
+  console.log('From ' + inputFromValue);
+  console.log('To ' + inputToValue);
 
-  fetchCoordinates(inputFrom, 'from');
-  fetchCoordinates(inputTo, 'to');
+  fetchCoordinates(inputFromValue, 'from');
+  fetchCoordinates(inputToValue, 'to');
 
 }
 
@@ -70,7 +57,6 @@ function tulosta(inputType, json) {
     console.log(coordinates);
     search();
   }
-
 }
 
 function search() {
@@ -98,9 +84,8 @@ function sortByPeople(json) {
   const itineraries = json.plan.itineraries;
   const boardingFeatures = boardings.features;
   let boarderCount;
-  let stopsOnOneRoute = [];
-  let arrayOfStops = [];
   let leg;
+  const boarderCountNotFound = 999999999999;
 
   for (let i = 0; i < itineraries.length; i++) {
     let itinerary = itineraries[i];
@@ -111,10 +96,6 @@ function sortByPeople(json) {
         break;
       }
     }
-    for (let l = 0; l < leg.intermediateStops.length; l++) {
-      stopsOnOneRoute[l] = leg.intermediateStops[l].lat + ',' +
-          leg.intermediateStops[l].lon;
-    }
     for (let k = 0; k < boardingFeatures.length; k++) {
       let boardingFeature = boardingFeatures[k];
       if (boardingFeature.properties.Lyhyt_tunn === leg.from.stopCode ||
@@ -123,14 +104,15 @@ function sortByPeople(json) {
           boardingFeature.geometry.coordinates[1].toFixed(4) ===
           leg.from.lat.toFixed(4)) {
         //jos täsmää, halutaan nousijamäärä
-        boarderCount = boardingFeature.properties.Lyhyt_tunn;
+        boarderCount = boardingFeature.properties.Nousijamaa;
         console.log(
-            boarderCount + ' määrä: ' + boardingFeature.properties.Nousijamaa);
+            boarderCount + ' pysäkki: ' + boardingFeature.properties.Lyhyt_tunn + ' nimi: ' + boardingFeature.properties.Nimi);
+      } else {
+        boarderCount = boarderCountNotFound;
       }
     }
-
   }
-  console.log(arrayOfStops);
+  // seuraavaan funktioon
 }
 
 function getTime() {
