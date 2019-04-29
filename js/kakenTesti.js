@@ -76,7 +76,7 @@ function search() {
   let time = getTime();
   let searchAdd = 'http://api.digitransit.fi/routing/v1/routers/hsl/plan?fromPlace=' +
   coordinates.from + '&toPlace=' + coordinates.to + '&time=' + time.time + '&date=' +
-      time.date + '&mode=TRANSIT,WALK&maxWalkDistance=500&arriveBy=false&showIntermediateStops=false';
+      time.date + '&mode=TRANSIT,WALK&maxWalkDistance=500&arriveBy=false&showIntermediateStops=true';
   console.log(searchAdd);
 
   fetch(searchAdd)
@@ -96,11 +96,16 @@ function sortByPeople(json) {
   const itineraries = json.plan.itineraries;
   const boardingFeatures = boardings.features;
   let boarderCount;
+  let stopsOnOneRoute = [];
+  let arrayOfStops = [];
 
   for(let i = 0; i < itineraries.length; i++) {
     let itinerary = itineraries[i];
     for (let j = 0; j < itinerary.legs.length; j++) {
       let leg = itinerary.legs[j];
+      for(let l = 0; l < leg.intermediateStops.length; l++) {
+        stopsOnOneRoute[l] = leg.intermediateStops[l].lat + ',' + leg.intermediateStops[l].lon;
+      }
       for (let k = 0; k < boardingFeatures.length; k++) {
         let boardingFeature = boardingFeatures[k];
         if (boardingFeature.properties.Lyhyt_tunn === leg.from.stopCode ||
@@ -115,11 +120,7 @@ function sortByPeople(json) {
       }
     }
   }
-  //let boardingByStop;
-
-  /*
-    let stopNames = json.plan.itineraries.legs[].from.stopCode;
-   */
+  console.log(arrayOfStops);
 }
 
 function getTime() {
