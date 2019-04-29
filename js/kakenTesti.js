@@ -50,8 +50,8 @@ function fetchCoordinates(input, inputType) {
 function tulosta(inputType, json) {
   console.log(json);
 
-  coordinates[inputType] = json[0].boundingbox[0] + ',' +
-      json[0].boundingbox[2];
+  coordinates[inputType] = json[0].lat + ',' +
+      json[0].lon;
   if (coordinates.from && coordinates.to) {
     console.log('toimii');
     console.log(coordinates);
