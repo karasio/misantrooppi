@@ -40,18 +40,21 @@ function fetchCoordinates(input, inputType) {
         return response.json();
       }).
       then(function(json) {
-        tulosta(inputType, json);
+        formatCoordinates(inputType, json);
       }).
       catch(function(error) {
         console.log(error);
       });
 }
 
-function tulosta(inputType, json) {
+function formatCoordinates(inputType, json) {
   console.log(json);
+  let coordinate = {
+    lat: json[0].lat,
+    lon: json[0].lon
+  };
 
-  coordinates[inputType] = json[0].lat + ',' +
-      json[0].lon;
+  coordinates[inputType] = coordinate;
   if (coordinates.from && coordinates.to) {
     console.log(coordinates);
     search();
@@ -60,8 +63,10 @@ function tulosta(inputType, json) {
 
 function search() {
   let time = getTime();
+  // coordinates formatted 'lat,lon'
   let searchAdd = 'http://api.digitransit.fi/routing/v1/routers/hsl/plan?fromPlace=' +
-      coordinates.from + '&toPlace=' + coordinates.to + '&time=' + time.time +
+      coordinates.from.lat + ',' + coordinates.from.lon + '&toPlace=' +
+      coordinates.to.lat + ',' + coordinates.to.lon + '&time=' + time.time +
       '&date=' +
       time.date +
       '&mode=TRANSIT,WALK&maxWalkDistance=500&arriveBy=false&showIntermediateStops=true';
