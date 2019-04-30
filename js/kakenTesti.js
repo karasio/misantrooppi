@@ -86,35 +86,42 @@ function sortByPeople(json) {
 
   const itineraries = json.plan.itineraries;
   const boardingFeatures = boardings.features;
-  let boarderCount;
-  let leg;
-  const boarderCountNotFound = 999999999999;
+  let stopData = {};
+  let stopDataForItineraries = [];
 
   for (let i = 0; i < itineraries.length; i++) {
     let itinerary = itineraries[i];
+    let noStopAdded = true;
     for (let j = 0; j < itinerary.legs.length; j++) {
-      let legTry = itinerary.legs[j];
-      if (legTry.mode != 'WALK') {
-        leg = legTry;
-        break;
+      let boarderAmount;
+      let leg = itinerary.legs[j];
+      if (leg.from.stopId && noStopAdded === true) {
+        for (let k = 0; k < boardingFeatures.length; k++) {
+          let boardingFeature = boardingFeatures[k];
+          if (boardingFeature.properties.Lyhyt_tunn === leg.from.stopCode ||
+              (boardingFeature.geometry.coordinates[0]).toFixed(4) ===
+              leg.from.lon.toFixed(4) &&
+              boardingFeature.geometry.coordinates[1].toFixed(4) ===
+              leg.from.lat.toFixed(4)) {
+            boarderAmount = boardingFeature.properties.Nousijamaa;
+            noStopAdded = false;
+            break;
+          }
+        }
+        stopData = {
+          name: leg.from.name,
+          code: leg.from.stopCode,
+          boarderCount: boarderAmount,
+          lon: leg.from.lon,
+          lat: leg.from.lat
+        };
+        noStopAdded = false;
+        //console.log(stopData);
       }
     }
-    for (let k = 0; k < boardingFeatures.length; k++) {
-      let boardingFeature = boardingFeatures[k];
-      if (boardingFeature.properties.Lyhyt_tunn === leg.from.stopCode ||
-          (boardingFeature.geometry.coordinates[0]).toFixed(4) ===
-          leg.from.lon.toFixed(4) &&
-          boardingFeature.geometry.coordinates[1].toFixed(4) ===
-          leg.from.lat.toFixed(4)) {
-        //jos täsmää, halutaan nousijamäärä
-        boarderCount = boardingFeature.properties.Nousijamaa;
-        console.log(
-            boarderCount + ' pysäkki: ' + boardingFeature.properties.Lyhyt_tunn + ' nimi: ' + boardingFeature.properties.Nimi);
-      } else {
-        boarderCount = boarderCountNotFound;
-      }
-    }
+    stopDataForItineraries.push(stopData);
   }
+  console.log(stopDataForItineraries);
 }
 
 function routeCoordinates(json) {
@@ -158,7 +165,6 @@ function routeCoordinates(json) {
         lat: leg.to.lat
       };
       stopsPerLeg.push(coordinate);
-      console.log(stopsPerLeg.length);
     }
     stopsPerItinerary[i] = stopsPerLeg;
   }
