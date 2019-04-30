@@ -57,11 +57,11 @@ function formatCoordinates(inputType, json) {
   coordinates[inputType] = coordinate;
   if (coordinates.from && coordinates.to) {
     console.log(coordinates);
-    search();
+    searchHSLRouting();
   }
 }
 
-function search() {
+function searchHSLRouting() {
   let time = getTime();
   // coordinates formatted 'lat,lon'
   let searchAdd = 'http://api.digitransit.fi/routing/v1/routers/hsl/plan?fromPlace=' +
@@ -72,11 +72,15 @@ function search() {
       '&mode=TRANSIT,WALK&maxWalkDistance=500&arriveBy=false&showIntermediateStops=true';
   console.log(searchAdd);
 
+  let stopInfo;
+  let stopsOnRoute;
+
   fetch(searchAdd).then(function(response) {
     return response.json();
   }).then(function(json) {
-    sortByPeople(json);
-    routeCoordinates(json);
+    stopInfo = sortByPeople(json);
+    stopsOnRoute = routeCoordinates(json);
+    printResults(stopInfo, stopsOnRoute);
   }).catch(function(error) {
     console.log(error);
   });
@@ -127,6 +131,7 @@ function sortByPeople(json) {
     stopDataForItineraries.push(stopData);
   }
   console.log(stopDataForItineraries);
+  return stopDataForItineraries;
 }
 
 function routeCoordinates(json) {
@@ -174,6 +179,7 @@ function routeCoordinates(json) {
     stopsPerItinerary[i] = stopsPerLeg;
   }
   console.log(stopsPerItinerary);
+  return stopsPerItinerary;
 }
 
 
@@ -205,4 +211,27 @@ function getTime() {
     time: timeAsString,
     date: dateAsString,
   };
+}
+
+function printResults(stopInfo, stopsOnRoute) {
+  let stopInfoString = '';
+  for (let i = 0; i < stopInfo.length; i++) {
+    if (stopInfoString.includes(stopInfo[i].name)) {
+      continue;
+    } else {
+      if (i === stopInfo.length-1) {
+        stopInfoString += stopInfo[i].name + ' - ' + stopInfo[i].boarderCount + ' ihmistä pysäkillä';
+      } else {
+        stopInfoString += stopInfo[i].name + ' - ' + stopInfo[i].boarderCount + ' ihmistä pysäkillä<br>';
+      }
+    }
+  }
+
+  const aside = document.getElementById('results');
+  aside.innerHTML = '<p><h2>Matkan tiedot</h2><br>' +
+      'Kohteesta: ' + inputFrom.value.charAt(0).toUpperCase() + inputFrom.value.slice(1) + '<br>' +
+      ' kohteeseen ' + inputTo.value.charAt(0).toUpperCase() + inputTo.value.slice(1) + '<br>' +
+      ' voit kulkea käyttämällä seuraavia pysäkkejä:' + '<br>' +
+      stopInfoString +
+      '</p>';
 }
