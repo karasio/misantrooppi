@@ -53,7 +53,6 @@ function tulosta(inputType, json) {
   coordinates[inputType] = json[0].lat + ',' +
       json[0].lon;
   if (coordinates.from && coordinates.to) {
-    console.log('toimii');
     console.log(coordinates);
     search();
   }
@@ -72,15 +71,19 @@ function search() {
     return response.json();
   }).then(function(json) {
     sortByPeople(json);
+    routeCoordinates(json);
   }).catch(function(error) {
     console.log(error);
   });
 }
 
 function sortByPeople(json) {
-  console.log('sortByPeoplessa!');
+  // debug printing
+  console.log('Reititys API ');
   console.log(json);
+  console.log('Nousijamaara.geojson ');
   console.log(boardings);
+
   const itineraries = json.plan.itineraries;
   const boardingFeatures = boardings.features;
   let boarderCount;
@@ -112,8 +115,56 @@ function sortByPeople(json) {
       }
     }
   }
-  // seuraavaan funktioon
 }
+
+function routeCoordinates(json) {
+  let coordinate = {};
+  let stopsPerItinerary = [];
+
+  const itineraries = json.plan.itineraries;
+
+  for (let i = 0; i < itineraries.length; i++) {
+    let stopsPerLeg = [];
+
+
+    let itinerary = itineraries[i];
+
+    for (let j = 0; j < itinerary.legs.length; j++) {
+
+      let leg = itinerary.legs[j];
+
+      //'from' value
+      coordinate = {
+        name: leg.from.name,
+        lon: leg.from.lon,
+        lat: leg.from.lat
+      };
+      stopsPerLeg.push(coordinate);
+
+      // intermediate stops if they exist
+      for (let k = 0; k < leg.intermediateStops.length; k++) {
+        coordinate = {
+          name: leg.intermediateStops[k].name,
+          lon: leg.intermediateStops[k].lon,
+          lat: leg.intermediateStops[k].lat
+        };
+        stopsPerLeg.push(coordinate);
+      }
+
+      // 'to' value
+      coordinate = {
+        name: leg.to.name,
+        lon: leg.to.lon,
+        lat: leg.to.lat
+      };
+      stopsPerLeg.push(coordinate);
+      console.log(stopsPerLeg.length);
+    }
+    stopsPerItinerary[i] = stopsPerLeg;
+  }
+  console.log(stopsPerItinerary);
+}
+
 
 function getTime() {
   let date = new Date();
