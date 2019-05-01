@@ -6,11 +6,19 @@ http://api.digitransit.fi/routing/v1/routers/hsl/
  */
 
 // getting coordinates according to address
-let haku = document.getElementById('searchButton');
 let inputFrom = document.getElementById('fromInput');
-let inputTo = document.getElementById('whereInput')
+let inputTo = document.getElementById('whereInput');
 
-haku.addEventListener('click', getCoordinates);
+document.getElementById("whereInput")
+.addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    document.getElementById("searchButton").click();
+  }
+});
+let searchBtn = document.getElementById('searchButton');
+
+searchBtn.addEventListener('click', getCoordinates);
 let coordinates = {};
 let boardings;
 
@@ -83,6 +91,7 @@ function searchHSLRouting() {
     printResults(stopInfo, stopsOnRoute);
   }).catch(function(error) {
     console.log(error);
+    alert('Computer says no! Tarkista syöte');
   });
 }
 
@@ -153,6 +162,7 @@ function routeCoordinates(json) {
       //'from' value
       coordinate = {
         name: leg.from.name,
+        mode: leg.mode,
         lon: leg.from.lon,
         lat: leg.from.lat
       };
@@ -162,6 +172,7 @@ function routeCoordinates(json) {
       for (let k = 0; k < leg.intermediateStops.length; k++) {
         coordinate = {
           name: leg.intermediateStops[k].name,
+          mode: leg.mode,
           lon: leg.intermediateStops[k].lon,
           lat: leg.intermediateStops[k].lat
         };
@@ -171,6 +182,7 @@ function routeCoordinates(json) {
       // 'to' value
       coordinate = {
         name: leg.to.name,
+        mode: leg.mode,
         lon: leg.to.lon,
         lat: leg.to.lat
       };
@@ -214,24 +226,107 @@ function getTime() {
 }
 
 function printResults(stopInfo, stopsOnRoute) {
+  // get usable stop information to string (to be printed)
   let stopInfoString = '';
   for (let i = 0; i < stopInfo.length; i++) {
     if (stopInfoString.includes(stopInfo[i].name)) {
       continue;
     } else {
-      if (i === stopInfo.length-1) {
-        stopInfoString += stopInfo[i].name + ' - ' + stopInfo[i].boarderCount + ' ihmistä pysäkillä';
+      if (isNaN(stopInfo[i].boarderCount)) {
+        if (i === stopInfo.length -1) {
+          stopInfoString += stopInfo[i].name + ' (' + stopInfo[i].code + ') - pysäkillä olevien ihmisten määrä ei ole tiedossa.';
+        } else {
+          stopInfoString += stopInfo[i].name + ' (' + stopInfo[i].code + ') - pysäkillä olevien ihmisten määrä ei ole tiedossa. <br>';
+        }
       } else {
-        stopInfoString += stopInfo[i].name + ' - ' + stopInfo[i].boarderCount + ' ihmistä pysäkillä<br>';
+        if (i === stopInfo.length - 1) {
+          stopInfoString += stopInfo[i].name + ' (' + stopInfo[i].code + ') - ' + stopInfo[i].boarderCount + ' ihmistä pysäkillä';
+        } else {
+          stopInfoString += stopInfo[i].name + ' (' + stopInfo[i].code + ') - ' + stopInfo[i].boarderCount + ' ihmistä pysäkillä<br>';
+        }
       }
     }
   }
 
+  // get intermediate stop information to string (to be printed)
+  let stopsOnRouteList = '<div id="routes"><ol><li>Vaihtoehto 1<br>' ;
+  for (let j=0; j < stopsOnRoute.length; j++) {
+    let vehicleType = '';
+    let stopsOnOneRoute = stopsOnRoute[j];
+    for (let k = 1; k < stopsOnOneRoute.length-1; k++) {
+      // if used with pictures, rendering route options side by side breaks down
+      switch (stopsOnOneRoute[k].mode) {
+        case 'WALK':
+          vehicleType ='(w)';
+          break;
+        case 'BUS':
+          vehicleType ='(b)';
+          break;
+        case 'SUBWAY':
+          vehicleType = '(m)';
+          break;
+        case 'FERRY':
+          vehicleType = '(l)';
+          break;
+        case 'RAIL':
+          vehicleType = '(j)';
+          break;
+        case 'TRAM':
+          vehicleType = '(r)';
+          break;
+      }
+      let x = k+1;
+      if(stopsOnOneRoute[k].name === stopsOnOneRoute[x].name) {
+        continue;
+      } else if (k === stopsOnOneRoute.length-2) {
+        stopsOnRouteList += vehicleType + ' ' + stopsOnOneRoute[k].name;
+      } else {
+        stopsOnRouteList += vehicleType + ' ' + stopsOnOneRoute[k].name + '<br>';
+      }
+    }
+    if (j < stopsOnRoute.length-1) {
+      stopsOnRouteList += '</li><li>Vaihtoehto ' + (j+2) + '<br>';
+    }
+  }
+  stopsOnRouteList += '</li></ol></div>';
+
+  let inputFromValue = toTitleCase(inputFrom.value);
+  let inputToValue = toTitleCase(inputTo.value);
+
   const aside = document.getElementById('results');
-  aside.innerHTML = '<p><h2>Matkan tiedot</h2><br>' +
-      'Kohteesta: ' + inputFrom.value.charAt(0).toUpperCase() + inputFrom.value.slice(1) + '<br>' +
-      ' kohteeseen ' + inputTo.value.charAt(0).toUpperCase() + inputTo.value.slice(1) + '<br>' +
+  // render travel info to aside
+  aside.innerHTML = '<p><h3>Matkan tiedot</h3>' +
+      'Kohteesta: ' + inputFromValue + '<br>' +
+      'Kohteeseen: ' + inputToValue + '<br>' +
       ' voit kulkea käyttämällä seuraavia pysäkkejä:' + '<br>' +
-      stopInfoString +
-      '</p>';
+      stopInfoString + '</p>'+
+      '<p id="showText" class="visible">Näytä pysäkit</p>' +
+      '<div id ="showStops"></div>';
+
+  // if user wants more information, show it & make aside bigger
+  let showStopText = document.getElementById('showText');
+  let showStopDiv = document.getElementById('showStops');
+  showStopText.addEventListener('click', function() {
+    aside.setAttribute('id', 'bigResults');
+    showStopDiv.innerHTML = '<p class="underlined">Piilota pysäkit</p>'+stopsOnRouteList;
+    showStopText.setAttribute('class', 'hidden');
+  });
+
+  // hide further travel information and make aside regular size again
+  showStopDiv.addEventListener('click', function() {
+    aside.setAttribute('id', 'results');
+    showStopDiv.innerHTML = '';
+    showStopText.setAttribute('class', 'visible');
+  });
+}
+
+// fix all words to start with uppercase letter
+// src: https://stackoverflow.com/questions/196972/convert-string-to-proper-case-with-javascript/196991#196991
+function toTitleCase(str) {
+  return str.replace(
+      /\w\S*/g,
+      function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      }
+  );
 }
