@@ -131,7 +131,8 @@ function sortByPeople(json) {
     let itinerary = itineraries[i];
     let noStopAdded = true;
     for (let j = 0; j < itinerary.legs.length; j++) {
-      let boarderAmount;
+      let boarderAmount = ' ei tiedossa';
+      let startingStop= ' ei tiedossa';
       let leg = itinerary.legs[j];
       if (leg.from.stopId && noStopAdded === true) {
         for (let k = 0; k < boardingFeatures.length; k++) {
@@ -142,13 +143,14 @@ function sortByPeople(json) {
               boardingFeature.geometry.coordinates[1].toFixed(4) ===
               leg.from.lat.toFixed(4)) {
             boarderAmount = boardingFeature.properties.Nousijamaa;
+            startingStop = leg.from.stopCode;
             noStopAdded = false;
             break;
           }
         }
         stopData = {
           name: leg.from.name,
-          code: leg.from.stopCode,
+          code: startingStop,
           boarderCount: boarderAmount,
           lon: leg.from.lon,
           lat: leg.from.lat
@@ -281,12 +283,12 @@ function printResults(stopInfo, stopsOnRoute) {
   }
 
   // get intermediate stop information to string (to be printed)
-  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li>Vaihtoehto 1</li>' ;
+
+  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li>Vaihtoehto 1 </li><li> Pysäkki '+ stopInfo[0].code+'</li><li>Ihmimäärä: '+ stopInfo[0].boarderCount +'</li>' ;
   for (let j=0; j < stopsOnRoute.length; j++) {
     let vehicleClass = '';
     let stopsOnOneRoute = stopsOnRoute[j];
     for (let k = 1; k < stopsOnOneRoute.length-1; k++) {
-      // if used with pictures, rendering route options side by side breaks down
       switch (stopsOnOneRoute[k].mode) {
         case 'WALK':
           vehicleClass ='walk';
@@ -317,7 +319,7 @@ function printResults(stopInfo, stopsOnRoute) {
       }
     }
     if (j < stopsOnRoute.length-1) {
-      stopsOnRouteList += '</ul></li></li><li class="virtahepo"><ul><li>Vaihtoehto ' + (j+2);
+      stopsOnRouteList += '</ul></li></li><li class="virtahepo"><ul><li>Vaihtoehto ' + (j+2) + '</li><li>Pysäkki ' + stopInfo[j+1].code + '</li><li>Ihmismäärä: '+ stopInfo[j+1].boarderCount +'</li>';
     }
   }
   stopsOnRouteList += '</li></ul></div>';
