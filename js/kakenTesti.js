@@ -249,46 +249,46 @@ function printResults(stopInfo, stopsOnRoute) {
   }
 
   // get intermediate stop information to string (to be printed)
-  let stopsOnRouteList = '<div id="routes"><ol><li>Vaihtoehto 1<br>' ;
+  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li>Vaihtoehto 1</li>' ;
   for (let j=0; j < stopsOnRoute.length; j++) {
-    let vehicleType = '';
+    let vehicleClass = '';
     let stopsOnOneRoute = stopsOnRoute[j];
     for (let k = 1; k < stopsOnOneRoute.length-1; k++) {
       // if used with pictures, rendering route options side by side breaks down
       switch (stopsOnOneRoute[k].mode) {
         case 'WALK':
-          vehicleType ='(w)';
+          vehicleClass ='walk';
           break;
         case 'BUS':
-          vehicleType ='(b)';
+          vehicleClass ='bus';
           break;
         case 'SUBWAY':
-          vehicleType = '(m)';
+          vehicleClass = 'subway';
           break;
         case 'FERRY':
-          vehicleType = '(l)';
+          vehicleClass = 'ferry';
           break;
         case 'RAIL':
-          vehicleType = '(j)';
+          vehicleClass = 'rail';
           break;
         case 'TRAM':
-          vehicleType = '(r)';
+          vehicleClass = 'tram';
           break;
       }
       let x = k+1;
       if(stopsOnOneRoute[k].name === stopsOnOneRoute[x].name) {
         continue;
       } else if (k === stopsOnOneRoute.length-2) {
-        stopsOnRouteList += vehicleType + ' ' + stopsOnOneRoute[k].name;
+        stopsOnRouteList += '<li class="'+ vehicleClass +'">' + stopsOnOneRoute[k].name + '</li>';
       } else {
-        stopsOnRouteList += vehicleType + ' ' + stopsOnOneRoute[k].name + '<br>';
+        stopsOnRouteList += '<li class ="' +vehicleClass +'">' + stopsOnOneRoute[k].name + '</li>';
       }
     }
     if (j < stopsOnRoute.length-1) {
-      stopsOnRouteList += '</li><li>Vaihtoehto ' + (j+2) + '<br>';
+      stopsOnRouteList += '</ul></li></li><li class="virtahepo"><ul><li>Vaihtoehto ' + (j+2);
     }
   }
-  stopsOnRouteList += '</li></ol></div>';
+  stopsOnRouteList += '</li></ul></div>';
 
   let inputFromValue = toTitleCase(inputFrom.value);
   let inputToValue = toTitleCase(inputTo.value);

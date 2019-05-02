@@ -81,19 +81,23 @@ ol {
     line-height: 2em;
     border: 1px solid #ccc;
     margin: 0;
-    overflow: scroll;
-    overflow-x: hidden;
 }
-li{
+.option{
     display: flex;
     position: relative;
     margin: 0.2em;
     padding: 0.5em;
-    background-color: rgba(141,196,189,0.2);
+    /*background-color: rgba(141,196,189,0.2);*/
     border-radius: 6px;
-    text-overflow: ellipsis;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 80%;
+
 }
 
+li {
+
+}
 h1 {
     background-color: rgba(255,255,255,0.5);
     border-radius: 6px;
@@ -106,4 +110,59 @@ h1 {
 
 #info {
     height: 30%
+}
+
+ul {
+    list-style-type: none;
+}
+
+.bus {
+    background-color: paleturquoise;
+    background-image: url("../media/bus.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 20px;
+    padding-left: 20px;
+}
+.walk {
+    background-color: lightyellow;
+    background-image: url("../media/walk.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 20px;
+    padding-left: 20px;
+}
+.rail {
+    background-color: lightpink;
+    background-image: url("../media/rail.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 20px;
+    padding-left: 20px;
+}
+.subway {
+    background-color: orange;
+    background-image: url("../media/subway.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 20px;
+    padding-left: 20px;
+}
+.ferry {
+    background-color: dodgerblue;
+    background-image: url("../media/ferry.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 20px;
+    padding-left: 20px;
+}
+
+.tram {
+    background-color: lightseagreen;
+    background-image: url("../media/tram.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 20px;
+    padding-left: 20px;
+
 }
