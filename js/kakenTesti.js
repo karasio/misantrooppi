@@ -31,6 +31,7 @@ fetch('nousijamaara.geojson').then(function(response) {
     });
 
 function getCoordinates() {
+  coordinates = {};
   let inputFromValue = inputFrom.value;
   let inputToValue = inputTo.value;
 
@@ -354,8 +355,12 @@ function printResults(stopInfo, stopsOnRoute) {
     showStopDiv.innerHTML = '';
     showStopText.setAttribute('class', 'visible');
   });*/
-
-  let aside = document.getElementById('results');
+  let aside;
+  if (document.getElementById("results") != null) {
+    aside = document.getElementById('results');
+  }else {
+    aside = document.getElementById('bigResults');
+  }
   //aside.innerHTML = '<div id ="info" class="visible"></div><div id ="moreInfo" class="hidden"></div>';
   let info = document.getElementById('info');
   let moreInfo = document.getElementById('moreInfo');
