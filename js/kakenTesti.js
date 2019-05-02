@@ -69,6 +69,25 @@ function formatCoordinates(inputType, json) {
   }
 }
 
+
+let markers;
+
+function placeMarkers() {
+  if (markers) { // check
+    map.removeLayer(markers); // remove
+  }
+  markers   = L.layerGroup().addTo(map);
+
+  let markerStart = new L.marker([coordinates.from.lat, coordinates.from.lon]).addTo(map);
+  let markerEnd = new L.marker([coordinates.to.lat, coordinates.to.lon]).addTo(map);
+
+  markers.addLayer(markerStart);
+  markers.addLayer(markerEnd);
+
+  let group = new L.featureGroup([markerStart, markerEnd]);
+  map.fitBounds(group.getBounds());
+}
+
 function searchHSLRouting() {
   let time = getTime();
   // coordinates formatted 'lat,lon'
