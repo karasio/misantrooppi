@@ -1,3 +1,8 @@
+body {
+    height: 100%;
+    weight: 100%;
+}
+
 #map {
     position: absolute;
     top: 0;
@@ -24,7 +29,7 @@
     height: 80%;
     margin: 0.5em 1em 1em;
     z-index: 1;
-    background-color: whitesmoke;
+    background-color: rgba(255,255,255,0.5);
     padding: 0.5em;
     border-radius: 6px;
     text-align: center;
@@ -50,32 +55,43 @@
     position:fixed;
     right: 0;
     width: auto;
-    height: auto;
+    height: 80%;
     margin: 0.5em 1em 1em;
     z-index: 1;
-    background-color: whitesmoke;
+    background-color: rgba(255,255,255,0.5);
     padding: 0.5em;
     border-radius: 6px;
 }
-#route {
+#routes {
     display: flex;
     flex-flow: wrap;
+    height: 100%;
+}
+#showStops {
+    height: 70%;
 }
 
 ol {
+    height: 80%;
     display: flex;
     flex-flow: wrap;
     padding: 0.5em;
     justify-content: flex-start;
     list-style-type: none;
+    line-height: 2em;
+    border: 1px solid #ccc;
+    margin: 0;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 li{
     display: flex;
     position: relative;
     margin: 0.2em;
-    padding: 0.2em;
+    padding: 0.5em;
     background-color: rgba(141,196,189,0.2);
     border-radius: 6px;
+    text-overflow: ellipsis;
 }
 
 h1 {
@@ -86,4 +102,8 @@ h1 {
 .smallIcon {
     height: 15px;
     width: 15px;
+}
+
+#info {
+    height: 30%
 }

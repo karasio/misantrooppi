@@ -295,12 +295,12 @@ function printResults(stopInfo, stopsOnRoute) {
 
   const aside = document.getElementById('results');
   // render travel info to aside
-  aside.innerHTML = '<p><h3>Matkan tiedot</h3>' +
+  aside.innerHTML = '<div id="info"><h3>Matkan tiedot</h3>' +
       'Kohteesta: ' + inputFromValue + '<br>' +
       'Kohteeseen: ' + inputToValue + '<br>' +
       ' voit kulkea käyttämällä seuraavia pysäkkejä:' + '<br>' +
-      stopInfoString + '</p>'+
-      '<p id="showText" class="visible">Näytä pysäkit</p>' +
+      stopInfoString +
+      '<p id="showText" class="visible">Näytä pysäkit</p></div>'+
       '<div id ="showStops"></div>';
 
   // if user wants more information, show it & make aside bigger
