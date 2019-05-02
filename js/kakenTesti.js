@@ -132,20 +132,24 @@ function sortByPeople(json) {
   for (let i = 0; i < itineraries.length; i++) {
     let itinerary = itineraries[i];
     let noStopAdded = true;
+    let startingStop;
     for (let j = 0; j < itinerary.legs.length; j++) {
       let boarderAmount = ' ei tiedossa';
-      let startingStop= ' ei tiedossa';
       let leg = itinerary.legs[j];
       if (leg.from.stopId && noStopAdded === true) {
         for (let k = 0; k < boardingFeatures.length; k++) {
           let boardingFeature = boardingFeatures[k];
+          if (!leg.from.stopCode) {
+            startingStop = ' ei tiedossa';
+          } else {
+            startingStop = leg.from.stopCode;
+          }
           if (boardingFeature.properties.Lyhyt_tunn === leg.from.stopCode ||
               (boardingFeature.geometry.coordinates[0]).toFixed(4) ===
               leg.from.lon.toFixed(4) &&
               boardingFeature.geometry.coordinates[1].toFixed(4) ===
               leg.from.lat.toFixed(4)) {
             boarderAmount = boardingFeature.properties.Nousijamaa;
-            startingStop = leg.from.stopCode;
             noStopAdded = false;
             break;
           }
