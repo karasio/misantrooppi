@@ -17,9 +17,10 @@ document.getElementById("whereInput")
   }
 });
 let searchBtn = document.getElementById('searchButton');
+let coordinates = {};
+
 
 searchBtn.addEventListener('click', getCoordinates);
-let coordinates = {};
 let boardings;
 
 fetch('nousijamaara.geojson').then(function(response) {
@@ -261,6 +262,7 @@ function getTime() {
 
 function printResults(stopInfo, stopsOnRoute) {
   // get usable stop information to string (to be printed)
+/*
   let stopInfoString = '';
   for (let i = 0; i < stopInfo.length; i++) {
     if (stopInfoString.includes(stopInfo[i].code)) {
@@ -281,10 +283,11 @@ function printResults(stopInfo, stopsOnRoute) {
       }
     }
   }
+*/
 
   // get intermediate stop information to string (to be printed)
 
-  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li>Vaihtoehto 1 </li><li> Pysäkki '+ stopInfo[0].code+'</li><li>Ihmimäärä: '+ stopInfo[0].boarderCount +'</li>' ;
+  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li>Vaihtoehto 1 </li><li> Pysäkki: '+ stopInfo[0].code+'</li><li>Ihmimäärä: '+ stopInfo[0].boarderCount +'</li>' ;
   for (let j=0; j < stopsOnRoute.length; j++) {
     let vehicleClass = '';
     let stopsOnOneRoute = stopsOnRoute[j];
@@ -327,13 +330,12 @@ function printResults(stopInfo, stopsOnRoute) {
   let inputFromValue = toTitleCase(inputFrom.value);
   let inputToValue = toTitleCase(inputTo.value);
 
-  const aside = document.getElementById('results');
-  // render travel info to aside
+  //const aside = document.getElementById('results');
+/*  // render travel info to aside
   aside.innerHTML = '<div id="info"><h3>Matkan tiedot</h3>' +
       'Kohteesta: ' + inputFromValue + '<br>' +
       'Kohteeseen: ' + inputToValue + '<br>' +
-      ' voit kulkea käyttämällä seuraavia pysäkkejä:' + '<br>' +
-      stopInfoString +
+      ' voit kulkea käyttämällä seuraavia pysäkkejä:' + '<br>'+
       '<p id="showText" class="visible">Näytä pysäkit</p></div>'+
       '<div id ="showStops"></div>';
 
@@ -351,6 +353,34 @@ function printResults(stopInfo, stopsOnRoute) {
     aside.setAttribute('id', 'results');
     showStopDiv.innerHTML = '';
     showStopText.setAttribute('class', 'visible');
+  });*/
+
+  let aside = document.getElementById('results');
+  //aside.innerHTML = '<div id ="info" class="visible"></div><div id ="moreInfo" class="hidden"></div>';
+  let info = document.getElementById('info');
+  let moreInfo = document.getElementById('moreInfo');
+  info.innerHTML = '<div class="upper"><h3>Matkan tiedot</h3>' +
+      'Kohteesta: ' + inputFromValue + '<br>' +
+      'Kohteeseen: ' + inputToValue + '<br>' +
+      '<p id="showText" >Näytä pysäkit</p></div>';
+
+  moreInfo.innerHTML = '<div class="upper"><h3>Matkan tiedot</h3>' +
+      'Kohteesta: ' + inputFromValue + '<br>' +
+      'Kohteeseen: ' + inputToValue + '<br>' +
+      '<p id="hideText" >Piilota pysäkit</p></div>' + stopsOnRouteList;
+
+  let showStopText = document.getElementById('showText');
+  showStopText.addEventListener('click', function() {
+    aside.setAttribute('id', 'bigResults');
+    info.setAttribute('class', 'hidden');
+    moreInfo.setAttribute('class', 'visible');
+  });
+
+  let hideStopText = document.getElementById('hideText');
+  hideStopText.addEventListener('click', function() {
+    aside.setAttribute('id', 'results');
+    info.setAttribute('class', 'visible');
+    moreInfo.setAttribute('class', 'hidden');
   });
 }
 
