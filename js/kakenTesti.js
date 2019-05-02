@@ -291,8 +291,8 @@ function printResults(stopInfo, stopsOnRoute) {
 */
 
   // get intermediate stop information to string (to be printed)
-
-  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li>Vaihtoehto 1 </li><li> Pysäkki: '+ stopInfo[0].code+'</li><li>Ihmimäärä: '+ stopInfo[0].boarderCount +'</li>' ;
+  let amountOfPeople = numberOfPeople(stopInfo[0].boarderCount);
+  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li>Vaihtoehto 1 </li><li> Pysäkki: '+ stopInfo[0].code+'</li><li>Ihmimäärä: '+ amountOfPeople +'</li>' ;
   for (let j=0; j < stopsOnRoute.length; j++) {
     let vehicleClass = '';
     let stopsOnOneRoute = stopsOnRoute[j];
@@ -327,7 +327,8 @@ function printResults(stopInfo, stopsOnRoute) {
       }
     }
     if (j < stopsOnRoute.length-1) {
-      stopsOnRouteList += '</ul></li></li><li class="virtahepo"><ul><li>Vaihtoehto ' + (j+2) + '</li><li>Pysäkki ' + stopInfo[j+1].code + '</li><li>Ihmismäärä: '+ stopInfo[j+1].boarderCount +'</li>';
+      amountOfPeople = numberOfPeople(stopInfo[j+1].boarderCount);
+      stopsOnRouteList += '</ul></li></li><li class="virtahepo"><ul><li>Vaihtoehto ' + (j+2) + '</li><li>Pysäkki ' + stopInfo[j+1].code + '</li><li>Ihmismäärä: '+ amountOfPeople +'</li>';
     }
   }
   stopsOnRouteList += '</li></ul></div>';
@@ -402,4 +403,21 @@ function toTitleCase(str) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       }
   );
+}
+function numberOfPeople(peoplePerDay){
+  let time = getTime();
+  let hour = time.hours;
+  if (peoplePerDay === " ei tiedossa"){
+    return " ei tiedossa"
+  }
+  peoplePerDay /=24;
+  if (hour < 6){ //00-05:59
+    return Math.floor(peoplePerDay/10)
+  }else if (hour < 10 || hour >= 14 && hour < 18){ //6:00-9:59 & 14:00-17:59
+    return Math.floor(peoplePerDay/2)
+  }else if (hour < 14 || hour >= 18 && hour < 21){ //10:00-13:59 & 18:00-20:59
+    return Math.floor(peoplePerDay/3)
+  }else{ // 21-23:59
+    return Math.floor(peoplePerDay/5)
+  }
 }
