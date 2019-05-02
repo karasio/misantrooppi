@@ -3,6 +3,19 @@ body {
     weight: 100%;
 }
 
+/********* footer *************/
+footer {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
+
+footer img{
+    height: 40px;
+    width: 40px;
+}
+
+/********** map **********/
 #map {
     position: absolute;
     top: 0;
@@ -21,7 +34,7 @@ body {
     border: 0.1em solid white;
     border-radius: 6px;
 }
-
+/************ aside ********/
 #results {
     position: fixed;
     right: 0%;
@@ -101,17 +114,9 @@ ol {
     height: 80%;
 }
 
-li {
-
-}
 h1 {
     background-color: rgba(255,255,255,0.5);
     border-radius: 6px;
-}
-
-.smallIcon {
-    height: 15px;
-    width: 15px;
 }
 
 #info {
@@ -126,6 +131,7 @@ ul {
     list-style-type: none;
 }
 
+/********* transportation pictures in li *********/
 .bus {
     background-color: rgba(135,132,241,0.5);
     background-image: url("../media/bus.png");
@@ -174,5 +180,4 @@ ul {
     background-position: left center;
     background-size: 20px;
     padding-left: 20px;
-
 }

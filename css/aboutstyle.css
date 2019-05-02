@@ -1,0 +1,158 @@
+html, body {
+    background-color: lightgrey;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+footer {
+    text-align: center;
+    width: 100%;
+}
+a {
+    font-size: large;
+    text-decoration: none;
+    font-weight: bold;
+    color: darkslateblue;
+}
+
+.title {
+    background-color: rgba(200,200,200,0.8);
+    width: 100%;
+    top: 40px;
+    padding: 10px 0;
+    font-size: 1.5em;
+    text-align: center;
+    position: absolute;
+}
+
+.green {
+    background-color: rgba(161,241,132,0.8);
+}
+
+.yellow {
+    background-color: rgba(235,238,135,0.8);
+}
+
+.blue {
+    background-color: rgba(135,132,241,0.8);
+}
+
+.pink {
+    background-color: rgba(241,132,205,0.8);
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flexbox {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    min-height: 200px;
+    border: 5px solid white;
+    font-size: x-large;
+}
+
+.placekitten {
+    width: 100%;
+    max-width: 250px;
+}
+
+/* Media queries.. Use some breakpoints here */
+/* Content is king */
+
+@media screen and (min-width: 500px) {
+    .textBox {
+        width: 33.3%
+    }
+
+    .imageBox {
+        width: 66.6%;
+    }
+}
+
+@media screen and (min-width: 650px) {
+    .textBox {
+        width: 33.3%
+    }
+
+    .imageBox {
+        width: 66.6%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .container {
+        width: 1000px;
+        margin: auto;
+    }
+
+    .textBox {
+        width: 33.3%
+    }
+
+    .imageBox {
+        width: 66.6%;
+    }
+}
+
+header {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    height: 200px;
+}
+
+.turquoise {
+    background-color: rgba(132,232,241,0.8);
+    color: #efefef;
+}
+
+#vid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+#vid2{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.textBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.textLine {
+    max-width: 50%;
+}
+
+.imageBox{
+    padding: 0;
+}
+
+img {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;}
+
+
+
