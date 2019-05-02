@@ -415,7 +415,7 @@ function numberOfPeople(peoplePerDay){
   if (hour < 6){ //00-05:59
     return Math.floor(peoplePerDay/10)
   }else if (hour < 10 || hour >= 14 && hour < 18){ //6:00-9:59 & 14:00-17:59
-    return Math.floor(peoplePerDay*5)
+    return Math.floor(peoplePerDay/2)
   }else if (hour < 14 || hour >= 18 && hour < 21){ //10:00-13:59 & 18:00-20:59
     return Math.floor(peoplePerDay/3)
   }else{ // 21-23:59
