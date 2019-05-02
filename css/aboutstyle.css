@@ -5,7 +5,7 @@ html, body {
 }
 
 body {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Cutive Mono', monospace;
 }
 
 footer {
@@ -64,8 +64,7 @@ a {
     max-width: 250px;
 }
 
-/* Media queries.. Use some breakpoints here */
-/* Content is king */
+/* Media queries */
 
 @media screen and (min-width: 500px) {
     .textBox {

@@ -1,6 +1,7 @@
 body {
     height: 100%;
-    weight: 100%;
+    width: 100%;
+    font-family: 'Cutive Mono', monospace;
 }
 
 /********* footer *************/
@@ -78,29 +79,17 @@ footer img{
     height: 80%;
     margin: 0.5em 1em 1em;
     z-index: 1;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.9);
     padding: 0.5em;
     border-radius: 6px;
 }
 #routes {
     display: flex;
     flex-flow: wrap;
-    height: 75%;
+    height: 62.5%;
 }
 #showStops {
     height: 70%;
-}
-
-ol {
-    height: 80%;
-    display: flex;
-    flex-flow: wrap;
-    padding: 0.5em;
-    justify-content: flex-start;
-    list-style-type: none;
-    line-height: 2em;
-    border: 1px solid #ccc;
-    margin: 0;
 }
 .option{
     display: flex;
@@ -172,7 +161,6 @@ ul {
     background-size: 20px;
     padding-left: 20px;
 }
-
 .tram {
     background-color: rgba(161,241,132,0.5);
     background-image: url("../media/tram.png");
@@ -181,3 +169,39 @@ ul {
     background-size: 20px;
     padding-left: 20px;
 }
+
+/* Media queries */
+
+@media only screen and (max-width: 600px) {
+    #results {
+        position: absolute;
+        text-align: center;
+        font-size: large;
+        bottom: 0;
+        width: 90%;
+        height: 30%;
+        margin: 0.5em 1em 1em;
+        z-index: 1;
+        background-color: rgba(255,255,255,0.5);
+        padding: 0.5em;
+        border-radius: 6px;
+    }
+    #bigResults {
+        position: absolute;
+        text-align: center;
+        font-size: large;
+        bottom: 0;
+        width: 90%;
+        height: 60%;
+        margin: 0.5em 1em 1em;
+        z-index: 1;
+        background-color: rgba(255,255,255,0.5);
+        padding: 0.5em;
+        border-radius: 6px;
+    }
+    .option {
+        display: block;
+        height: 62.5%
+    }
+}
+
