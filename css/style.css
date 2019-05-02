@@ -92,7 +92,6 @@ ol {
     overflow: scroll;
     overflow-x: hidden;
     height: 80%;
-
 }
 
 li {
@@ -117,7 +116,7 @@ ul {
 }
 
 .bus {
-    background-color: paleturquoise;
+    background-color: rgba(135,132,241,0.5);
     background-image: url("../media/bus.png");
     background-repeat: no-repeat;
     background-position: left center;
@@ -125,7 +124,7 @@ ul {
     padding-left: 20px;
 }
 .walk {
-    background-color: lightyellow;
+    background-color: rgba(235,238,135,0.5);
     background-image: url("../media/walk.png");
     background-repeat: no-repeat;
     background-position: left center;
@@ -133,7 +132,7 @@ ul {
     padding-left: 20px;
 }
 .rail {
-    background-color: lightpink;
+    background-color: rgba(241,132,205,0.5);
     background-image: url("../media/rail.png");
     background-repeat: no-repeat;
     background-position: left center;
@@ -141,7 +140,7 @@ ul {
     padding-left: 20px;
 }
 .subway {
-    background-color: orange;
+    background-color: rgba(242,170,55,0.5);
     background-image: url("../media/subway.png");
     background-repeat: no-repeat;
     background-position: left center;
@@ -149,7 +148,7 @@ ul {
     padding-left: 20px;
 }
 .ferry {
-    background-color: dodgerblue;
+    background-color: rgba(132,232,241,0.5);
     background-image: url("../media/ferry.png");
     background-repeat: no-repeat;
     background-position: left center;
@@ -158,7 +157,7 @@ ul {
 }
 
 .tram {
-    background-color: lightseagreen;
+    background-color: rgba(161,241,132,0.5);
     background-image: url("../media/tram.png");
     background-repeat: no-repeat;
     background-position: left center;

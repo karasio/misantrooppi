@@ -66,6 +66,7 @@ function formatCoordinates(inputType, json) {
   if (coordinates.from && coordinates.to) {
     console.log(coordinates);
     searchHSLRouting();
+    placeMarkers();
   }
 }
 
@@ -177,11 +178,21 @@ function routeCoordinates(json) {
     for (let j = 0; j < itinerary.legs.length; j++) {
 
       let leg = itinerary.legs[j];
+      let vehicle;
+
+      if(leg.mode === 'FERRY') {
+        vehicle = '';
+      } else if (leg.mode === 'WALK') {
+        vehicle = '';
+      } else {
+        vehicle = ' [' + leg.routeShortName + ']';
+      }
 
       //'from' value
       coordinate = {
         name: leg.from.name,
         mode: leg.mode,
+        vehicle: vehicle,
         lon: leg.from.lon,
         lat: leg.from.lat
       };
@@ -192,6 +203,7 @@ function routeCoordinates(json) {
         coordinate = {
           name: leg.intermediateStops[k].name,
           mode: leg.mode,
+          vehicle: vehicle,
           lon: leg.intermediateStops[k].lon,
           lat: leg.intermediateStops[k].lat
         };
@@ -202,6 +214,7 @@ function routeCoordinates(json) {
       coordinate = {
         name: leg.to.name,
         mode: leg.mode,
+        vehicle: vehicle,
         lon: leg.to.lon,
         lat: leg.to.lat
       };
@@ -248,7 +261,7 @@ function printResults(stopInfo, stopsOnRoute) {
   // get usable stop information to string (to be printed)
   let stopInfoString = '';
   for (let i = 0; i < stopInfo.length; i++) {
-    if (stopInfoString.includes(stopInfo[i].name)) {
+    if (stopInfoString.includes(stopInfo[i].code)) {
       continue;
     } else {
       if (isNaN(stopInfo[i].boarderCount)) {
@@ -298,9 +311,9 @@ function printResults(stopInfo, stopsOnRoute) {
       if(stopsOnOneRoute[k].name === stopsOnOneRoute[x].name) {
         continue;
       } else if (k === stopsOnOneRoute.length-2) {
-        stopsOnRouteList += '<li class="'+ vehicleClass +'">' + stopsOnOneRoute[k].name + '</li>';
+        stopsOnRouteList += '<li class="'+ vehicleClass +'">' + stopsOnOneRoute[k].name + stopsOnOneRoute[k].vehicle +'</li>';
       } else {
-        stopsOnRouteList += '<li class ="' +vehicleClass +'">' + stopsOnOneRoute[k].name + '</li>';
+        stopsOnRouteList += '<li class ="' +vehicleClass +'">' + stopsOnOneRoute[k].name + stopsOnOneRoute[k].vehicle + '</li>';
       }
     }
     if (j < stopsOnRoute.length-1) {
