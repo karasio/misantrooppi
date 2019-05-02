@@ -30,11 +30,5 @@ function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
-function placeMarker(lat, lng) {
-  var marker = L.marker([lat, lng]).addTo(map);
-}
-
-placeMarker(60.192059,24.945831);
-
 // Käynnistetään paikkatietojen haku
 navigator.geolocation.getCurrentPosition(success, error, options);
