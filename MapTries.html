@@ -2,8 +2,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Misantroopin matkaopas</title>
     <!-- include Leaflet libraries -->
+    <link rel="stylesheet" href="leaflet-routing-machine/leaflet-routing-machine.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
           integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
           crossorigin=""/>
@@ -13,56 +15,29 @@
             crossorigin=""></script>
 </head>
 <body>
-<div style="width: 100%; height: 100%;">
-    <aside id="results">
-        <p>
-            Curabitur dignissim, mi sed volutpat ornare, tortor diam dictum risus, tempus venenatis augue enim sit amet
-            ipsum. Fusce eget dolor nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-            inceptos
-            himenaeos. Mauris posuere lacus quis elementum cursus. Interdum et malesuada fames ac ante ipsum primis in
-            faucibus. Nulla aliquam, purus ut suscipit egestas, justo lorem porttitor nisi, non condimentum libero velit
-            non
-            magna. Praesent tempor mauris neque, vel lobortis leo suscipit nec. Donec egestas mauris quis sagittis
-            ornare.
-            Nam non facilisis eros, quis accumsan quam. Duis et justo placerat, dignissim lacus ac, lobortis lectus.
-            Mauris
-            dapibus ex vitae felis tempus, a molestie lacus tincidunt. Fusce pretium sodales nibh. Vestibulum tellus
-            felis,
-            iaculis in scelerisque nec, consectetur id nulla.
+<main id="search">
+    <h1>Misantroopin reittihaku</h1>
+    <input type=text placeholder="Mistä" id="fromInput">
+    <input type=text placeholder="Mihin" id="whereInput">
+    <button type="button" id="searchButton">Hae!</button>
+</main>
 
-            Vivamus finibus diam est, vel convallis eros consectetur a. Integer et nulla id dui mattis efficitur sit
-            amet in
-            diam. Ut convallis diam ac felis suscipit egestas. Curabitur iaculis, nunc at aliquam gravida, est sapien
-            feugiat ligula, at imperdiet mi elit vitae erat. Nam sit amet lectus ex. In hac habitasse platea dictumst.
-            Etiam
-            sed bibendum libero.
+<aside id="results">
+    <p><a href="https://fi.wikipedia.org/wiki/Ihmisviha">Misantroopin</a> reittihausta voit tarkistaa, millä pysäkillä on sinulle riittävästi tilaa.</a> </p>
+    <div id ="info" class="visible"></div>
+    <div id ="moreInfo" class="hidden"></div>
+</aside>
 
-            Suspendisse vitae imperdiet tellus, in auctor quam. Nullam sodales bibendum quam. Fusce neque mauris,
-            facilisis
-            vel lacus vitae, aliquet bibendum justo. Nulla semper lorem sit amet sodales mattis. Suspendisse elementum
-            urna
-            non pretium egestas. Mauris vitae rhoncus ex, at tincidunt justo. Phasellus accumsan sollicitudin laoreet.
-            Curabitur vestibulum mi sem, at efficitur lorem fermentum eget. Nunc nisi dolor, pellentesque vel justo at,
-            tincidunt auctor nibh. Sed sed dignissim felis, a venenatis arcu.
-        </p>
-    </aside>
-
-    <main id="search">
-        <h1>Misantrooppi reittihaku</h1>
-        <input type=text value="Mistä" id="fromInput">
-        <input type=text value="Mihin" id="whereInput">
-        <button type="button" id="searchButton">Hae!</button>
-    </main>
-
-    <div id="map"/>
-
-</div>
+<div id="map"></div>
 
 <footer>
+    <a href="about.html"><img src="media/infobutton.png"></a>
     <!--
     Tänne nimet, kuvat sun muut.
     -->
 </footer>
 </body>
+<script src="leaflet-routing-machine/leaflet-routing-machine.js"></script>
+<script src="js/eelisJs.js"></script>
 <script src="js/eelisJsTEST.js"></script>
 </html>
