@@ -1,32 +1,24 @@
 'use strict';
 
-/*
-POHDINTAOSIO
-http://api.digitransit.fi/routing/v1/routers/hsl/
- */
+// printing map to site
+let map = L.map('map').setView([60.192059,24.945831], 13);
 
-// getting coordinates according to address
-let inputFrom = document.getElementById('fromInput');
-let inputTo = document.getElementById('whereInput');
+let normalTiles = L.tileLayer('https://cdn.digitransit.fi/map/v1/{id}/{z}/{x}/{y}.png', {
+  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+  maxZoom: 19,
+  tileSize: 512,
+  zoomOffset: -1,
+  id: 'hsl-map'}).addTo(map);
 
-document.getElementById("whereInput")
-.addEventListener("keyup", function(event) {
-  event.preventDefault();
-  if (event.keyCode === 13) {
-    document.getElementById("searchButton").click();
-  }
-});
-let searchBtn = document.getElementById('searchButton');
-let locateBtn = document.getElementById('locateButton');
-let coordinates = {};
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
 
-locateBtn.addEventListener('click', function() {
-  inputFrom.value = 'Oma sijainti';
-});
-
-searchBtn.addEventListener('click', getCoordinates);
+// get nousijamaara.geojson
 let boardings;
-
 fetch('nousijamaara.geojson').then(function(response) {
   return response.json();
 }).
@@ -34,19 +26,86 @@ fetch('nousijamaara.geojson').then(function(response) {
       boardings = json;
     });
 
+// getting location
+let coordinates = {};
+let userLocation = {};
+let located = false;
+
+// Funktio, joka ajetaan, kun paikkatiedot on haettu
+function success(pos) {
+  const crd = pos.coords;
+
+  // Tulostetaan paikkatiedot konsoliin
+  console.log('Your current position is:');
+  console.log(`Latitude : ${crd.latitude}`);
+  console.log(`Longitude: ${crd.longitude}`);
+  console.log(`More or less ${crd.accuracy} meters.`);
+
+  // asetetaan arvo muuttujaan
+  userLocation = {
+    lat: crd.latitude,
+    lon: crd.longitude
+  };
+  console.log('userLocation');
+  console.log(userLocation);
+}
+
+// Funktio, joka ajetaan, jos paikkatietojen hakemisessa tapahtuu virhe
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
+// Käynnistetään paikkatietojen haku
+navigator.geolocation.getCurrentPosition(success, error, options);
+
+// input boxes
+let inputFrom = document.getElementById('fromInput');
+let inputTo = document.getElementById('whereInput');
+
+// locate-button & listener
+let locateBtn = document.getElementById('locateButton');
+locateBtn.addEventListener('click', function() {
+  inputFrom.value = 'Oma sijainti';
+  located= true;
+  console.log('located ' + located);
+});
+
+// enable return-key press on whereInput start search
+inputTo.addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    document.getElementById("searchButton").click();
+  }
+});
+
+// trigger for search button
+let searchBtn = document.getElementById('searchButton');
+searchBtn.addEventListener('click', getCoordinates);
+
 function getCoordinates() {
   coordinates = {};
-  let inputFromValue = inputFrom.value;
-  let inputToValue = inputTo.value;
+  let inputFromValue;
+  let inputToValue;
 
-  console.log('From ' + inputFromValue);
+  // from
+  inputFromValue = inputFrom.value;
+  // to
+  inputToValue = inputTo.value;
   console.log('To ' + inputToValue);
-
-  fetchCoordinates(inputFromValue, 'from');
-  fetchCoordinates(inputToValue, 'to');
+  if (located === false) {
+    console.log('located = false');
+    console.log('From ' + inputFromValue);
+    fetchCoordinates(inputFromValue, 'from');
+    fetchCoordinates(inputToValue, 'to');
+  } else {
+    console.log('located = true, so no from coordinate search done');
+    formatCoordinates('from', userLocation);
+    fetchCoordinates(inputToValue, 'to');
+  }
 }
 
 function fetchCoordinates(input, inputType) {
+  console.log('fetching ' + inputType + 'coordinates');
   fetch(' https://nominatim.openstreetmap.org/search/' + input +
       '?format=json&addressdetails=1&limit=1&polygon_svg=1').
       then(function(response) {
@@ -61,13 +120,26 @@ function fetchCoordinates(input, inputType) {
 }
 
 function formatCoordinates(inputType, json) {
+  console.log('format coordinates');
   console.log(json);
-  let coordinate = {
-    lat: json[0].lat,
-    lon: json[0].lon
-  };
+  let coordinate = {};
 
+  if(inputType === 'from' && located) {
+    coordinate = {
+      lat: json.lat,
+      lon: json.lon
+    }
+    console.log(coordinates);
+    located = false;
+  } else {
+    console.log('formatCoordinates, rivi 131 elsessä');
+    coordinate = {
+      lat: json[0].lat,
+      lon: json[0].lon
+    };
+  }
   coordinates[inputType] = coordinate;
+
   if (coordinates.from && coordinates.to) {
     console.log(coordinates);
     searchHSLRouting();
@@ -184,31 +256,26 @@ function routeCoordinates(json) {
 
   for (let i = 0; i < itineraries.length; i++) {
     let stopsPerLeg = [];
+
+
     let itinerary = itineraries[i];
 
     for (let j = 0; j < itinerary.legs.length; j++) {
 
       let leg = itinerary.legs[j];
       let vehicle;
-      let nameFrom = leg.from.name;
-      let nameTo = leg.to.name;
 
-      if(leg.mode === 'FERRY' || leg.mode === 'WALK') {
+      if(leg.mode === 'FERRY') {
+        vehicle = '';
+      } else if (leg.mode === 'WALK') {
         vehicle = '';
       } else {
         vehicle = ' [' + leg.routeShortName + ']';
       }
 
-      // change origin and destination value name to input values
-      if (j === 0) {
-        nameFrom = 'Lähtöpaikka';
-      } else if ( j === (itinerary.legs.length-1)) {
-        nameTo = 'Määränpää';
-      }
-
       //'from' value
       coordinate = {
-        name: nameFrom,
+        name: leg.from.name,
         mode: leg.mode,
         vehicle: vehicle,
         lon: leg.from.lon,
@@ -230,7 +297,7 @@ function routeCoordinates(json) {
 
       // 'to' value
       coordinate = {
-        name: nameTo,
+        name: leg.to.name,
         mode: leg.mode,
         vehicle: vehicle,
         lon: leg.to.lon,
@@ -276,49 +343,31 @@ function getTime() {
 }
 
 function printResults(stopInfo, stopsOnRoute) {
-  // get usable stop information to string (to be printed)
-/*
-  let stopInfoString = '';
-  for (let i = 0; i < stopInfo.length; i++) {
-    if (stopInfoString.includes(stopInfo[i].code)) {
-      continue;
-    } else {
-      if (isNaN(stopInfo[i].boarderCount)) {
-        if (i === stopInfo.length -1) {
-          stopInfoString += stopInfo[i].name + ' (' + stopInfo[i].code + ') - pysäkillä olevien ihmisten määrä ei ole tiedossa.';
-        } else {
-          stopInfoString += stopInfo[i].name + ' (' + stopInfo[i].code + ') - pysäkillä olevien ihmisten määrä ei ole tiedossa. <br>';
-        }
-      } else {
-        if (i === stopInfo.length - 1) {
-          stopInfoString += stopInfo[i].name + ' (' + stopInfo[i].code + ') - ' + stopInfo[i].boarderCount + ' ihmistä pysäkillä';
-        } else {
-          stopInfoString += stopInfo[i].name + ' (' + stopInfo[i].code + ') - ' + stopInfo[i].boarderCount + ' ihmistä pysäkillä<br>';
-        }
-      }
-    }
-  }
-*/
-
-  // get intermediate stop information to string (to be printed)
+  // get intermediate stop information, boarder count & times to string (to be printed)
   let start = stopInfo[0].startTime; //bussin lähtöaika
   let end = stopInfo[0].endTime; // millon perillä kävelyineen
+
   console.log("Bussi lähtee: " + getTimes(start));
   console.log("Perillä: "+ getTimes(end));
   let amountOfPeople = numberOfPeople(stopInfo[0].boarderCount);
+
   let stopsOnRouteList =
       '<div id="lower">' +
-        '<ul class="option">' +
-          '<li class="virtahepo">'+
-            '<ul class ="innerOption">' +
-              '<li>Vaihtoehto 1 </li>' +
-              '<li> Pysäkki: '+ stopInfo[0].code+'</li>' +
-              '<li>Ihmismäärä: '+ amountOfPeople +'</li>' +
-              '<li>Lähtöaika: '+ getTimes(start) +'</li>';
+      '<ul class="option">' +
+      '<li class="virtahepo">'+
+      '<ul class ="innerOption">' +
+      '<li>Vaihtoehto 1 </li>' +
+      '<li> Pysäkki: '+ stopInfo[0].code+'</li>' +
+      '<li>Ihmismäärä: '+ amountOfPeople +'</li>' +
+      '<li>Lähtöaika: '+ getTimes(start) +'</li>';
+
+  // iterate through itineraries
   for (let j=0; j < stopsOnRoute.length; j++) {
     let vehicleClass = '';
     let stopsOnOneRoute = stopsOnRoute[j];
-    for (let k = 0; k < stopsOnOneRoute.length; k++) {
+
+    // iterate through legs on a itinerary
+    for (let k = 1; k < stopsOnOneRoute.length-1; k++) {
       switch (stopsOnOneRoute[k].mode) {
         case 'WALK':
           vehicleClass ='walk';
@@ -340,71 +389,41 @@ function printResults(stopInfo, stopsOnRoute) {
           break;
       }
       let x = k+1;
-      if((k > 0) && (x < stopsOnOneRoute.length) && (stopsOnOneRoute[k].name === stopsOnOneRoute[x].name)) {
+      if(stopsOnOneRoute[k].name === stopsOnOneRoute[x].name) {
         continue;
-      } else if (k === stopsOnOneRoute.length-1) {
-        if (stopsOnOneRoute[k].vehicle != stopsOnOneRoute[k-1].vehicle) {
-          stopsOnRouteList += '<li>----</li>';
-        }
+      } else if (k === stopsOnOneRoute.length-2) {
         stopsOnRouteList += '<li class="'+ vehicleClass +'">' + stopsOnOneRoute[k].name + stopsOnOneRoute[k].vehicle +'</li>';
       } else {
-        if ((k > 0) && (stopsOnOneRoute[k].vehicle != stopsOnOneRoute[k-1].vehicle)) {
-          stopsOnRouteList += '<li>----</li>';
-        }
         stopsOnRouteList += '<li class ="' +vehicleClass +'">' + stopsOnOneRoute[k].name + stopsOnOneRoute[k].vehicle + '</li>';
       }
     }
     if (j < stopsOnRoute.length-1) {
       start = stopInfo[j+1].startTime; //bussin lähtöaika
       end = stopInfo[j+1].endTime; //millon perillä kävelyineen
-      //console.log("Bussi lähtee: " + getTimes(start));
-      //console.log("Perillä: "+ getTimes(end));
+      console.log("Bussi lähtee: " + getTimes(start));
+      console.log("Perillä: "+ getTimes(end));
       amountOfPeople = numberOfPeople(stopInfo[j+1].boarderCount);
       stopsOnRouteList +=
-                '<li>Perillä: ' + getTimes(stopInfo[j+1].endTime) + '</li>' +
-              '</ul>' +
-            '</li>' +
+          '<li>Perillä: ' + getTimes(stopInfo[j+1].endTime) + '</li>' +
+          '</ul>' +
           '</li>' +
-            '<li class="virtahepo">' +
-              '<ul class="innerOption">' +
-                '<li>Vaihtoehto ' + (j+2) + '</li>' +
-                '<li>Pysäkki ' + stopInfo[j+1].code + '</li>' +
-                '<li>Ihmismäärä: '+ amountOfPeople +'</li>' +
-                '<li>Lähtöaika: ' + getTimes(stopInfo[j+1].startTime) + '</li>';
+          '</li>' +
+          '<li class="virtahepo">' +
+          '<ul class="innerOption">' +
+          '<li>Vaihtoehto ' + (j+2) + '</li>' +
+          '<li>Pysäkki ' + stopInfo[j+1].code + '</li>' +
+          '<li>Ihmismäärä: '+ amountOfPeople +'</li>' +
+          '<li>Lähtöaika: ' + getTimes(stopInfo[j+1].startTime) + '</li>';
     }
   }
   stopsOnRouteList +=
-          '<li>Perillä: ' + getTimes(end) + '</li>' +
-        '</ul>' +
+      '<li>Perillä: ' + getTimes(end) + '</li>' +
+      '</ul>' +
       '</div>';
 
   let inputFromValue = toTitleCase(inputFrom.value);
   let inputToValue = toTitleCase(inputTo.value);
 
-  //const aside = document.getElementById('results');
-/*  // render travel info to aside
-  aside.innerHTML = '<div id="info"><h3>Matkan tiedot</h3>' +
-      'Kohteesta: ' + inputFromValue + '<br>' +
-      'Kohteeseen: ' + inputToValue + '<br>' +
-      ' voit kulkea käyttämällä seuraavia pysäkkejä:' + '<br>'+
-      '<p id="showText" class="visible">Näytä pysäkit</p></div>'+
-      '<div id ="showStops"></div>';
-
-  // if user wants more information, show it & make aside bigger
-  let showStopText = document.getElementById('showText');
-  let showStopDiv = document.getElementById('showStops');
-  showStopText.addEventListener('click', function() {
-    aside.setAttribute('id', 'bigResults');
-    showStopDiv.innerHTML = '<p class="underlined">Piilota pysäkit</p>'+stopsOnRouteList;
-    showStopText.setAttribute('class', 'hidden');
-  });
-
-  // hide further travel information and make aside regular size again
-  showStopDiv.addEventListener('click', function() {
-    aside.setAttribute('id', 'results');
-    showStopDiv.innerHTML = '';
-    showStopText.setAttribute('class', 'visible');
-  });*/
   let aside;
   if (document.getElementById("results") != null) {
     aside = document.getElementById('results');
@@ -443,8 +462,7 @@ function printResults(stopInfo, stopsOnRoute) {
   });
 }
 
-// fix all words to start with uppercase letter
-// src: https://stackoverflow.com/questions/196972/convert-string-to-proper-case-with-javascript/196991#196991
+// fix all words to start with uppercase letter src: https://stackoverflow.com/questions/196972/convert-string-to-proper-case-with-javascript/196991#196991
 function toTitleCase(str) {
   return str.replace(
       /\w\S*/g,
@@ -453,6 +471,7 @@ function toTitleCase(str) {
       }
   );
 }
+// weight boarder count according to time of day
 function numberOfPeople(peoplePerDay){
   let time = getTime();
   let hour = time.hours;
@@ -470,6 +489,7 @@ function numberOfPeople(peoplePerDay){
     return Math.floor(peoplePerDay/5)
   }
 }
+
 function getTimes(time) {
   let date = new Date(time);
   let hours = date.getHours();
