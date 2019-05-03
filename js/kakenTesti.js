@@ -201,9 +201,9 @@ function routeCoordinates(json) {
 
       // change origin and destination value name to input values
       if (j === 0) {
-        nameFrom = toTitleCase(inputFrom.value);
+        nameFrom = 'Lähtöpaikka';
       } else if ( j === (itinerary.legs.length-1)) {
-        nameTo = toTitleCase(inputTo.value);
+        nameTo = 'Määränpää';
       }
 
       //'from' value
@@ -342,7 +342,7 @@ function printResults(stopInfo, stopsOnRoute) {
       let x = k+1;
       if((k > 0) && (x < stopsOnOneRoute.length) && (stopsOnOneRoute[k].name === stopsOnOneRoute[x].name)) {
         continue;
-      } else if (k === stopsOnOneRoute.length-2) {
+      } else if (k === stopsOnOneRoute.length-1) {
         if (stopsOnOneRoute[k].vehicle != stopsOnOneRoute[k-1].vehicle) {
           stopsOnRouteList += '<li>----</li>';
         }
@@ -357,8 +357,8 @@ function printResults(stopInfo, stopsOnRoute) {
     if (j < stopsOnRoute.length-1) {
       start = stopInfo[j+1].startTime; //bussin lähtöaika
       end = stopInfo[j+1].endTime; //millon perillä kävelyineen
-      console.log("Bussi lähtee: " + getTimes(start));
-      console.log("Perillä: "+ getTimes(end));
+      //console.log("Bussi lähtee: " + getTimes(start));
+      //console.log("Perillä: "+ getTimes(end));
       amountOfPeople = numberOfPeople(stopInfo[j+1].boarderCount);
       stopsOnRouteList +=
                 '<li>Perillä: ' + getTimes(stopInfo[j+1].endTime) + '</li>' +
