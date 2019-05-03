@@ -292,7 +292,7 @@ function printResults(stopInfo, stopsOnRoute) {
 
   // get intermediate stop information to string (to be printed)
   let amountOfPeople = numberOfPeople(stopInfo[0].boarderCount);
-  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li>Vaihtoehto 1 </li><li> Pysäkki: '+ stopInfo[0].code+'</li><li>Ihmimäärä: '+ amountOfPeople +'</li>' ;
+  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li>Vaihtoehto 1 </li><li> Pysäkki: '+ stopInfo[0].code+'</li><li>Ihmismäärä: '+ amountOfPeople +'</li>' ;
   for (let j=0; j < stopsOnRoute.length; j++) {
     let vehicleClass = '';
     let stopsOnOneRoute = stopsOnRoute[j];
@@ -366,6 +366,10 @@ function printResults(stopInfo, stopsOnRoute) {
   }else {
     aside = document.getElementById('bigResults');
   }
+
+  let headerText = document.getElementById('headerText');
+  headerText.innerHTML = '';
+
   //aside.innerHTML = '<div id ="info" class="visible"></div><div id ="moreInfo" class="hidden"></div>';
   let info = document.getElementById('info');
   let moreInfo = document.getElementById('moreInfo');

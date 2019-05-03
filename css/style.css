@@ -82,11 +82,13 @@ footer img{
     background-color: rgba(255,255,255,0.9);
     padding: 0.5em;
     border-radius: 6px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 #routes {
     display: flex;
     flex-flow: wrap;
-    height: 62.5%;
+    height: 72.5%;
 }
 #showStops {
     height: 70%;
@@ -98,8 +100,6 @@ footer img{
     padding: 0.5em;
     /*background-color: rgba(141,196,189,0.2);*/
     border-radius: 6px;
-    overflow: scroll;
-    overflow-x: hidden;
     height: 80%;
 }
 
@@ -173,35 +173,86 @@ ul {
 /* Media queries */
 
 @media only screen and (max-width: 600px) {
+    body {
+        font-size: large;
+    }
     #results {
         position: absolute;
         text-align: center;
-        font-size: large;
+        font-size: larger;
         bottom: 0;
         width: 90%;
-        height: 30%;
-        margin: 0.5em 1em 1em;
+        height: 50%;
+        margin: 0.5em;
         z-index: 1;
-        background-color: rgba(255,255,255,0.5);
+        background-color: rgba(255,255,255,0.8);
         padding: 0.5em;
         border-radius: 6px;
     }
     #bigResults {
         position: absolute;
         text-align: center;
-        font-size: large;
+        font-size: initial;
         bottom: 0;
         width: 90%;
         height: 60%;
-        margin: 0.5em 1em 1em;
+        margin: 0.5em;
         z-index: 1;
-        background-color: rgba(255,255,255,0.5);
+        background-color: rgba(255,255,255,0.8);
         padding: 0.5em;
         border-radius: 6px;
     }
     .option {
         display: block;
-        height: 62.5%
+        height: 62.5%;
+        width: 80%;
+        margin-left: 0.7em;
+    }
+
+    #routes {
+        height: 95%;
+    }
+    #moreInfo {
+        height: 95%;
+    }
+    button {
+        width: 70px;
+        height: 35px;
+        font-size: large;
+    }
+    input {
+        width: 180px;
+        height: 35px;
+        font-size: large;
+    }
+    #headerText {
+        font-size: larger;
+    }
+    #search {
+        left: 10%;
+    }
+    h1 {
+        margin: 10px;
+        font-size: 1.5rem;
+    }
+    #upper {
+        height: auto;
     }
 }
 
+@media only screen and (max-height: 500px) {
+    #search {
+        height: 45%;
+    }
+    #results {
+        height: 40%;
+    }
+    h1 {
+        margin: 10px;
+        font-size: 1.5rem;
+    }
+    #headerText {
+        margin-top: 0;
+        font-size: 110%;
+    }
+}
