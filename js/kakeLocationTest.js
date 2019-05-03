@@ -343,36 +343,14 @@ function getTime() {
 }
 
 function printResults(stopInfo, stopsOnRoute) {
-  // get usable stop information to string (to be printed)
-  /*
-    let stopInfoString = '';
-    for (let i = 0; i < stopInfo.length; i++) {
-      if (stopInfoString.includes(stopInfo[i].code)) {
-        continue;
-      } else {
-        if (isNaN(stopInfo[i].boarderCount)) {
-          if (i === stopInfo.length -1) {
-            stopInfoString += stopInfo[i].name + ' (' + stopInfo[i].code + ') - pysäkillä olevien ihmisten määrä ei ole tiedossa.';
-          } else {
-            stopInfoString += stopInfo[i].name + ' (' + stopInfo[i].code + ') - pysäkillä olevien ihmisten määrä ei ole tiedossa. <br>';
-          }
-        } else {
-          if (i === stopInfo.length - 1) {
-            stopInfoString += stopInfo[i].name + ' (' + stopInfo[i].code + ') - ' + stopInfo[i].boarderCount + ' ihmistä pysäkillä';
-          } else {
-            stopInfoString += stopInfo[i].name + ' (' + stopInfo[i].code + ') - ' + stopInfo[i].boarderCount + ' ihmistä pysäkillä<br>';
-          }
-        }
-      }
-    }
-  */
-
-  // get intermediate stop information to string (to be printed)
+  // get intermediate stop information, boarder count & times to string (to be printed)
   let start = stopInfo[0].startTime; //bussin lähtöaika
   let end = stopInfo[0].endTime; // millon perillä kävelyineen
+
   console.log("Bussi lähtee: " + getTimes(start));
   console.log("Perillä: "+ getTimes(end));
   let amountOfPeople = numberOfPeople(stopInfo[0].boarderCount);
+
   let stopsOnRouteList =
       '<div id="lower">' +
       '<ul class="option">' +
@@ -382,9 +360,13 @@ function printResults(stopInfo, stopsOnRoute) {
       '<li> Pysäkki: '+ stopInfo[0].code+'</li>' +
       '<li>Ihmismäärä: '+ amountOfPeople +'</li>' +
       '<li>Lähtöaika: '+ getTimes(start) +'</li>';
+
+  // iterate through itineraries
   for (let j=0; j < stopsOnRoute.length; j++) {
     let vehicleClass = '';
     let stopsOnOneRoute = stopsOnRoute[j];
+
+    // iterate through legs on a itinerary
     for (let k = 1; k < stopsOnOneRoute.length-1; k++) {
       switch (stopsOnOneRoute[k].mode) {
         case 'WALK':
@@ -442,30 +424,6 @@ function printResults(stopInfo, stopsOnRoute) {
   let inputFromValue = toTitleCase(inputFrom.value);
   let inputToValue = toTitleCase(inputTo.value);
 
-  //const aside = document.getElementById('results');
-  /*  // render travel info to aside
-    aside.innerHTML = '<div id="info"><h3>Matkan tiedot</h3>' +
-        'Kohteesta: ' + inputFromValue + '<br>' +
-        'Kohteeseen: ' + inputToValue + '<br>' +
-        ' voit kulkea käyttämällä seuraavia pysäkkejä:' + '<br>'+
-        '<p id="showText" class="visible">Näytä pysäkit</p></div>'+
-        '<div id ="showStops"></div>';
-
-    // if user wants more information, show it & make aside bigger
-    let showStopText = document.getElementById('showText');
-    let showStopDiv = document.getElementById('showStops');
-    showStopText.addEventListener('click', function() {
-      aside.setAttribute('id', 'bigResults');
-      showStopDiv.innerHTML = '<p class="underlined">Piilota pysäkit</p>'+stopsOnRouteList;
-      showStopText.setAttribute('class', 'hidden');
-    });
-
-    // hide further travel information and make aside regular size again
-    showStopDiv.addEventListener('click', function() {
-      aside.setAttribute('id', 'results');
-      showStopDiv.innerHTML = '';
-      showStopText.setAttribute('class', 'visible');
-    });*/
   let aside;
   if (document.getElementById("results") != null) {
     aside = document.getElementById('results');
@@ -504,8 +462,7 @@ function printResults(stopInfo, stopsOnRoute) {
   });
 }
 
-// fix all words to start with uppercase letter
-// src: https://stackoverflow.com/questions/196972/convert-string-to-proper-case-with-javascript/196991#196991
+// fix all words to start with uppercase letter src: https://stackoverflow.com/questions/196972/convert-string-to-proper-case-with-javascript/196991#196991
 function toTitleCase(str) {
   return str.replace(
       /\w\S*/g,
@@ -514,6 +471,7 @@ function toTitleCase(str) {
       }
   );
 }
+// weight boarder count according to time of day
 function numberOfPeople(peoplePerDay){
   let time = getTime();
   let hour = time.hours;
@@ -531,6 +489,7 @@ function numberOfPeople(peoplePerDay){
     return Math.floor(peoplePerDay/5)
   }
 }
+
 function getTimes(time) {
   let date = new Date(time);
   let hours = date.getHours();

@@ -184,26 +184,31 @@ function routeCoordinates(json) {
 
   for (let i = 0; i < itineraries.length; i++) {
     let stopsPerLeg = [];
-
-
     let itinerary = itineraries[i];
 
     for (let j = 0; j < itinerary.legs.length; j++) {
 
       let leg = itinerary.legs[j];
       let vehicle;
+      let nameFrom = leg.from.name;
+      let nameTo = leg.to.name;
 
-      if(leg.mode === 'FERRY') {
-        vehicle = '';
-      } else if (leg.mode === 'WALK') {
+      if(leg.mode === 'FERRY' || leg.mode === 'WALK') {
         vehicle = '';
       } else {
         vehicle = ' [' + leg.routeShortName + ']';
       }
 
+      // change origin and destination value name to input values
+      if (j === 0) {
+        nameFrom = toTitleCase(inputFrom.value);
+      } else if ( j === (itinerary.legs.length-1)) {
+        nameTo = toTitleCase(inputTo.value);
+      }
+
       //'from' value
       coordinate = {
-        name: leg.from.name,
+        name: nameFrom,
         mode: leg.mode,
         vehicle: vehicle,
         lon: leg.from.lon,
@@ -225,7 +230,7 @@ function routeCoordinates(json) {
 
       // 'to' value
       coordinate = {
-        name: leg.to.name,
+        name: nameTo,
         mode: leg.mode,
         vehicle: vehicle,
         lon: leg.to.lon,
@@ -313,7 +318,7 @@ function printResults(stopInfo, stopsOnRoute) {
   for (let j=0; j < stopsOnRoute.length; j++) {
     let vehicleClass = '';
     let stopsOnOneRoute = stopsOnRoute[j];
-    for (let k = 1; k < stopsOnOneRoute.length-1; k++) {
+    for (let k = 0; k < stopsOnOneRoute.length; k++) {
       switch (stopsOnOneRoute[k].mode) {
         case 'WALK':
           vehicleClass ='walk';
@@ -335,11 +340,17 @@ function printResults(stopInfo, stopsOnRoute) {
           break;
       }
       let x = k+1;
-      if(stopsOnOneRoute[k].name === stopsOnOneRoute[x].name) {
+      if((k > 0) && (x < stopsOnOneRoute.length) && (stopsOnOneRoute[k].name === stopsOnOneRoute[x].name)) {
         continue;
       } else if (k === stopsOnOneRoute.length-2) {
+        if (stopsOnOneRoute[k].vehicle != stopsOnOneRoute[k-1].vehicle) {
+          stopsOnRouteList += '<li>----</li>';
+        }
         stopsOnRouteList += '<li class="'+ vehicleClass +'">' + stopsOnOneRoute[k].name + stopsOnOneRoute[k].vehicle +'</li>';
       } else {
+        if ((k > 0) && (stopsOnOneRoute[k].vehicle != stopsOnOneRoute[k-1].vehicle)) {
+          stopsOnRouteList += '<li>----</li>';
+        }
         stopsOnRouteList += '<li class ="' +vehicleClass +'">' + stopsOnOneRoute[k].name + stopsOnOneRoute[k].vehicle + '</li>';
       }
     }
