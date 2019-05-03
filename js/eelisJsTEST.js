@@ -39,7 +39,6 @@ function getCoordinates() {
 
   fetchCoordinates(inputFromValue, 'from');
   fetchCoordinates(inputToValue, 'to');
-
 }
 
 function fetchCoordinates(input, inputType) {
@@ -455,40 +454,90 @@ function getTimes(time) {
   return timeString;
 }
 
+let routeLayer;
+
 function findWalks(json) {
+  if (routeLayer) { // check
+    map.removeLayer(routeLayer); // remove
+  }
+  routeLayer = L.layerGroup().addTo(map);
+
   console.log(json);
   //MUISTA VAIHTAA MUUTTUJAKSI
   let legs = json.plan.itineraries[0].legs;
   for (let i = 0; i < legs.length; i++) {
+    let fromCrd = {
+      lat: legs[i].from.lat,
+      lon: legs[i].from.lon,
+    };
+
+    let toCrd = {
+      lat: legs[i].to.lat,
+      lon: legs[i].to.lon,
+    };
+
+    routeMarkers(toCrd);
+
     if (legs[i].mode == 'WALK') {
-      let fromCrd = {
-        lat: legs[i].from.lat,
-        lon: legs[i].from.lon
-      }
-      let toCrd = {
-        lat: legs[i].to.lat,
-        lon: legs[i].to.lon
-      }
       routeWalks(fromCrd, toCrd);
+    } else {
+      routePub(legs[i].intermediateStops, fromCrd, toCrd);
     }
   }
 }
 
-
+//routeWalks actually just draws lines, no need for routing control for now. Maybe later if we add route instructions
+function routeWalksControl(fromCrd, toCrd) {
+  // L.Routing.control({
+  //   waypoints: [
+  //     L.latLng(fromCrd),
+  //     L.latLng(toCrd),
+  //   ],
+  //   show: false,
+  //   routeWhileDragging: false,
+  //   fitSelectedRoutes: false,
+  //   draggableWaypoints: false,
+  //   addWaypoints: false,
+  //   router: L.Routing.mapbox(
+  //       'pk.eyJ1IjoiZWxlYW4iLCJhIjoiY2p2ODMwZWR1MDMzajQ0bXRlMXYwbnpreSJ9.IWZKqC-mBbnFZbd2jqxFHw',
+  //       {
+  //         profile: 'mapbox/walking',
+  //       }),
+  // }).addTo(map);
+}
 
 function routeWalks(fromCrd, toCrd) {
-  L.Routing.control({
-    waypoints: [
-      L.latLng(fromCrd),
-      L.latLng(toCrd)
-    ],
-    show: false,
-    routeWhileDragging: false,
-    fitSelectedRoutes: false,
-    draggableWaypoints: false,
-    router: L.Routing.mapbox('pk.eyJ1IjoiZWxlYW4iLCJhIjoiY2p2ODMwZWR1MDMzajQ0bXRlMXYwbnpreSJ9.IWZKqC-mBbnFZbd2jqxFHw',
-        {
-          profile: 'mapbox/walking',
-        })
-  }).addTo(map);
+  let router = L.Routing.mapbox('pk.eyJ1IjoiZWxlYW4iLCJhIjoiY2p2ODMwZWR1MDMzajQ0bXRlMXYwbnpreSJ9.IWZKqC-mBbnFZbd2jqxFHw',
+      {
+        profile: 'mapbox/walking',
+      }),waypoints = [],line;
+  waypoints.push({latLng: L.latLng(fromCrd)});
+  waypoints.push({latLng: L.latLng(toCrd)});
+
+  router.route (waypoints,function(err, routes) {
+    if (line) {
+      map.removeLayer(line);
+    }
+    if (err) {
+      alert(err);
+    } else {
+      line = L.Routing.line(routes[0]).addTo(map);
+      routeLayer.addLayer(line);
+    }
+  });
+}
+
+function routePub(stops, fromCrd, toCrd) {
+  let crds = [fromCrd];
+  for (let i = 0; i < stops.length; i++) {
+    crds.push([stops[i].lat, stops[i].lon]);
+  }
+  crds.push(toCrd);
+  let line = L.polyline(crds, {color: 'blue'}).addTo(map);
+  routeLayer.addLayer(line);
+}
+
+function routeMarkers(toCrd) {
+  let marker = L.marker(toCrd).addTo(map);
+  routeLayer.addLayer(marker);
 }
