@@ -159,7 +159,9 @@ function sortByPeople(json) {
           code: startingStop,
           boarderCount: boarderAmount,
           lon: leg.from.lon,
-          lat: leg.from.lat
+          lat: leg.from.lat,
+          startTime: leg.startTime,
+          endTime: itinerary.endTime
         };
         noStopAdded = false;
         //console.log(stopData);
@@ -291,6 +293,10 @@ function printResults(stopInfo, stopsOnRoute) {
 */
 
   // get intermediate stop information to string (to be printed)
+  let start = stopInfo[0].startTime; //bussin lähtöaika
+  let end = stopInfo[0].endTime; // millon perillä kävelyineen
+  console.log("Bussi lähtee: " + getTimes(start));
+  console.log("Perillä: "+ getTimes(end));
   let amountOfPeople = numberOfPeople(stopInfo[0].boarderCount);
   let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li>Vaihtoehto 1 </li><li> Pysäkki: '+ stopInfo[0].code+'</li><li>Ihmismäärä: '+ amountOfPeople +'</li>' ;
   for (let j=0; j < stopsOnRoute.length; j++) {
@@ -327,6 +333,10 @@ function printResults(stopInfo, stopsOnRoute) {
       }
     }
     if (j < stopsOnRoute.length-1) {
+      start = stopInfo[j+1].startTime; //bussin lähtöaika
+      end = stopInfo[j+1].endTime; //millon perillä kävelyineen
+      console.log("Bussi lähtee: " + getTimes(start));
+      console.log("Perillä: "+ getTimes(end));
       amountOfPeople = numberOfPeople(stopInfo[j+1].boarderCount);
       stopsOnRouteList += '</ul></li></li><li class="virtahepo"><ul><li>Vaihtoehto ' + (j+2) + '</li><li>Pysäkki ' + stopInfo[j+1].code + '</li><li>Ihmismäärä: '+ amountOfPeople +'</li>';
     }
@@ -424,4 +434,17 @@ function numberOfPeople(peoplePerDay){
   }else{ // 21-23:59
     return Math.floor(peoplePerDay/5)
   }
+}
+function getTimes(time) {
+  let date = new Date(time);
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  if (hours < 10) {
+    hours = '0' + hours;
+  }
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
+  let timeString = hours + ':' + minutes;
+  return timeString;
 }
