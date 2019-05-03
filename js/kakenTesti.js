@@ -298,7 +298,15 @@ function printResults(stopInfo, stopsOnRoute) {
   console.log("Bussi lähtee: " + getTimes(start));
   console.log("Perillä: "+ getTimes(end));
   let amountOfPeople = numberOfPeople(stopInfo[0].boarderCount);
-  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li>Vaihtoehto 1 </li><li> Pysäkki: '+ stopInfo[0].code+'</li><li>Ihmismäärä: '+ amountOfPeople +'</li>' ;
+  let stopsOnRouteList =
+      '<div id="lower">' +
+        '<ul class="option">' +
+          '<li class="virtahepo">'+
+            '<ul class ="innerOption">' +
+              '<li>Vaihtoehto 1 </li>' +
+              '<li> Pysäkki: '+ stopInfo[0].code+'</li>' +
+              '<li>Ihmismäärä: '+ amountOfPeople +'</li>' +
+              '<li>Lähtöaika: '+ getTimes(start) +'</li>';
   for (let j=0; j < stopsOnRoute.length; j++) {
     let vehicleClass = '';
     let stopsOnOneRoute = stopsOnRoute[j];
@@ -338,10 +346,23 @@ function printResults(stopInfo, stopsOnRoute) {
       console.log("Bussi lähtee: " + getTimes(start));
       console.log("Perillä: "+ getTimes(end));
       amountOfPeople = numberOfPeople(stopInfo[j+1].boarderCount);
-      stopsOnRouteList += '</ul></li></li><li class="virtahepo"><ul><li>Vaihtoehto ' + (j+2) + '</li><li>Pysäkki ' + stopInfo[j+1].code + '</li><li>Ihmismäärä: '+ amountOfPeople +'</li>';
+      stopsOnRouteList +=
+                '<li>Perillä: ' + getTimes(stopInfo[j+1].endTime) + '</li>' +
+              '</ul>' +
+            '</li>' +
+          '</li>' +
+            '<li class="virtahepo">' +
+              '<ul class="innerOption">' +
+                '<li>Vaihtoehto ' + (j+2) + '</li>' +
+                '<li>Pysäkki ' + stopInfo[j+1].code + '</li>' +
+                '<li>Ihmismäärä: '+ amountOfPeople +'</li>' +
+                '<li>Lähtöaika: ' + getTimes(stopInfo[j+1].startTime) + '</li>';
     }
   }
-  stopsOnRouteList += '</li></ul></div>';
+  stopsOnRouteList +=
+          '<li>Perillä: ' + getTimes(end) + '</li>' +
+        '</ul>' +
+      '</div>';
 
   let inputFromValue = toTitleCase(inputFrom.value);
   let inputToValue = toTitleCase(inputTo.value);

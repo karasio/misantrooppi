@@ -68,7 +68,6 @@ footer img{
 }
 
 .upper {
-    height: 25%;
 }
 
 #bigResults {
@@ -85,10 +84,9 @@ footer img{
     overflow: scroll;
     overflow-x: hidden;
 }
-#routes {
+#lower {
     display: flex;
     flex-flow: wrap;
-    height: 72.5%;
 }
 #showStops {
     height: 70%;
@@ -101,6 +99,10 @@ footer img{
     /*background-color: rgba(141,196,189,0.2);*/
     border-radius: 6px;
     height: 80%;
+    border: dot-dot-dash greenyellow;
+}
+.innerOption {
+    padding: 0.3em;
 }
 
 h1 {
@@ -119,6 +121,8 @@ h1 {
 ul {
     list-style-type: none;
 }
+
+
 
 /********* transportation pictures in li *********/
 .bus {
@@ -209,7 +213,7 @@ ul {
         margin-left: 0.7em;
     }
 
-    #routes {
+    #lower {
         height: 95%;
     }
     #moreInfo {
