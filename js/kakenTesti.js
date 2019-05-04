@@ -1,10 +1,5 @@
 'use strict';
 
-/*
-POHDINTAOSIO
-http://api.digitransit.fi/routing/v1/routers/hsl/
- */
-
 // getting coordinates according to address
 let inputFrom = document.getElementById('fromInput');
 let inputTo = document.getElementById('whereInput');
@@ -16,6 +11,7 @@ document.getElementById("whereInput")
     document.getElementById("searchButton").click();
   }
 });
+
 let searchBtn = document.getElementById('searchButton');
 let locateBtn = document.getElementById('locateButton');
 let coordinates = {};
@@ -76,7 +72,6 @@ function formatCoordinates(inputType, json) {
     placeMarkers();
   }
 }
-
 
 let markers;
 

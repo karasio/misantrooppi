@@ -121,10 +121,6 @@ ul {
     list-style-type: none;
 }
 
-#locateButton {
-    display: none;
-}
-
 #tips {
     font-size: small;
     margin: 5px;
