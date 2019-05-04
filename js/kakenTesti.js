@@ -35,6 +35,7 @@ fetch('nousijamaara.geojson').then(function(response) {
     });
 
 function getCoordinates() {
+  document.getElementById('errorMsg').innerHTML = '<br>';
   coordinates = {};
   let inputFromValue = inputFrom.value;
   let inputToValue = inputTo.value;
@@ -56,6 +57,7 @@ function fetchCoordinates(input, inputType) {
         formatCoordinates(inputType, json);
       }).
       catch(function(error) {
+        document.getElementById('errorMsg').innerHTML = 'Jotain meni vikaan. Haku toimii vain HSL-alueella.';
         console.log(error);
       });
 }
@@ -116,7 +118,8 @@ function searchHSLRouting() {
     printResults(stopInfo, stopsOnRoute);
   }).catch(function(error) {
     console.log(error);
-    alert('Computer says no! Tarkista syöte');
+    //alert('Computer says no! Tarkista syöte');
+    document.getElementById('errorMsg').innerHTML = 'Jotain meni pieleen. Kokeile kirjoittaa osoitteen perään kaupunki.';
   });
 }
 
@@ -426,7 +429,7 @@ function printResults(stopInfo, stopsOnRoute) {
   moreInfo.innerHTML = '<div class="upper"><h3>Matkan tiedot</h3>' +
       'Kohteesta: ' + inputFromValue + '<br>' +
       'Kohteeseen: ' + inputToValue + '<br>' +
-      '<p id="hideText" >Piilota pysäkit</p></div>' + stopsOnRouteList;
+      '<div id="hideText" >Piilota pysäkit<img id=hideTextIcon src="media/closesmall.png"></div></div>' + stopsOnRouteList;
 
   let showStopText = document.getElementById('showText');
   showStopText.addEventListener('click', function() {

@@ -16,11 +16,13 @@
 </head>
 <body>
 <main id="search">
-    <h1>Misantrooppi reittihaku</h1>
+    <h1>Misantroopin reittihaku</h1>
+    <p id="tips">Etsi osoitteella (Leiritie 1 Vantaa) <br>tai paikannimellä (Kalasatama Helsinki<br>Haku toimii HSL-alueella</p>
     <button type="button" id="locateButton">Paikanna!</button>
     <input type=text placeholder="Mistä" id="fromInput">
     <input type=text placeholder="Mihin" id="whereInput">
     <button type="button" id="searchButton">Hae!</button>
+    <div id="errorMsg"><br></div>
 </main>
 
 <aside id="results">
@@ -39,6 +41,8 @@
 </footer>
 </body>
 <!--<script src="js/samuJs.js"></script>-->
+<script src="leaflet-routing-machine/leaflet-routing-machine.js"></script>
+<!--<script src="js/eelisJsTEST.js"></script><-->
 <script src="js/kakenTesti.js"></script>
 <script src="js/eelisJs.js"></script>
 </html>

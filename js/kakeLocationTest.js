@@ -58,6 +58,7 @@ function error(err) {
 // Käynnistetään paikkatietojen haku
 navigator.geolocation.getCurrentPosition(success, error, options);
 
+
 // input boxes
 let inputFrom = document.getElementById('fromInput');
 let inputTo = document.getElementById('whereInput');
@@ -65,6 +66,7 @@ let inputTo = document.getElementById('whereInput');
 // locate-button & listener
 let locateBtn = document.getElementById('locateButton');
 locateBtn.addEventListener('click', function() {
+  document.getElementById('search').innerHTML += '<p>Olet paikassa '+ userLocation.lat.toFixed(4)+', ' + userLocation.lon.toFixed(4) + '</p>';
   inputFrom.value = 'Oma sijainti';
   located= true;
   console.log('located ' + located);
