@@ -77,6 +77,7 @@ fetch('nousijamaara.geojson').then(function(response) {
     });
 
 function getCoordinates() {
+  document.getElementById('errorMsg').innerHTML = '<br>';
   coordinates = {};
   let inputFromValue = inputFrom.value;
   let inputToValue = inputTo.value;
