@@ -109,7 +109,7 @@ function searchHSLRouting() {
   }).then(function(json) {
     stopInfo = sortByPeople(json);
     stopsOnRoute = routeCoordinates(json);
-    printResults(stopInfo, stopsOnRoute);
+    printResults(stopInfo, stopsOnRoute, json);
   }).catch(function(error) {
     console.log(error);
     alert('Computer says no! Tarkista syöte');
@@ -231,7 +231,7 @@ function routeCoordinates(json) {
     stopsPerItinerary[i] = stopsPerLeg;
   }
   console.log(stopsPerItinerary);
-  findWalks(json);
+  drawRoute(json, 0);
   return stopsPerItinerary;
 }
 
@@ -265,7 +265,7 @@ function getTime() {
   };
 }
 
-function printResults(stopInfo, stopsOnRoute) {
+function printResults(stopInfo, stopsOnRoute, json) {
   // get usable stop information to string (to be printed)
   /*
     let stopInfoString = '';
@@ -296,7 +296,7 @@ function printResults(stopInfo, stopsOnRoute) {
   console.log('Bussi lähtee: ' + getTimes(start));
   console.log('Perillä: ' + getTimes(end));
   let amountOfPeople = numberOfPeople(stopInfo[0].boarderCount);
-  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li>Vaihtoehto 1 </li><li> Pysäkki: ' +
+  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li class="routeOption" id="routeOption0">Vaihtoehto 1 </li><li> Pysäkki: ' +
       stopInfo[0].code + '</li><li>Ihmismäärä: ' + amountOfPeople + '</li>';
   for (let j = 0; j < stopsOnRoute.length; j++) {
     let vehicleClass = '';
@@ -339,7 +339,7 @@ function printResults(stopInfo, stopsOnRoute) {
       console.log('Bussi lähtee: ' + getTimes(start));
       console.log('Perillä: ' + getTimes(end));
       amountOfPeople = numberOfPeople(stopInfo[j + 1].boarderCount);
-      stopsOnRouteList += '</ul></li></li><li class="virtahepo"><ul><li>Vaihtoehto ' +
+      stopsOnRouteList += '</ul></li></li><li class="virtahepo"><ul><li class="routeOption" id="routeOption' + (j+1) + '">Vaihtoehto ' +
           (j + 2) + '</li><li>Pysäkki ' + stopInfo[j + 1].code +
           '</li><li>Ihmismäärä: ' + amountOfPeople + '</li>';
     }
@@ -395,6 +395,8 @@ function printResults(stopInfo, stopsOnRoute) {
       'Kohteesta: ' + inputFromValue + '<br>' +
       'Kohteeseen: ' + inputToValue + '<br>' +
       '<p id="hideText" >Piilota pysäkit</p></div>' + stopsOnRouteList;
+
+  getRouteOptionElements(json);
 
   let showStopText = document.getElementById('showText');
   showStopText.addEventListener('click', function() {
@@ -456,7 +458,7 @@ function getTimes(time) {
 
 let routeLayer;
 
-function findWalks(json) {
+function drawRoute(json, index) {
   if (routeLayer) { // check
     map.removeLayer(routeLayer); // remove
   }
@@ -464,7 +466,7 @@ function findWalks(json) {
 
   console.log(json);
   //MUISTA VAIHTAA MUUTTUJAKSI
-  let legs = json.plan.itineraries[0].legs;
+  let legs = json.plan.itineraries[index].legs;
   for (let i = 0; i < legs.length; i++) {
     let fromCrd = {
       lat: legs[i].from.lat,
@@ -484,26 +486,6 @@ function findWalks(json) {
       routePub(legs[i].intermediateStops, fromCrd, toCrd);
     }
   }
-}
-
-//routeWalks actually just draws lines, no need for routing control for now. Maybe later if we add route instructions
-function routeWalksControl(fromCrd, toCrd) {
-  // L.Routing.control({
-  //   waypoints: [
-  //     L.latLng(fromCrd),
-  //     L.latLng(toCrd),
-  //   ],
-  //   show: false,
-  //   routeWhileDragging: false,
-  //   fitSelectedRoutes: false,
-  //   draggableWaypoints: false,
-  //   addWaypoints: false,
-  //   router: L.Routing.mapbox(
-  //       'pk.eyJ1IjoiZWxlYW4iLCJhIjoiY2p2ODMwZWR1MDMzajQ0bXRlMXYwbnpreSJ9.IWZKqC-mBbnFZbd2jqxFHw',
-  //       {
-  //         profile: 'mapbox/walking',
-  //       }),
-  // }).addTo(map);
 }
 
 function routeWalks(fromCrd, toCrd) {
@@ -540,4 +522,37 @@ function routePub(stops, fromCrd, toCrd) {
 function routeMarkers(toCrd) {
   let marker = L.marker(toCrd).addTo(map);
   routeLayer.addLayer(marker);
+}
+
+//routeWalks actually just draws lines, no need for routing control for now. Maybe later if we add route instructions
+function routeWalksControl(fromCrd, toCrd) {
+  // L.Routing.control({
+  //   waypoints: [
+  //     L.latLng(fromCrd),
+  //     L.latLng(toCrd),
+  //   ],
+  //   show: false,
+  //   routeWhileDragging: false,
+  //   fitSelectedRoutes: false,
+  //   draggableWaypoints: false,
+  //   addWaypoints: false,
+  //   router: L.Routing.mapbox(
+  //       'pk.eyJ1IjoiZWxlYW4iLCJhIjoiY2p2ODMwZWR1MDMzajQ0bXRlMXYwbnpreSJ9.IWZKqC-mBbnFZbd2jqxFHw',
+  //       {
+  //         profile: 'mapbox/walking',
+  //       }),
+  // }).addTo(map);
+}
+
+let routeOptions = [];
+
+function getRouteOptionElements(json) {
+  let routeOptions = document.getElementsByClassName('routeOption');
+  console.log(routeOptions)
+  for (let i = 0; i < routeOptions.length; i++) {
+    routeOptions[i].addEventListener('click', function() {
+      console.log('You clicked ' + i);
+      drawRoute(json, i);
+    })
+  }
 }
