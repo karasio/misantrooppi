@@ -16,9 +16,57 @@ document.getElementById("whereInput")
     document.getElementById("searchButton").click();
   }
 });
+
+let map = L.map('map').setView([60.192059,24.945831], 13);
+
+let normalTiles = L.tileLayer('https://cdn.digitransit.fi/map/v1/{id}/{z}/{x}/{y}.png', {
+  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+  maxZoom: 19,
+  tileSize: 512,
+  zoomOffset: -1,
+  id: 'hsl-map'}).addTo(map);
+
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+// Funktio, joka ajetaan, kun paikkatiedot on haettu
+function success(pos) {
+  const crd = pos.coords;
+
+  // Tulostetaan paikkatiedot konsoliin
+  console.log('Your current position is:');
+  console.log(`Latitude : ${crd.latitude}`);
+  console.log(`Longitude: ${crd.longitude}`);
+  console.log(`More or less ${crd.accuracy} meters.`);
+  let coordinates =
+      {
+        lat: crd.latitude,
+        lon: crd.longitude
+      };
+  localStorage.setItem('coordinates',
+      JSON.stringify(coordinates));
+
+}
+
+// Funktio, joka ajetaan, jos paikkatietojen hakemisessa tapahtuu virhe
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
+// Käynnistetään paikkatietojen haku
+navigator.geolocation.getCurrentPosition(success, error, options);
+
 let searchBtn = document.getElementById('searchButton');
+let locateBtn = document.getElementById('locateButton');
 let coordinates = {};
 
+locateBtn.addEventListener('click', function() {
+  inputFrom.value = 'Oma sijainti';
+});
 
 searchBtn.addEventListener('click', getCoordinates);
 let boardings;
@@ -40,7 +88,6 @@ function getCoordinates() {
 
   fetchCoordinates(inputFromValue, 'from');
   fetchCoordinates(inputToValue, 'to');
-
 }
 
 function fetchCoordinates(input, inputType) {
@@ -58,11 +105,22 @@ function fetchCoordinates(input, inputType) {
 }
 
 function formatCoordinates(inputType, json) {
+  let coordinate
   console.log(json);
-  let coordinate = {
-    lat: json[0].lat,
-    lon: json[0].lon
-  };
+  if(inputType === 'from' && inputFrom.value === 'Oma sijainti'){
+    let coordinatesStr = localStorage.getItem('coordinates');
+    let coordinates = JSON.parse(coordinatesStr);
+    coordinate = {
+      lat: coordinates.lat,
+      lon: coordinates.lon
+    };
+  }else {
+    coordinate = {
+      lat: json[0].lat,
+      lon: json[0].lon
+    };
+  }
+  console.log(coordinate);
 
   coordinates[inputType] = coordinate;
   if (coordinates.from && coordinates.to) {
@@ -181,26 +239,31 @@ function routeCoordinates(json) {
 
   for (let i = 0; i < itineraries.length; i++) {
     let stopsPerLeg = [];
-
-
     let itinerary = itineraries[i];
 
     for (let j = 0; j < itinerary.legs.length; j++) {
 
       let leg = itinerary.legs[j];
       let vehicle;
+      let nameFrom = leg.from.name;
+      let nameTo = leg.to.name;
 
-      if(leg.mode === 'FERRY') {
-        vehicle = '';
-      } else if (leg.mode === 'WALK') {
+      if(leg.mode === 'FERRY' || leg.mode === 'WALK') {
         vehicle = '';
       } else {
         vehicle = ' [' + leg.routeShortName + ']';
       }
 
+      // change origin and destination value name to input values
+      if (j === 0) {
+        nameFrom = 'Lähtöpaikka';
+      } else if ( j === (itinerary.legs.length-1)) {
+        nameTo = 'Määränpää';
+      }
+
       //'from' value
       coordinate = {
-        name: leg.from.name,
+        name: nameFrom,
         mode: leg.mode,
         vehicle: vehicle,
         lon: leg.from.lon,
@@ -222,7 +285,7 @@ function routeCoordinates(json) {
 
       // 'to' value
       coordinate = {
-        name: leg.to.name,
+        name: nameTo,
         mode: leg.mode,
         vehicle: vehicle,
         lon: leg.to.lon,
@@ -264,7 +327,6 @@ function getTime() {
   return {
     time: timeAsString,
     date: dateAsString,
-    hours: hours,
   };
 }
 
@@ -294,16 +356,24 @@ function printResults(stopInfo, stopsOnRoute) {
   */
 
   // get intermediate stop information to string (to be printed)
-  let start = stopInfo[0].startTime;
-  let end = stopInfo[0].endTime;
+  let start = stopInfo[0].startTime; //bussin lähtöaika
+  let end = stopInfo[0].endTime; // millon perillä kävelyineen
   console.log("Bussi lähtee: " + getTimes(start));
   console.log("Perillä: "+ getTimes(end));
   let amountOfPeople = numberOfPeople(stopInfo[0].boarderCount);
-  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li>Vaihtoehto 1 </li><li> Pysäkki: '+ stopInfo[0].code+'</li><li>Ihmimäärä: '+ amountOfPeople +'</li>' ;
+  let stopsOnRouteList =
+      '<div id="lower">' +
+      '<ul class="option">' +
+      '<li class="virtahepo">'+
+      '<ul class ="innerOption">' +
+      '<li>Vaihtoehto 1 </li>' +
+      '<li> Pysäkki: '+ stopInfo[0].code+'</li>' +
+      '<li>Ihmismäärä: '+ amountOfPeople +'</li>' +
+      '<li>Lähtöaika: '+ getTimes(start) +'</li>';
   for (let j=0; j < stopsOnRoute.length; j++) {
     let vehicleClass = '';
     let stopsOnOneRoute = stopsOnRoute[j];
-    for (let k = 1; k < stopsOnOneRoute.length-1; k++) {
+    for (let k = 0; k < stopsOnOneRoute.length; k++) {
       switch (stopsOnOneRoute[k].mode) {
         case 'WALK':
           vehicleClass ='walk';
@@ -325,24 +395,43 @@ function printResults(stopInfo, stopsOnRoute) {
           break;
       }
       let x = k+1;
-      if(stopsOnOneRoute[k].name === stopsOnOneRoute[x].name) {
+      if((k > 0) && (x < stopsOnOneRoute.length) && (stopsOnOneRoute[k].name === stopsOnOneRoute[x].name)) {
         continue;
-      } else if (k === stopsOnOneRoute.length-2) {
+      } else if (k === stopsOnOneRoute.length-1) {
+        if (stopsOnOneRoute[k].vehicle != stopsOnOneRoute[k-1].vehicle) {
+          stopsOnRouteList += '<li>----</li>';
+        }
         stopsOnRouteList += '<li class="'+ vehicleClass +'">' + stopsOnOneRoute[k].name + stopsOnOneRoute[k].vehicle +'</li>';
       } else {
+        if ((k > 0) && (stopsOnOneRoute[k].vehicle != stopsOnOneRoute[k-1].vehicle)) {
+          stopsOnRouteList += '<li>----</li>';
+        }
         stopsOnRouteList += '<li class ="' +vehicleClass +'">' + stopsOnOneRoute[k].name + stopsOnOneRoute[k].vehicle + '</li>';
       }
     }
     if (j < stopsOnRoute.length-1) {
-      start = stopInfo[j+1].startTime;
-      end = stopInfo[j+1].endTime;
-      console.log("Bussi lähtee: " + getTimes(start));
-      console.log("Perillä: "+ getTimes(end));
+      start = stopInfo[j+1].startTime; //bussin lähtöaika
+      end = stopInfo[j+1].endTime; //millon perillä kävelyineen
+      //console.log("Bussi lähtee: " + getTimes(start));
+      //console.log("Perillä: "+ getTimes(end));
       amountOfPeople = numberOfPeople(stopInfo[j+1].boarderCount);
-      stopsOnRouteList += '</ul></li></li><li class="virtahepo"><ul><li>Vaihtoehto ' + (j+2) + '</li><li>Pysäkki ' + stopInfo[j+1].code + '</li><li>Ihmismäärä: '+ amountOfPeople +'</li>';
+      stopsOnRouteList +=
+          '<li>Perillä: ' + getTimes(stopInfo[j+1].endTime) + '</li>' +
+          '</ul>' +
+          '</li>' +
+          '</li>' +
+          '<li class="virtahepo">' +
+          '<ul class="innerOption">' +
+          '<li>Vaihtoehto ' + (j+2) + '</li>' +
+          '<li>Pysäkki ' + stopInfo[j+1].code + '</li>' +
+          '<li>Ihmismäärä: '+ amountOfPeople +'</li>' +
+          '<li>Lähtöaika: ' + getTimes(stopInfo[j+1].startTime) + '</li>';
     }
   }
-  stopsOnRouteList += '</li></ul></div>';
+  stopsOnRouteList +=
+      '<li>Perillä: ' + getTimes(end) + '</li>' +
+      '</ul>' +
+      '</div>';
 
   let inputFromValue = toTitleCase(inputFrom.value);
   let inputToValue = toTitleCase(inputTo.value);
@@ -377,6 +466,10 @@ function printResults(stopInfo, stopsOnRoute) {
   }else {
     aside = document.getElementById('bigResults');
   }
+
+  let headerText = document.getElementById('headerText');
+  headerText.innerHTML = '';
+
   //aside.innerHTML = '<div id ="info" class="visible"></div><div id ="moreInfo" class="hidden"></div>';
   let info = document.getElementById('info');
   let moreInfo = document.getElementById('moreInfo');
@@ -432,14 +525,14 @@ function numberOfPeople(peoplePerDay){
     return Math.floor(peoplePerDay/5)
   }
 }
-function getTimes(time){
+function getTimes(time) {
   let date = new Date(time);
   let hours = date.getHours();
   let minutes = date.getMinutes();
-  if (hours < 10){
+  if (hours < 10) {
     hours = '0' + hours;
   }
-  if (minutes < 10){
+  if (minutes < 10) {
     minutes = '0' + minutes;
   }
   let timeString = hours + ':' + minutes;
