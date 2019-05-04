@@ -1,0 +1,9 @@
+.routeOption {
+    text-decoration: underline;
+    background-color: rgba(170,170,150, 0.5);
+}
+
+.routeOptionSelected {
+    text-decoration: underline;
+    background-color: rgba(70,70,60, 0.5);
+}

@@ -296,7 +296,7 @@ function printResults(stopInfo, stopsOnRoute, json) {
   console.log('Bussi lähtee: ' + getTimes(start));
   console.log('Perillä: ' + getTimes(end));
   let amountOfPeople = numberOfPeople(stopInfo[0].boarderCount);
-  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li class="routeOption" id="routeOption0">Vaihtoehto 1 </li><li> Pysäkki: ' +
+  let stopsOnRouteList = '<div id="routes"><ul class="option"><li class="virtahepo"><ul><li class="routeOption routeOptionSelected" id="routeOption0">Vaihtoehto 1 </li><li> Pysäkki: ' +
       stopInfo[0].code + '</li><li>Ihmismäärä: ' + amountOfPeople + '</li>';
   for (let j = 0; j < stopsOnRoute.length; j++) {
     let vehicleClass = '';
@@ -339,7 +339,8 @@ function printResults(stopInfo, stopsOnRoute, json) {
       console.log('Bussi lähtee: ' + getTimes(start));
       console.log('Perillä: ' + getTimes(end));
       amountOfPeople = numberOfPeople(stopInfo[j + 1].boarderCount);
-      stopsOnRouteList += '</ul></li></li><li class="virtahepo"><ul><li class="routeOption" id="routeOption' + (j+1) + '">Vaihtoehto ' +
+      stopsOnRouteList += '</ul></li></li><li class="virtahepo"><ul><li class="routeOption" id="routeOption' +
+          (j + 1) + '">Vaihtoehto ' +
           (j + 2) + '</li><li>Pysäkki ' + stopInfo[j + 1].code +
           '</li><li>Ihmismäärä: ' + amountOfPeople + '</li>';
     }
@@ -489,14 +490,15 @@ function drawRoute(json, index) {
 }
 
 function routeWalks(fromCrd, toCrd) {
-  let router = L.Routing.mapbox('pk.eyJ1IjoiZWxlYW4iLCJhIjoiY2p2ODMwZWR1MDMzajQ0bXRlMXYwbnpreSJ9.IWZKqC-mBbnFZbd2jqxFHw',
+  let router = L.Routing.mapbox(
+      'pk.eyJ1IjoiZWxlYW4iLCJhIjoiY2p2ODMwZWR1MDMzajQ0bXRlMXYwbnpreSJ9.IWZKqC-mBbnFZbd2jqxFHw',
       {
         profile: 'mapbox/walking',
-      }),waypoints = [],line;
+      }), waypoints = [], line;
   waypoints.push({latLng: L.latLng(fromCrd)});
   waypoints.push({latLng: L.latLng(toCrd)});
 
-  router.route (waypoints,function(err, routes) {
+  router.route(waypoints, function(err, routes) {
     if (line) {
       map.removeLayer(line);
     }
@@ -547,12 +549,28 @@ function routeWalksControl(fromCrd, toCrd) {
 let routeOptions = [];
 
 function getRouteOptionElements(json) {
-  let routeOptions = document.getElementsByClassName('routeOption');
-  console.log(routeOptions)
+  routeOptions = document.getElementsByClassName('routeOption');
+  console.log(routeOptions);
   for (let i = 0; i < routeOptions.length; i++) {
     routeOptions[i].addEventListener('click', function() {
       console.log('You clicked ' + i);
+      darkenSelected(i);
       drawRoute(json, i);
-    })
+    });
+  }
+}
+
+function darkenSelected(index) {
+  console.log(routeOptions);
+  console.log(index);
+  console.log(routeOptions[index]);
+  console.log(routeOptions[index].classList);
+  routeOptions[index].classList.add('routeOptionSelected');
+  console.log(routeOptions[index].classList);
+
+  for (let i = 0; i < routeOptions.length; i++) {
+    if (i != index) {
+      routeOptions[i].classList.remove('routeOptionSelected');
+    }
   }
 }
