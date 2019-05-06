@@ -128,7 +128,14 @@ ul {
 h1 {
     margin: 5px;
 }
-#fromInput {
+
+#locateButton{
+    background-image: url("../media/locateIcon.png");
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: left center;
+    width: 13px;
+    height: 13px;
     margin-left: 5px;
 }
 
@@ -231,6 +238,8 @@ h1 {
         height: 95%;
     }
     button {
+        position: absolute;
+        right: 5%;
         width: 70px;
         height: 35px;
         font-size: initial;
@@ -239,6 +248,7 @@ h1 {
         width: 180px;
         height: 35px;
         font-size: initial;
+        margin: 2px;
     }
     #headerText {
         font-size: initial;
@@ -254,7 +264,9 @@ h1 {
         height: auto;
     }
     #locateButton {
-        display: none;
+        right: 10%;
+        width: 30px;
+        height: 30px;
     }
     .innerOption {
         padding-left: 40px;
