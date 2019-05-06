@@ -158,7 +158,7 @@ function searchHSLRouting() {
       coordinates.to.lat + ',' + coordinates.to.lon + '&time=' + time.time +
       '&date=' +
       time.date +
-      '&mode=TRANSIT,WALK&maxWalkDistance=500&arriveBy=false&showIntermediateStops=true';
+      '&mode=TRANSIT,WALK&maxWalkDistance=1000&arriveBy=false&showIntermediateStops=true';
   console.log(searchAdd);
 
   let stopInfo;
