@@ -611,3 +611,18 @@ function darkenSelected(index) {
     }
   }
 }
+
+let closeButton = document.getElementById('closeInput');
+let searchInput = document.getElementById('searchInput');
+
+closeButton.addEventListener('click', openClose);
+
+function openClose(evt) {
+  if (searchInput.classList.contains('hidden')) {
+    searchInput.setAttribute('class', 'visible');
+     closeButton.setAttribute('class', 'collapse');
+  } else  {
+    searchInput.setAttribute('class', 'hidden');
+    closeButton.setAttribute('class', 'expand');
+  }
+}

@@ -128,6 +128,13 @@ ul {
 h1 {
     margin: 5px;
 }
+#firstHeader {
+
+}
+#closeInput {
+    display: none;
+}
+
 
 #locateButton{
     background-image: url("../media/locateIcon.png");
@@ -137,6 +144,10 @@ h1 {
     width: 13px;
     height: 13px;
     margin-left: 5px;
+    border-radius: 4px;
+}
+input {
+    border-radius: 4px;
 }
 
 /********* transportation pictures in li *********/
@@ -243,6 +254,7 @@ h1 {
         width: 70px;
         height: 35px;
         font-size: initial;
+        border-radius: 4px;
     }
     input {
         width: 180px;
@@ -275,6 +287,14 @@ h1 {
         right: 5%;
         top: 2%;
     }
+    #closeInput {
+        display: inline-block;
+        position: absolute;
+        right: 0.2em;
+        top: 0.2em;
+        width: 35px;
+        height: 35px;
+    }
 }
 
 @media only screen and (max-height: 300px) {
@@ -292,4 +312,14 @@ h1 {
         margin-top: 0;
         font-size: initial;
     }
+}
+
+.expand {
+    display: block;
+    content:url("../media/expand.png");
+}
+
+.collapse {
+    display: block;
+    content:url("../media/collapse.png");
 }
