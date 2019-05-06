@@ -127,6 +127,7 @@ ul {
 }
 h1 {
     margin: 5px;
+    padding-right: 40px;
 }
 #firstHeader {
 
@@ -288,7 +289,7 @@ input {
         top: 2%;
     }
     #closeInput {
-        display: inline-block;
+        display: block;
         position: absolute;
         right: 0.2em;
         top: 0.2em;
@@ -315,11 +316,11 @@ input {
 }
 
 .expand {
-    display: block;
-    content:url("../media/expand.png");
+    background-image: url("../media/expand.png");
+    background-size: 100%;
 }
 
 .collapse {
-    display: block;
-    content:url("../media/collapse.png");
+    background-image: url("../media/collapse.png");
+    background-size: 100%;
 }
