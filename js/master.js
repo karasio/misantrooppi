@@ -51,6 +51,7 @@ function success(pos) {
 
 // Funktio, joka ajetaan, jos paikkatietojen hakemisessa tapahtuu virhe
 function error(err) {
+  document.getElementById('errorMsg').innerHTML = 'Paikannustietojen hakemisessa tapahtui virhe. Kirjoita lähtösijainti';
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
@@ -99,6 +100,7 @@ function fetchCoordinates(input, inputType) {
         formatCoordinates(inputType, json);
       }).
       catch(function(error) {
+        document.getElementById('errorMsg').innerHTML = 'Sijaintia ei löydy';
         console.log(error);
       });
 }
@@ -151,7 +153,7 @@ function placeMarkers() {
 function searchHSLRouting() {
   let time = getTime();
   // coordinates formatted 'lat,lon'
-  let searchAdd = 'http://api.digitransit.fi/routing/v1/routers/hsl/plan?fromPlace=' +
+  let searchAdd = 'https://api.digitransit.fi/routing/v1/routers/hsl/plan?fromPlace=' +
       coordinates.from.lat + ',' + coordinates.from.lon + '&toPlace=' +
       coordinates.to.lat + ',' + coordinates.to.lon + '&time=' + time.time +
       '&date=' +
@@ -342,7 +344,7 @@ function printResults(stopInfo, stopsOnRoute, json) {
       '<ul class="option">' +
       '<li class="virtahepo">'+
       '<ul class ="innerOption">' +
-      '<li>Vaihtoehto 1 </li>' +
+      '<li class="routeOption routeOptionSelected" id="routeOption0">Vaihtoehto 1 </li>' +
       '<li> Pysäkki: '+ stopInfo[0].code+'</li>' +
       '<li>Ihmismäärä: '+ amountOfPeople +'</li>' +
       '<li>Lähtöaika: '+ getTimes(start) +'</li>';
@@ -398,7 +400,7 @@ function printResults(stopInfo, stopsOnRoute, json) {
           '</li>' +
           '<li class="virtahepo">' +
           '<ul class="innerOption">' +
-          '<li>Vaihtoehto ' + (j+2) + '</li>' +
+          '<li class="routeOption" id="routeOption">Vaihtoehto ' + (j+2) + '</li>' +
           '<li>Pysäkki ' + stopInfo[j+1].code + '</li>' +
           '<li>Ihmismäärä: '+ amountOfPeople +'</li>' +
           '<li>Lähtöaika: ' + getTimes(stopInfo[j+1].startTime) + '</li>';
