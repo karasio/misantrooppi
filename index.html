@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="fi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,18 +20,22 @@
 <main id="search">
     <h1>Misantroopin reittihaku</h1>
     <div id="closeInput" class="collapse"></div>
-    <div id="searchInput" class=visible">
-    <p id="tips">Etsi osoitteella (Leiritie 1 Vantaa) <br>tai paikannimellä (Kalasatama Helsinki)<br>Haku toimii HSL-alueella</p>
-    <img id="locateButton" src="media/locateIcon.png">
-    <input type=text placeholder="Mistä" id="fromInput">
-    <input type=text placeholder="Mihin" id="whereInput">
-    <button type="button" id="searchButton">Hae!</button>
+    <div id="searchInput" class="visible">
+        <p id="tips">Etsi osoitteella (Leiritie 1 Vantaa) <br>tai paikannimellä (Kalasatama Helsinki)<br>Haku toimii HSL-alueella</p>
+        <div id="firstRow">
+            <input type=text placeholder="Mistä" id="fromInput">
+            <img id="locateButton" src="media/locateIcon.png" alt="locator button">
+        </div>
+        <div id="secondRow">
+            <input type=text placeholder="Mihin" id="whereInput">
+            <button type="button" id="searchButton">Hae!</button>
+        </div>
     <div id="errorMsg"><br></div>
     </div>
 </main>
 
 <aside id="results">
-    <p id="headerText"><a href="https://fi.wikipedia.org/wiki/Ihmisviha">Misantroopin</a> reittihausta voit tarkistaa, millä pysäkillä on sinulle riittävästi tilaa.</a> </p>
+    <p id="headerText"><a href="https://fi.wikipedia.org/wiki/Ihmisviha">Misantroopin</a> reittihausta voit tarkistaa, millä pysäkillä on sinulle riittävästi tilaa.</p>
     <div id ="info" class="visible"></div>
     <div id ="moreInfo" class="hidden"></div>
 </aside>
@@ -39,9 +43,9 @@
 <div id="map"></div>
 
 <footer>
-    <a href="about.html"><img src="media/infobutton.png"></a>
+    <a href="about.html"><img src="media/infobutton.png" alt="info button"></a>
 </footer>
-</body>
 <script src="leaflet-routing-machine/leaflet-routing-machine.js"></script>
 <script src="js/master.js"></script>
+</body>
 </html>

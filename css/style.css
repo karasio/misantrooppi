@@ -103,7 +103,6 @@ footer img{
     padding: 0.5em;
     border-radius: 6px;
     height: 80%;
-    border: dot-dot-dash greenyellow;
 }
 .innerOption {
     padding: 0.3em;
@@ -121,6 +120,7 @@ ul {
     list-style-type: none;
 }
 
+/********* search block ***********/
 #tips {
     font-size: small;
     margin: 5px;
@@ -129,13 +129,10 @@ h1 {
     margin: 5px;
     padding-right: 40px;
 }
-#firstHeader {
 
-}
 #closeInput {
     display: none;
 }
-
 
 #locateButton{
     background-color: #FFFFFF;
@@ -148,6 +145,13 @@ h1 {
 }
 input {
     border-radius: 4px;
+    width: 70%;
+}
+#firstRow {
+    width: 100%;
+}
+#secondRow {
+    width: 100%;
 }
 
 /********* transportation pictures in li *********/
@@ -248,20 +252,42 @@ input {
     #moreInfo {
         height: 95%;
     }
-    button {
+
+    /*** search first row input ****/
+    #firstRow {
+        width: 100%;
+
+    }
+    #firstRow input {
+        width: 80%;
+        height: 30px;
+    }
+    #locateButton {
         position: absolute;
-        right: 5%;
-        width: 70px;
-        height: 35px;
-        font-size: initial;
+        right: 2%;
+        width: 15%;
+        max-width: 30px;
+        height: 30px;
+    }
+    /*** search second row input ****/
+    secondRow {
+        width: 100%;
+        height: 30px;
+    }
+    #secondRow input {
+        width: 80%;
+        height: 30px;
+    }
+    #secondRow button {
+        position: absolute;
+        width: 15%;
+        height: 32px;
         border-radius: 4px;
+        right: 2%;
+        vertical-align: bottom;
+        padding: 0;
     }
-    input {
-        width: 180px;
-        height: 35px;
-        font-size: initial;
-        margin: 2px;
-    }
+
     #headerText {
         font-size: initial;
     }
@@ -274,11 +300,6 @@ input {
     }
     #upper {
         height: auto;
-    }
-    #locateButton {
-        right: 10%;
-        width: 30px;
-        height: 30px;
     }
     .innerOption {
         padding-left: 40px;
