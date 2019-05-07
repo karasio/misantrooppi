@@ -449,7 +449,7 @@ function printResults(stopInfo, stopsOnRoute, json) {
 
   let info = document.getElementById('info');
   let moreInfo = document.getElementById('moreInfo');
-  // prints some infromtion above results like what locations you used to get results.
+  // prints some information above results like what locations you used to get results.
   info.innerHTML = '<div class="upper"><h3>Matkan tiedot</h3>' +
       'Kohteesta: ' + inputFromValue + '<br>' +
       'Kohteeseen: ' + inputToValue + '<br>' +
