@@ -1,6 +1,6 @@
 'use strict';
 
-// getting coordinates according to address
+// getting user input address / place name
 let inputFrom = document.getElementById('fromInput');
 let inputTo = document.getElementById('whereInput');
 
@@ -200,11 +200,11 @@ function sortByPeople(json) {
   let stopData = {};
   let stopDataForItineraries = [];
 
-  for (let i = 0; i < itineraries.length; i++) {
+  for (let i = 0; i < itineraries.length; i++) {                      // iterate through different route options
     let itinerary = itineraries[i];
     let noStopAdded = true;
     let startingStop;
-    for (let j = 0; j < itinerary.legs.length; j++) {
+    for (let j = 0; j < itinerary.legs.length; j++) {                 // iterate through intermediate stops on one route
       let boarderAmount = ' ei tiedossa';
       let leg = itinerary.legs[j];
       if (leg.from.stopId && noStopAdded === true) {
@@ -245,6 +245,9 @@ function sortByPeople(json) {
 }
 
 function routeCoordinates(json) {
+  /*
+  intermediate stops on route to one file
+   */
   let coordinate = {};
   let stopsPerItinerary = [];
 
