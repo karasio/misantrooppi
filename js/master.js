@@ -144,7 +144,7 @@ function formatCoordinates(inputType, json) {
 let markers;
 
 function placeMarkers() {
-  //Places markers on map.
+  //Places markers on starting and end position of the selected route.
   if (markers) { // check
     map.removeLayer(markers); // remove
   }
@@ -520,8 +520,12 @@ function getTimes(time) {
   return timeString;
 }
 
-let routeLayer;
+let routeLayer; //Layer to contain all the polylines of route. Required so one
+//can remove them later
 
+
+//Removes the old polylines and draws new polylines between every stop of the
+//route
 function drawRoute(json, index) {
   if (routeLayer) { // check
     map.removeLayer(routeLayer); // remove
@@ -541,7 +545,7 @@ function drawRoute(json, index) {
       lon: legs[i].to.lon,
     };
 
-    routeMarkers(toCrd);
+    routeMarkers(toCrd); //add marker at the end of the leg
 
     if (legs[i].mode == 'WALK') {
       routeWalks(fromCrd, toCrd);
@@ -551,12 +555,15 @@ function drawRoute(json, index) {
   }
 }
 
+//Routes walking portions of the route utilizing mapobox and leaflet routing machine
 function routeWalks(fromCrd, toCrd) {
+  //set router
   let router = L.Routing.mapbox(
       'pk.eyJ1IjoiZWxlYW4iLCJhIjoiY2p2ODMwZWR1MDMzajQ0bXRlMXYwbnpreSJ9.IWZKqC-mBbnFZbd2jqxFHw',
       {
         profile: 'mapbox/walking',
       }), waypoints = [], line;
+  //add starting and end coordinates of the walk
   waypoints.push({latLng: L.latLng(fromCrd)});
   waypoints.push({latLng: L.latLng(toCrd)});
 
@@ -573,6 +580,7 @@ function routeWalks(fromCrd, toCrd) {
   });
 }
 
+//Routes public transport portions
 function routePub(stops, fromCrd, toCrd) {
   let crds = [fromCrd];
   for (let i = 0; i < stops.length; i++) {
@@ -583,33 +591,15 @@ function routePub(stops, fromCrd, toCrd) {
   routeLayer.addLayer(line);
 }
 
+//adds marker to wanted coordinate
 function routeMarkers(toCrd) {
   let marker = L.marker(toCrd).addTo(map);
   routeLayer.addLayer(marker);
 }
 
-//routeWalks actually just draws lines, no need for routing control for now. Maybe later if we add route instructions
-function routeWalksControl(fromCrd, toCrd) {
-  // L.Routing.control({
-  //   waypoints: [
-  //     L.latLng(fromCrd),
-  //     L.latLng(toCrd),
-  //   ],
-  //   show: false,
-  //   routeWhileDragging: false,
-  //   fitSelectedRoutes: false,
-  //   draggableWaypoints: false,
-  //   addWaypoints: false,
-  //   router: L.Routing.mapbox(
-  //       'pk.eyJ1IjoiZWxlYW4iLCJhIjoiY2p2ODMwZWR1MDMzajQ0bXRlMXYwbnpreSJ9.IWZKqC-mBbnFZbd2jqxFHw',
-  //       {
-  //         profile: 'mapbox/walking',
-  //       }),
-  // }).addTo(map);
-}
-
 let routeOptions = [];
 
+//adds clicking to route options so you can select which route to draw on screen
 function getRouteOptionElements(json) {
   routeOptions = document.getElementsByClassName('routeOption');
   console.log(routeOptions);
@@ -622,6 +612,8 @@ function getRouteOptionElements(json) {
   }
 }
 
+//darkens the selected route in the route options menu to indicate which route
+//is being shown on screen
 function darkenSelected(index) {
   console.log(routeOptions);
   console.log(index);
@@ -642,6 +634,7 @@ let searchInput = document.getElementById('searchInput');
 
 closeButton.addEventListener('click', openClose);
 
+//Adds menu for mobile in which you can expand and collapse the search fuction
 function openClose(evt) {
   if (searchInput.classList.contains('hidden')) {
     searchInput.setAttribute('class', 'visible');
